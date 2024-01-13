@@ -1,4 +1,5 @@
 pluginManagement {
+    includeBuild("build-logic")
     repositories {
         google()
         mavenCentral()
@@ -13,6 +14,6 @@ dependencyResolutionManagement {
     }
 }
 
+
 rootProject.name = "MapleFinder"
 include(":app")
- 

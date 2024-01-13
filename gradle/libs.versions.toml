@@ -1,0 +1,86 @@
+[versions]
+androidGradleVersion = "8.0.2"
+kotlinGradleVersion = "1.8.10"
+androidxComposeCompiler = "1.4.3"
+org-jetbrains-kotlin-jvm = "1.8.10"
+secretsGradleVersion = "2.0.1"
+
+core = "1.9.0"
+kotlin-stdlib = "1.7.10"
+coroutine = "1.6.4"
+
+lifecycle = "2.6.2"
+hilt-navigation = "1.0.0"
+
+activity-compose = "1.8.1"
+compose-bom = "2023.03.00"
+appcompat = "1.6.1"
+material = "1.10.0"
+navigation = "2.5.3"
+
+junit-junit = "4.13.2"
+ext-junit = "1.1.5"
+espresso-core = "3.5.1"
+
+hilt = "2.44.2"
+javax-inject = "1"
+
+retrofit = "2.9.0"
+moshi = "1.9.3"
+
+[libraries]
+androidGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradleVersion" }
+kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradleVersion" }
+hiltGradlePlugin = { group = "com.google.dagger", name = "hilt-android-gradle-plugin", version.ref = "hilt" }
+secretsGradlePlugin = { group = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin", name = "secrets-gradle-plugin",version.ref = "secretsGradleVersion"}
+
+kotlin-stdlib = {module = "org.jetbrains.kotlin:kotlin-stdlib",version.ref = "kotlin-stdlib"}
+core-ktx = {module = "androidx.core:core-ktx",version.ref = "core"}
+coroutine-core = {module ="org.jetbrains.kotlinx:kotlinx-coroutines-core",version.ref="coroutine"}
+
+lifecycle-ktx = {module = "androidx.lifecycle:lifecycle-runtime-ktx",version.ref = "lifecycle"}
+lifecycle-viewmodel = {module = "androidx.lifecycle:lifecycle-viewmodel-compose",version.ref = "lifecycle"}
+lifecycle-compose = {module = "androidx.lifecycle:lifecycle-runtime-compose",version.ref = "lifecycle"}
+hilt-navigation = {module = "androidx.hilt:hilt-navigation-fragment", version.ref = "hilt-navigation"}
+hilt-navigation-compose = {module = "androidx.hilt:hilt-navigation-compose",version.ref="hilt-navigation"}
+
+activity-compose = {module = "androidx.activity:activity-compose",version.ref = "activity-compose"}
+compose-bom = {module = "androidx.compose:compose-bom",version.ref ="compose-bom"}
+compose-ui = {module = "androidx.compose.ui:ui"}
+compose-graphics = {module = "androidx.compose.ui:ui-graphics"}
+compose-preview = {module = "androidx.compose.ui:ui-tooling-preview"}
+material3 = {module = "androidx.compose.material3:material3"}
+appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+compose-navigation = {module = "androidx.navigation:navigation-compose",version.ref = "navigation"}
+
+junit = {module = "junit:junit",version.ref = "junit-junit"}
+ext-junit = {module = "androidx.test.ext:junit",version.ref = "ext-junit"}
+espresso-core = {module = "androidx.test.espresso:espresso-core",version.ref="espresso-core"}
+compose-bom-test = {module = "androidx.compose:compose-bom",version.ref="compose-bom"}
+compose-junit = {module = "androidx.compose.ui:ui-test-junit4"}
+
+ui-tooling = {module = "androidx.compose.ui:ui-tooling"}
+ui-test-manifest = {module = "androidx.compose.ui:ui-test-manifest"}
+
+hilt-core = { module = "com.google.dagger:hilt-core", version.ref = "hilt" }
+hilt-compiler = { module = "com.google.dagger:hilt-compiler", version.ref = "hilt" }
+hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
+javax-inject = {module ="javax.inject:javax.inject",version.ref ="javax-inject"}
+
+retrofit2-retrofit = {module = "com.squareup.retrofit2:retrofit",version.ref ="retrofit"}
+retrofit2-moshi = {module = "com.squareup.retrofit2:converter-moshi",version.ref = "retrofit"}
+moshi = {module = "com.squareup.moshi:moshi",version.ref = "moshi"}
+moshi-kotlin = {module = "com.squareup.moshi:moshi-kotlin",version.ref = "moshi"}
+
+[bundles]
+compose-ui = ["compose-ui","compose-graphics","compose-preview"]
+retrofit2 = ["retrofit2-retrofit","retrofit2-moshi"]
+moshi = ["moshi","moshi-kotlin"]
+
+[plugins]
+android-application = { id = "com.android.application", version.ref = "androidGradleVersion" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt"}
+android-library = { id = "com.android.library", version.ref = "androidGradleVersion" }
+org-jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlinGradleVersion" }
+org-jetbrains-kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "org-jetbrains-kotlin-jvm" }
