@@ -7,7 +7,6 @@ android {
 
     defaultConfig {
         applicationId = "com.hegunhee.maplefinder.maplefinder"
-        minSdk = 26
         versionCode = 1
         versionName = "1.0"
 
@@ -25,6 +24,11 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":core:data"))
+    implementation(project(":core:domain"))
+
+    implementation(project(":feature:main"))
 
     implementation(libs.core.ktx)
     implementation(libs.lifecycle.ktx)
