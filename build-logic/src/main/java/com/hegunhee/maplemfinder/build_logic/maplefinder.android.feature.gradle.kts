@@ -16,10 +16,11 @@ configureHiltAndroid()
 
 dependencies {
 
-//    implementation(project(":core:domain"))
-//    implementation(project(":core:model"))
-//    implementation(project(":core:ui"))
-//    implementation(project(":core:designsystem"))
+    implementation(project(":core:domain"))
+    implementation(project(":core:model"))
+    implementation(project(":core:ui"))
+    implementation(project(":core:designsystem"))
+    
     val libs = project.extensions.libs
     implementation(libs.findLibrary("core.ktx").get())
     implementation(libs.findLibrary("appcompat").get())
