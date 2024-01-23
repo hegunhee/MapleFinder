@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.data.api.datasource.remote
+package com.hegunhee.maplefinder.data.datasource.remote
 
 import com.hegunhee.maplefinder.data.api.MapleApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
