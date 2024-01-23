@@ -29,6 +29,9 @@ import kotlinx.coroutines.launch
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.NavHost
+import com.hegunhee.maplefinder.dojang_record.DojangNavGraph
+import com.hegunhee.maplefinder.dojang_record.dojangNavGraph
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -41,7 +44,14 @@ fun MapleApp(
             DrawerSheetContent(selectedDrawerItem = mapleAppScaffoldState.selectedDrawerItem, onClickDrawerItem = mapleAppScaffoldState::navigate)
         }
     ) {
-        Text(text = "MapleApp 테스트")
+        NavHost(
+            navController = mapleAppScaffoldState.navController,
+            startDestination = DojangNavGraph.dojangRoute
+        ) {
+            dojangNavGraph(
+                onNavigationIconClick = mapleAppScaffoldState::openDrawer
+            )
+        }
     }
 }
 
@@ -71,6 +81,12 @@ class MapleAppScaffoldState @OptIn(ExperimentalMaterial3Api::class) constructor(
         navController.navigate(drawerItem.navRoute)
         coroutineScope.launch {
             drawerState.close()
+        }
+    }
+
+    fun openDrawer() {
+        coroutineScope.launch {
+            drawerState.open()
         }
     }
 
@@ -110,10 +126,10 @@ enum class DrawerItem(
     val navRoute : String
 ) {
 
-    Item(
-        titleString = "",
+    Dojang(
+        titleString = "무릉도장",
         icon = Icons.Default.Search,
-        navRoute = ""
+        navRoute = DojangNavGraph.dojangRoute
     );
     companion object {
         fun ofOrNull(route: String): DrawerItem? {
