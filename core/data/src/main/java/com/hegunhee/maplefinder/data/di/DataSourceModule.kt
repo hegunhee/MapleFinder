@@ -1,7 +1,7 @@
 package com.hegunhee.maplefinder.data.di
 
-import com.hegunhee.maplefinder.data.api.datasource.remote.DefaultRemoteDataSource
-import com.hegunhee.maplefinder.data.api.datasource.remote.RemoteDataSource
+import com.hegunhee.maplefinder.data.datasource.remote.DefaultRemoteDataSource
+import com.hegunhee.maplefinder.data.datasource.remote.RemoteDataSource
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
