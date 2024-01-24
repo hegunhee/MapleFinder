@@ -12,7 +12,7 @@ import okhttp3.Response
 import retrofit2.Retrofit
 import javax.inject.Singleton
 import com.hegunhee.maplefinder.data.BuildConfig
-import com.hegunhee.maplefinder.data.api.MapleApi
+import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import okhttp3.OkHttpClient
 import retrofit2.converter.moshi.MoshiConverterFactory
 
@@ -41,13 +41,13 @@ class ApiModule {
     @Provides
     fun provideMapleApi(
         moshi : Moshi
-    ) : MapleApi {
+    ) : MapleCharacterApi {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.GET_CHARACTER_MAPLE_BASE_URL)
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .client(provideOkHttpClient(NexonInterceptor()))
             .build()
-            .create(MapleApi::class.java)
+            .create(MapleCharacterApi::class.java)
     }
 
     private fun provideOkHttpClient(vararg interceptor: Interceptor) : OkHttpClient =

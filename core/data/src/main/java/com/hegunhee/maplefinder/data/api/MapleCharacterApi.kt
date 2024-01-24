@@ -4,7 +4,7 @@ import com.hegunhee.maplefinder.data.api.model.CharacterDojangResponse
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-interface MapleApi {
+interface MapleCharacterApi {
 
     @GET("dojang")
     suspend fun getCharacterDojang(

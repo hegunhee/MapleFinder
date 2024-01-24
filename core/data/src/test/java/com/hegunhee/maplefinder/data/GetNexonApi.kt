@@ -1,6 +1,6 @@
 package com.hegunhee.maplefinder.data
 
-import com.hegunhee.maplefinder.data.api.MapleApi
+import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -22,13 +22,13 @@ internal fun getMapleOcidApi(moshi : Moshi = getMapleMoshi()) : MapleOcidApi =
         .build()
         .create(MapleOcidApi::class.java)
 
-internal fun getMapleApi(moshi : Moshi = getMapleMoshi()) : MapleApi =
+internal fun getMapleApi(moshi : Moshi = getMapleMoshi()) : MapleCharacterApi =
     Retrofit.Builder()
         .baseUrl(BuildConfig.GET_CHARACTER_MAPLE_BASE_URL)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .client(provideOkHttpClient(NexonInterceptor()))
         .build()
-        .create(MapleApi::class.java)
+        .create(MapleCharacterApi::class.java)
 
 
 private fun provideOkHttpClient(vararg interceptor: Interceptor) : OkHttpClient =
