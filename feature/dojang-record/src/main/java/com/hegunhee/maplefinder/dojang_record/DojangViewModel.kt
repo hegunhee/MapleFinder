@@ -17,17 +17,21 @@ class DojangViewModel @Inject constructor(
     private val getCharacterDojangUseCase: GetCharacterDojangUseCase
 ) : ViewModel() {
 
-    private val _characterDojang : MutableStateFlow<CharacterDojang> = MutableStateFlow(CharacterDojang("","","","",0,"",0))
-    val characterDojang : StateFlow<CharacterDojang> = _characterDojang.asStateFlow()
+    private val _uiState : MutableStateFlow<DojangUiState> = MutableStateFlow(DojangUiState.Search(characterDojang = null))
+    val uiState : StateFlow<DojangUiState> = _uiState.asStateFlow()
 
-    init {
-        getDojangTest()
+    private val _searchQuery : MutableStateFlow<String> = MutableStateFlow("")
+    val searchQuery : StateFlow<String> = _searchQuery.asStateFlow()
+
+    fun onQueryChange(query : String) {
+        _searchQuery.value = query
     }
-    fun getDojangTest() {
+
+    fun getCharacterDojang(characterName : String) {
         viewModelScope.launch {
-            getCharacterDojangUseCase("엔버는함초롱","2024-01-23")
-                .onSuccess {
-                    _characterDojang.value = it
+            getCharacterDojangUseCase(characterName = characterName,date = "2024-01-23")
+                .onSuccess { characterDojang ->
+                    _uiState.value = DojangUiState.Search(characterDojang = characterDojang)
                 }.onFailure {
 
                 }
