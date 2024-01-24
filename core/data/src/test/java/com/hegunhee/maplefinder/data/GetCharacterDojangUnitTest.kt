@@ -1,6 +1,6 @@
 package com.hegunhee.maplefinder.data
 
-import com.hegunhee.maplefinder.data.api.MapleApi
+import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -9,12 +9,12 @@ import org.junit.Test
 class GetCharacterDojangUnitTest {
 
     private lateinit var mapleOcidApi: MapleOcidApi
-    private lateinit var mapleApi : MapleApi
+    private lateinit var mapleCharacterApi : MapleCharacterApi
 
     @Before
     fun initApi() {
         mapleOcidApi = getMapleOcidApi()
-        mapleApi = getMapleApi()
+        mapleCharacterApi = getMapleApi()
     }
 
     // 테스트 닉네임 = 엔버는함초롱
@@ -25,7 +25,7 @@ class GetCharacterDojangUnitTest {
         runBlocking {
             runCatching {
                 val ocid = mapleOcidApi.getOcid(characterName = TestParameter.CHARACTER_NAME).id
-                mapleApi.getCharacterDojang(
+                mapleCharacterApi.getCharacterDojang(
                     ocid = ocid,
                     date = "2024-01-22"
                 )
