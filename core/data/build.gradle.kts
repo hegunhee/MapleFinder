@@ -15,6 +15,7 @@ dependencies {
 
     implementation(project(":core:domain"))
     implementation(project(":core:model"))
+    implementation(project(":core:util"))
 
     implementation(libs.core.ktx)
     implementation(libs.appcompat)

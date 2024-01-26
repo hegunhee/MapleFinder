@@ -20,6 +20,7 @@ dependencies {
     implementation(project(":core:model"))
     implementation(project(":core:ui"))
     implementation(project(":core:designsystem"))
+    implementation(project(":core:util"))
     
     val libs = project.extensions.libs
     implementation(libs.findLibrary("core.ktx").get())
