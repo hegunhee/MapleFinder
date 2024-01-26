@@ -2,6 +2,7 @@ package com.hegunhee.maplefinder.data.mapper
 
 import com.hegunhee.maplefinder.data.api.model.CharacterDojangResponse
 import com.hegunhee.maplefinder.model.character.CharacterDojang
+import com.hegunhee.maplefinder.util.TimeUtil
 
 fun CharacterDojangResponse.toCharacterDojang(
     characterName : String
@@ -11,7 +12,7 @@ fun CharacterDojangResponse.toCharacterDojang(
         characterName = characterName,
         characterClass = response.characterClass,
         worldName = response.worldName,
-        recordDate = response.dojangRecordDate,
+        recordDate = TimeUtil.apiFormatToUiFormat(response.dojangRecordDate),
         bestFloor = response.dojangBestFloor,
         bestTimeStamp = response.dojangBestTime.toTimeStamp(),
         bestTime = response.dojangBestTime
