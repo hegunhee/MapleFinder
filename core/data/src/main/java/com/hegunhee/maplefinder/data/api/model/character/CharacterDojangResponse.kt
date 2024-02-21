@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.data.api.model
+package com.hegunhee.maplefinder.data.api.model.character
 
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass

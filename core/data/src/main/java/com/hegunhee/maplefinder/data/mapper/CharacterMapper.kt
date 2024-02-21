@@ -1,6 +1,6 @@
 package com.hegunhee.maplefinder.data.mapper
 
-import com.hegunhee.maplefinder.data.api.model.CharacterDojangResponse
+import com.hegunhee.maplefinder.data.api.model.character.CharacterDojangResponse
 import com.hegunhee.maplefinder.model.character.CharacterDojang
 import com.hegunhee.maplefinder.util.TimeUtil
 
