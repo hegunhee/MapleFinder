@@ -1,6 +1,6 @@
 package com.hegunhee.maplefinder.data.datasource.remote
 
-import com.hegunhee.maplefinder.data.api.model.CharacterDojangResponse
+import com.hegunhee.maplefinder.data.api.model.character.CharacterDojangResponse
 import com.hegunhee.maplefinder.data.api.model.OcidResponse
 
 interface RemoteDataSource {
