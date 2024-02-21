@@ -1,12 +1,15 @@
-package com.hegunhee.maplefinder.data
+package com.hegunhee.maplefinder.data.character
 
+import com.hegunhee.maplefinder.data.TestParameter
 import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
+import com.hegunhee.maplefinder.data.getMapleApi
+import com.hegunhee.maplefinder.data.getMapleOcidApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class GetCharacterDojangUnitTest {
+class GetCharacterBasicUnitTest {
 
     private lateinit var mapleOcidApi: MapleOcidApi
     private lateinit var mapleCharacterApi : MapleCharacterApi
@@ -21,20 +24,20 @@ class GetCharacterDojangUnitTest {
     // 테스트 결과 캐릭터명 = 엔젤릭버스터
     // 새로운 규칙 : 2023-12-22 이후 ~ 어제의 날짜까지 조회 가능함
     @Test
-    fun `get Character Dojang Test`() {
+    fun `get character basic info test`() {
         runBlocking {
             runCatching {
                 val ocid = mapleOcidApi.getOcid(characterName = TestParameter.CHARACTER_NAME).id
-                mapleCharacterApi.getCharacterDojang(
+                mapleCharacterApi.getCharacterBasic(
                     ocid = ocid,
-                    date = "2024-01-22"
+                    date = "2024-02-20"
                 )
-            }.onSuccess { characterDojang ->
-                if(characterDojang.characterClass == "엔젤릭버스터") {
-                    println(characterDojang.toString())
+            }.onSuccess { characterBasic ->
+                if(characterBasic.jobName == "엔젤릭버스터") {
+                    println(characterBasic.toString())
                     assert(true)
                 }else {
-                    println(characterDojang.toString())
+                    println(characterBasic.toString())
                     assert(false)
                 }
             }.onFailure {
