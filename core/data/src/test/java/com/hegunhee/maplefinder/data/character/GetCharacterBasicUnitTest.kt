@@ -5,6 +5,7 @@ import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.hegunhee.maplefinder.data.getMapleApi
 import com.hegunhee.maplefinder.data.getMapleOcidApi
+import com.hegunhee.maplefinder.data.mapper.toModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -32,6 +33,30 @@ class GetCharacterBasicUnitTest {
                     ocid = ocid,
                     date = "2024-02-20"
                 )
+            }.onSuccess { characterBasic ->
+                if(characterBasic.jobName == "엔젤릭버스터") {
+                    println(characterBasic.toString())
+                    assert(true)
+                }else {
+                    println(characterBasic.toString())
+                    assert(false)
+                }
+            }.onFailure {
+                println(it.message)
+                assert(false)
+            }
+        }
+    }
+
+    @Test
+    fun `get character basic model test`() {
+        runBlocking {
+            runCatching {
+                val ocid = mapleOcidApi.getOcid(characterName = TestParameter.CHARACTER_NAME).id
+                mapleCharacterApi.getCharacterBasic(
+                    ocid = ocid,
+                    date = "2024-02-20"
+                ).toModel()
             }.onSuccess { characterBasic ->
                 if(characterBasic.jobName == "엔젤릭버스터") {
                     println(characterBasic.toString())
