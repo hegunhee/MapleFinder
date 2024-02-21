@@ -4,6 +4,10 @@ import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.hegunhee.maplefinder.data.api.model.character.CharacterDojangResponse
 import com.hegunhee.maplefinder.data.api.model.OcidResponse
+import com.hegunhee.maplefinder.data.api.model.character.CharacterAbilityResponse
+import com.hegunhee.maplefinder.data.api.model.character.CharacterBasicResponse
+import com.hegunhee.maplefinder.data.api.model.character.CharacterHyperStatResponse
+import com.hegunhee.maplefinder.data.api.model.character.CharacterStatResponse
 import javax.inject.Inject
 
 class DefaultRemoteDataSource @Inject constructor(
@@ -17,5 +21,21 @@ class DefaultRemoteDataSource @Inject constructor(
 
     override suspend fun getCharacterDojang(ocid: String, date: String): CharacterDojangResponse {
         return mapleCharacterApi.getCharacterDojang(ocid,date)
+    }
+
+    override suspend fun getCharacterBasic(ocid: String, date: String): CharacterBasicResponse {
+        return mapleCharacterApi.getCharacterBasic(ocid,date)
+    }
+
+    override suspend fun getCharacterStat(ocid: String, date: String): CharacterStatResponse {
+        return mapleCharacterApi.getCharacterStat(ocid,date)
+    }
+
+    override suspend fun getCharacterHyperStat(ocid: String, date: String): CharacterHyperStatResponse {
+        return mapleCharacterApi.getCharacterHyperStat(ocid,date)
+    }
+
+    override suspend fun getCharacterAbility(ocid: String, date: String): CharacterAbilityResponse {
+        return mapleCharacterApi.getCharacterAbility(ocid,date)
     }
 }

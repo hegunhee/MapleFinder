@@ -1,5 +1,6 @@
 package com.hegunhee.maplefinder.data.api.model.character
 
+import com.hegunhee.maplefinder.model.character.HyperStat
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
@@ -15,4 +16,17 @@ data class HyperStat(
     @Json(name = "stat_level") val statLevel: Int,
     @Json(name = "stat_point") val statPoint: Int?,
     @Json(name = "stat_type") val statType: String
-)
+) {
+    fun toModel() : HyperStat {
+        return HyperStat(
+            statIncrease = statIncrease,
+            statLevel = statLevel,
+            statPoint = statPoint,
+            statType = statType
+        )
+    }
+}
+
+fun List<com.hegunhee.maplefinder.data.api.model.character.HyperStat>.toModel() : List<HyperStat> {
+    return this.map(com.hegunhee.maplefinder.data.api.model.character.HyperStat::toModel)
+}

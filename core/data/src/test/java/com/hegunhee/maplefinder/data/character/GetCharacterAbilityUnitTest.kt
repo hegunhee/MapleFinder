@@ -5,6 +5,7 @@ import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.hegunhee.maplefinder.data.getMapleApi
 import com.hegunhee.maplefinder.data.getMapleOcidApi
+import com.hegunhee.maplefinder.data.mapper.toModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -59,6 +60,54 @@ class GetCharacterAbilityUnitTest {
                     ocid = ocid,
                     date = "2024-01-22"
                 )
+            }.onSuccess { characterAbility ->
+                if(characterAbility.abilityPreset1 != null) {
+                    println(characterAbility.toString())
+                    assert(true)
+                }else {
+                    println(characterAbility.toString())
+                    assert(false)
+                }
+            }.onFailure {
+                println(it.message)
+                assert(false)
+            }
+        }
+    }
+
+    @Test
+    fun `get ability model if has no preset`() {
+        runBlocking {
+            runCatching {
+                val ocid = mapleOcidApi.getOcid(characterName = TestParameter.CHARACTER_NAME).id
+                mapleCharacterApi.getCharacterAbility(
+                    ocid = ocid,
+                    date = "2024-01-22"
+                ).toModel()
+            }.onSuccess { characterAbility ->
+                if(characterAbility.abilityPreset1 == null) {
+                    println(characterAbility.toString())
+                    assert(true)
+                }else {
+                    println(characterAbility.toString())
+                    assert(false)
+                }
+            }.onFailure {
+                println(it.message)
+                assert(false)
+            }
+        }
+    }
+
+    @Test
+    fun `get ability model if has preset`() {
+        runBlocking {
+            runCatching {
+                val ocid = mapleOcidApi.getOcid(characterName = "자아정체감").id
+                mapleCharacterApi.getCharacterAbility(
+                    ocid = ocid,
+                    date = "2024-01-22"
+                ).toModel()
             }.onSuccess { characterAbility ->
                 if(characterAbility.abilityPreset1 != null) {
                     println(characterAbility.toString())

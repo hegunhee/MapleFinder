@@ -5,6 +5,7 @@ import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.hegunhee.maplefinder.data.getMapleApi
 import com.hegunhee.maplefinder.data.getMapleOcidApi
+import com.hegunhee.maplefinder.data.mapper.toModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -32,6 +33,30 @@ class GetCharacterHyperStatUnitTest {
                     ocid = ocid,
                     date = "2024-01-22"
                 )
+            }.onSuccess { characterHyperStat ->
+                if(characterHyperStat.jobName == "엔젤릭버스터") {
+                    println(characterHyperStat.toString())
+                    assert(true)
+                }else {
+                    println(characterHyperStat.toString())
+                    assert(false)
+                }
+            }.onFailure {
+                println(it.message)
+                assert(false)
+            }
+        }
+    }
+
+    @Test
+    fun `get hyper stat model test`() {
+        runBlocking {
+            runCatching {
+                val ocid = mapleOcidApi.getOcid(characterName = TestParameter.CHARACTER_NAME).id
+                mapleCharacterApi.getCharacterHyperStat(
+                    ocid = ocid,
+                    date = "2024-01-22"
+                ).toModel()
             }.onSuccess { characterHyperStat ->
                 if(characterHyperStat.jobName == "엔젤릭버스터") {
                     println(characterHyperStat.toString())
