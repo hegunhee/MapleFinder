@@ -1,6 +1,6 @@
 package com.hegunhee.maplefinder.data.api.model.character
 
-import com.hegunhee.maplefinder.domain.ImageUrl
+import com.hegunhee.maplefinder.model.ImageUrl
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 
