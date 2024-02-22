@@ -1,10 +1,8 @@
 package com.hegunhee.maplefinder.dojang_record
 
-import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hegunhee.maplefinder.domain.usecase.GetCharacterDojangUseCase
-import com.hegunhee.maplefinder.model.character.CharacterDojang
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,7 +15,7 @@ class DojangViewModel @Inject constructor(
     private val getCharacterDojangUseCase: GetCharacterDojangUseCase
 ) : ViewModel() {
 
-    private val _uiState : MutableStateFlow<DojangUiState> = MutableStateFlow(DojangUiState.Search(characterDojang = null))
+    private val _uiState : MutableStateFlow<DojangUiState> = MutableStateFlow(DojangUiState.Loading)
     val uiState : StateFlow<DojangUiState> = _uiState.asStateFlow()
 
     private val _searchQuery : MutableStateFlow<String> = MutableStateFlow("")
@@ -33,7 +31,7 @@ class DojangViewModel @Inject constructor(
                 .onSuccess { characterDojang ->
                     _uiState.value = DojangUiState.Search(characterDojang = characterDojang)
                 }.onFailure {
-
+                    _uiState.value = DojangUiState.Error
                 }
         }
     }
