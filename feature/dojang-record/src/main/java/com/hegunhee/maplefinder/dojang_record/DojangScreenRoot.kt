@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -12,7 +13,6 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.hegunhee.maplefinder.model.character.CharacterDojang
 import com.hegunhee.maplefinder.ui.CharacterSearchBar
 import com.hegunhee.maplefinder.ui.MapleTopBar
 import com.hegunhee.maplefinder.ui.surface.DojangSurface
@@ -24,26 +24,21 @@ fun DojangScreenRoot(
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val characterQuery = viewModel.searchQuery.collectAsStateWithLifecycle().value
-    when(uiState) {
-        DojangUiState.Loading -> { }
-        is DojangUiState.Search -> {
-            DojangScreen(
-                characterQuery = characterQuery,
-                characterDojang = uiState.characterDojang,
-                onNavigationIconClick = onNavigationIconClick,
-                onSearchCharacterDojang = viewModel::getCharacterDojang,
-                onQueryChange = viewModel::onQueryChange
-            )
-        }
-        DojangUiState.Error -> { }
-    }
+
+    DojangScreen(
+        uiState = uiState,
+        characterQuery = characterQuery,
+        onNavigationIconClick = onNavigationIconClick,
+        onSearchCharacterDojang = viewModel::getCharacterDojang,
+        onQueryChange = viewModel::onQueryChange
+    )
 }
 
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 @Composable
 private fun DojangScreen(
+    uiState : DojangUiState,
     characterQuery : String,
-    characterDojang : CharacterDojang?,
     onNavigationIconClick : () -> Unit,
     onSearchCharacterDojang : (String) -> Unit,
     onQueryChange : (String) -> Unit
@@ -67,8 +62,14 @@ private fun DojangScreen(
                 keyboardController = keyboardController
             )
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
-            if(characterDojang != null) {
-                DojangSurface(characterDojang = characterDojang)
+            when(uiState) {
+                DojangUiState.Loading -> { }
+                is DojangUiState.Search -> {
+                    DojangSurface(characterDojang = uiState.characterDojang)
+                }
+                DojangUiState.Error -> {
+                    Text("존재하지 않는 캐릭터입니다.")
+                }
             }
         }
     }
