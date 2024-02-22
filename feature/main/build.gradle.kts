@@ -9,4 +9,5 @@ android {
 
 dependencies {
     implementation(project(":feature:dojang-record"))
+    implementation(project(":feature:character-info"))
 }

@@ -30,6 +30,8 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
+import com.hegunhee.maplefinder.character_info.InfoNavGraph
+import com.hegunhee.maplefinder.character_info.infoNavGraph
 import com.hegunhee.maplefinder.dojang_record.DojangNavGraph
 import com.hegunhee.maplefinder.dojang_record.dojangNavGraph
 
@@ -46,9 +48,12 @@ fun MapleApp(
     ) {
         NavHost(
             navController = mapleAppScaffoldState.navController,
-            startDestination = DojangNavGraph.dojangRoute
+            startDestination = InfoNavGraph.infoRoute
         ) {
             dojangNavGraph(
+                onNavigationIconClick = mapleAppScaffoldState::openDrawer
+            )
+            infoNavGraph(
                 onNavigationIconClick = mapleAppScaffoldState::openDrawer
             )
         }
@@ -125,7 +130,11 @@ enum class DrawerItem(
     val icon : ImageVector,
     val navRoute : String
 ) {
-
+    Info(
+        titleString = "캐릭터 정보 조회",
+        icon = Icons.Default.Search,
+        navRoute = InfoNavGraph.infoRoute
+    ),
     Dojang(
         titleString = "무릉도장",
         icon = Icons.Default.Search,
