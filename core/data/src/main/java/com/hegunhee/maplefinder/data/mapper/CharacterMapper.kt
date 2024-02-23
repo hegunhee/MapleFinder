@@ -1,5 +1,6 @@
 package com.hegunhee.maplefinder.data.mapper
 
+import com.hegunhee.maplefinder.data.R
 import com.hegunhee.maplefinder.data.api.model.character.CharacterAbilityResponse
 import com.hegunhee.maplefinder.data.api.model.character.CharacterBasicResponse
 import com.hegunhee.maplefinder.data.api.model.character.CharacterDojangResponse
@@ -8,6 +9,8 @@ import com.hegunhee.maplefinder.data.api.model.character.CharacterStatResponse
 import com.hegunhee.maplefinder.data.api.model.character.DetailStat
 import com.hegunhee.maplefinder.data.api.model.character.HyperStat
 import com.hegunhee.maplefinder.data.api.model.character.toModel
+import com.hegunhee.maplefinder.model.Grade
+import com.hegunhee.maplefinder.model.World
 import com.hegunhee.maplefinder.model.character.CharacterAbility
 import com.hegunhee.maplefinder.model.character.CharacterBasic
 import com.hegunhee.maplefinder.model.character.CharacterDojang
@@ -18,38 +21,35 @@ import com.hegunhee.maplefinder.util.TimeUtil
 fun CharacterDojangResponse.toCharacterDojang(
     characterName: String
 ): CharacterDojang {
-    val response = this
     return CharacterDojang(
         characterName = characterName,
-        characterClass = response.characterClass,
-        worldName = response.worldName,
-        recordDate = TimeUtil.apiFormatToUiFormat(response.dojangRecordDate),
-        bestFloor = response.dojangBestFloor,
-        bestTimeStamp = response.dojangBestTime.toTimeStamp(),
-        bestTime = response.dojangBestTime
+        characterClass =characterClass,
+        worldName = worldName,
+        recordDate = TimeUtil.apiFormatToUiFormat(dojangRecordDate),
+        bestFloor = dojangBestFloor,
+        bestTimeStamp = dojangBestTime.toTimeStamp(),
+        bestTime = dojangBestTime
     )
 }
 
 fun CharacterBasicResponse.toModel(): CharacterBasic {
-    val response = this
     return CharacterBasic(
-        name = response.name,
-        jobName = response.jobName,
-        jobLevel = response.jobLevel,
-        worldName = response.worldName,
-        image = response.image,
-        gender = response.gender,
-        exp = response.exp,
-        expRate = response.expRate,
-        guildName = response.guildName,
-        date = response.date
+        name = name,
+        jobName = jobName,
+        jobLevel = jobLevel,
+        world = worldName.toWorld(),
+        image = image,
+        gender = gender,
+        exp = exp,
+        expRate = expRate,
+        guildName = guildName,
+        date = date
     )
 }
 
 fun CharacterStatResponse.toModel(): CharacterStat {
-    val response = this
     return CharacterStat(
-        jobName = response.jobName,
+        jobName = jobName,
         detailStatList = detailStatList.map(DetailStat::toModel),
         remainAp = remainAp,
         date = date
@@ -57,22 +57,20 @@ fun CharacterStatResponse.toModel(): CharacterStat {
 }
 
 fun CharacterHyperStatResponse.toModel() : CharacterHyperStat {
-    val response = this
-    val hyperStatList = listOf<List<HyperStat>>(this.hyperStatPreset1,this.hyperStatPreset2,this.hyperStatPreset3).map {
+    val hyperStatList = listOf<List<HyperStat>>(hyperStatPreset1,hyperStatPreset2,hyperStatPreset3).map {
         it.toModel()
     }
     return CharacterHyperStat(
-        jobName = response.jobName,
+        jobName = jobName,
         hyperStatPresetList = hyperStatList,
-        remainHyperStat = response.remainHyperStat,
-        currentPresetNum = response.currentPresetNum
+        remainHyperStat = remainHyperStat,
+        currentPresetNum =currentPresetNum
     )
 }
 
 fun CharacterAbilityResponse.toModel() : CharacterAbility {
-    val response = this
     return CharacterAbility(
-        abilityGrade = abilityGrade,
+        abilityGrade = abilityGrade.toGrade(),
         abilityInfo = abilityInfo.toModel(),
         abilityPreset1 = abilityPreset1?.toModel(),
         abilityPreset2 = abilityPreset2?.toModel(),
@@ -80,6 +78,38 @@ fun CharacterAbilityResponse.toModel() : CharacterAbility {
         presetNo = presetNo,
         remainFame = remainFame
     )
+}
+
+internal val mapleWorldList = listOf<World>(
+    World("아케인", R.drawable.arcane),
+    World("베라",R.drawable.bera),
+    World("크로아",R.drawable.croa),
+    World("엘리시움",R.drawable.elysium),
+    World("루나",R.drawable.luna),
+    World("노바",R.drawable.noba),
+    World("오로라",R.drawable.orora),
+    World("레드",R.drawable.red),
+    World("스카니아",R.drawable.scania),
+    World("유니온",R.drawable.union),
+    World("제니스",R.drawable.zenith),
+    World("리부트",R.drawable.reboot),
+    World("리부트2",R.drawable.reboot),
+)
+
+private val mapleMWorldNameMap = mapleWorldList.associateBy { it.name }
+
+fun String.toWorld() : World {
+    return mapleMWorldNameMap[this] ?: World(this,R.drawable.ic_default_server_mark_24)
+}
+
+internal fun String.toGrade() : Grade {
+    return when(this) {
+        "레어" -> Grade.Rare
+        "에픽" -> Grade.Epic
+        "유니크" -> Grade.Unique
+        "레전드리" -> Grade.Legendary
+        else -> Grade.Unknown
+    }
 }
 
 private fun Int.toTimeStamp(): String {

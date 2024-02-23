@@ -1,5 +1,6 @@
 package com.hegunhee.maplefinder.data.api.model.character
 
+import com.hegunhee.maplefinder.data.mapper.toGrade
 import com.hegunhee.maplefinder.model.character.AbilityInfo
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -12,7 +13,7 @@ data class AbilityInfo(
 ) {
     fun toModel() : AbilityInfo {
         return AbilityInfo(
-            grade = grade,
+            grade = grade.toGrade(),
             num = num,
             value = value
         )
