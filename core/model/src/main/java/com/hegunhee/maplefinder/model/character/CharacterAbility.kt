@@ -1,7 +1,9 @@
 package com.hegunhee.maplefinder.model.character
 
+import com.hegunhee.maplefinder.model.Grade
+
 data class CharacterAbility(
-    val abilityGrade : String,
+    val abilityGrade : Grade,
     val abilityInfo : List<AbilityInfo>,
     val abilityPreset1 : AbilityPreset?,
     val abilityPreset2 : AbilityPreset?,
@@ -11,12 +13,12 @@ data class CharacterAbility(
 )
 
 data class AbilityInfo(
-    val grade : String,
+    val grade : Grade,
     val num : String,
     val value : String
 )
 
 data class AbilityPreset(
     val abilityInfo : List<AbilityInfo>,
-    val abilityGrade : String
+    val abilityGrade : Grade
 )

@@ -1,6 +1,7 @@
 package com.hegunhee.maplefinder.model.character
 
 import com.hegunhee.maplefinder.model.ImageUrl
+import com.hegunhee.maplefinder.model.World
 
 data class Character(
     val basic : CharacterBasic,
@@ -9,6 +10,6 @@ data class Character(
     val ability : CharacterAbility,
     val name : String = basic.name,
     val job : String = basic.jobName,
-    val worldName : String = basic.worldName,
+    val world : World = basic.world,
     val image : ImageUrl = basic.image
 )

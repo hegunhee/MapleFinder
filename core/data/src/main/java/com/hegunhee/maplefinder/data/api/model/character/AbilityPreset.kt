@@ -1,5 +1,6 @@
 package com.hegunhee.maplefinder.data.api.model.character
 
+import com.hegunhee.maplefinder.data.mapper.toGrade
 import com.hegunhee.maplefinder.model.character.AbilityPreset
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
@@ -13,7 +14,7 @@ data class AbilityPreset(
     fun toModel() : AbilityPreset {
         return AbilityPreset(
             abilityInfo = abilityInfo.toModel(),
-            abilityGrade = abilityGrade
+            abilityGrade = abilityGrade.toGrade()
         )
     }
 }
