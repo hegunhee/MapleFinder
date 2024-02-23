@@ -35,6 +35,7 @@ fun CharacterDojangResponse.toCharacterDojang(
 fun CharacterBasicResponse.toModel(): CharacterBasic {
     return CharacterBasic(
         name = name,
+        level = level,
         jobName = jobName,
         jobLevel = jobLevel,
         world = worldName.toWorld(),

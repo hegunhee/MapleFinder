@@ -28,6 +28,7 @@ javax-inject = "1"
 retrofit = "2.9.0"
 moshi = "1.9.3"
 
+coil = "2.5.0"
 [libraries]
 androidGradlePlugin = { module = "com.android.tools.build:gradle", version.ref = "androidGradleVersion" }
 kotlinGradlePlugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlinGradleVersion" }
@@ -53,6 +54,7 @@ material3 = {module = "androidx.compose.material3:material3"}
 appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 compose-navigation = {module = "androidx.navigation:navigation-compose",version.ref = "navigation"}
+compose-coil = {module = "io.coil-kt:coil-compose",version.ref = "coil"}
 
 junit = {module = "junit:junit",version.ref = "junit-junit"}
 ext-junit = {module = "androidx.test.ext:junit",version.ref = "ext-junit"}

@@ -5,6 +5,7 @@ import com.hegunhee.maplefinder.model.World
 
 data class CharacterBasic(
     val name : String,
+    val level : Int,
     val jobName : String,
     val jobLevel : String,
     val world : World,
