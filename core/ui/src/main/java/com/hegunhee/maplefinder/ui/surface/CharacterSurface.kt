@@ -5,9 +5,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
@@ -25,8 +32,11 @@ import com.hegunhee.maplefinder.ui.tag.WorldTag
 fun CharacterSurface(
     character : Character
 ) {
+    val scrollState = rememberScrollState()
     Surface(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
+            .verticalScroll(scrollState)
     ) {
         Column {
             CharacterHeader(characterBasic = character.basic)
@@ -65,7 +75,9 @@ fun CharacterStat(
     characterHyperStat: CharacterHyperStat,
     characterAbility: CharacterAbility
 ) {
-   Text(characterStat.toString())
-   Text(characterHyperStat.toString())
-   Text(characterAbility.toString())
+    Text(characterStat.toString())
+    Text(characterHyperStat.toString())
+    val (abilityNum, onAbilityNumChange) = remember { mutableIntStateOf(characterAbility.presetNo) }
+
+    AbilityPreset(currentNum = abilityNum, abilityInfo = characterAbility.abilityInfo,abilityPresetList = characterAbility.abilityPresetList, onAbilityClickButton = onAbilityNumChange)
 }
