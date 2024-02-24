@@ -73,10 +73,8 @@ fun CharacterAbilityResponse.toModel() : CharacterAbility {
     return CharacterAbility(
         abilityGrade = abilityGrade.toGrade(),
         abilityInfo = abilityInfo.toModel(),
-        abilityPreset1 = abilityPreset1?.toModel(),
-        abilityPreset2 = abilityPreset2?.toModel(),
-        abilityPreset3 = abilityPreset3?.toModel(),
-        presetNo = presetNo,
+        abilityPresetList = listOf(abilityPreset1,abilityPreset2,abilityPreset3).map { it?.toModel() },
+        presetNo = presetNo ?: 1,
         remainFame = remainFame
     )
 }
