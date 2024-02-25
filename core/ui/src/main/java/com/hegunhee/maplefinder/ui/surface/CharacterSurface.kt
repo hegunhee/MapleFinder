@@ -76,7 +76,8 @@ fun CharacterStat(
     characterAbility: CharacterAbility
 ) {
     Text(characterStat.toString())
-    Text(characterHyperStat.toString())
+    HyperStat(hyperStat = characterHyperStat)
+    
     val (abilityNum, onAbilityNumChange) = remember { mutableIntStateOf(characterAbility.presetNo) }
 
     AbilityPreset(currentNum = abilityNum, abilityInfo = characterAbility.abilityInfo,abilityPresetList = characterAbility.abilityPresetList, onAbilityClickButton = onAbilityNumChange)

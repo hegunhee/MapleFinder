@@ -18,8 +18,9 @@ data class HyperStat(
     @Json(name = "stat_type") val statType: String
 ) {
     fun toModel() : HyperStat {
+        val statSplit = statIncrease?.split(" ")
         return HyperStat(
-            statIncrease = statIncrease,
+            statIncrease = statSplit?.takeLast(2)?.get(0), // 스텟 증가량만 추출
             statLevel = statLevel,
             statPoint = statPoint,
             statType = statType
