@@ -63,6 +63,7 @@ fun CharacterHyperStatResponse.toModel() : CharacterHyperStat {
     }
     return CharacterHyperStat(
         jobName = jobName,
+        currentPreset = hyperStatList[currentPresetNum.toInt()-1],
         hyperStatPresetList = hyperStatList,
         remainHyperStat = remainHyperStat,
         currentPresetNum =currentPresetNum

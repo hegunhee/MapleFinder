@@ -2,6 +2,7 @@ package com.hegunhee.maplefinder.model.character
 
 data class CharacterHyperStat(
     val jobName : String,
+    val currentPreset : List<HyperStat>,
     val hyperStatPresetList : List<List<HyperStat>>,
     val remainHyperStat : Int,
     val currentPresetNum : String
