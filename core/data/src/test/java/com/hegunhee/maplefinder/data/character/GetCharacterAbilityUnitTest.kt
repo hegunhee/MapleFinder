@@ -85,7 +85,7 @@ class GetCharacterAbilityUnitTest {
                     date = "2024-01-22"
                 ).toModel()
             }.onSuccess { characterAbility ->
-                if(characterAbility.abilityPreset1 == null) {
+                if(characterAbility.abilityInfo == null) {
                     println(characterAbility.toString())
                     assert(true)
                 }else {
@@ -109,7 +109,7 @@ class GetCharacterAbilityUnitTest {
                     date = "2024-01-22"
                 ).toModel()
             }.onSuccess { characterAbility ->
-                if(characterAbility.abilityPreset1 != null) {
+                if(characterAbility.abilityInfo != null) {
                     println(characterAbility.toString())
                     assert(true)
                 }else {
