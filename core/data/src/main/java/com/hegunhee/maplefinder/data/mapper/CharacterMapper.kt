@@ -88,7 +88,7 @@ private fun powerLevelToFormat(powerLevel : Int) : String {
 }
 
 private val filterStat = listOf<String>(
-    "최소 스텟공격력",
+    "최소 스탯공격력",
     "스탠스",
     "방어력",
     "이동속도",

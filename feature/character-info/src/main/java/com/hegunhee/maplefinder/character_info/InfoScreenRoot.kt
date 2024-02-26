@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
@@ -24,7 +23,6 @@ fun InfoScreenRoot(
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val searchQuery = viewModel.searchQuery.collectAsStateWithLifecycle()
-
     InfoScreen(
         uiState = uiState,
         searchQuery = searchQuery.value,
