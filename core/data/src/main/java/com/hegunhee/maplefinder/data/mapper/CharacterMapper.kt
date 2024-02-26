@@ -17,6 +17,7 @@ import com.hegunhee.maplefinder.model.character.CharacterDojang
 import com.hegunhee.maplefinder.model.character.CharacterHyperStat
 import com.hegunhee.maplefinder.model.character.CharacterStat
 import com.hegunhee.maplefinder.util.TimeUtil
+import java.text.DecimalFormat
 
 fun CharacterDojangResponse.toCharacterDojang(
     characterName: String
@@ -49,13 +50,51 @@ fun CharacterBasicResponse.toModel(): CharacterBasic {
 }
 
 fun CharacterStatResponse.toModel(): CharacterStat {
+    val detailStatList = detailStatList.filterNot {
+        filterStat.contains(it.statName)
+    }.filterNot {
+        it.statName.contains("AP")
+    }.map {
+        it.copy(statName =it.statName,statValue = it.statValue.toStatFormat()).toModel()
+    }
+    val powerLevel = this.detailStatList.find { it.statName == "전투력" }?.statValue ?: "0"
+
     return CharacterStat(
         jobName = jobName,
-        detailStatList = detailStatList.map(DetailStat::toModel),
+        powerLevel = powerLevelToFormat(powerLevel = powerLevel.toInt()),
+        detailStatList = detailStatList,
         remainAp = remainAp,
         date = date
     )
 }
+
+private fun String.toStatFormat() : String {
+    return if(this.contains(".")) {
+        "${this.split(".")[0]}%"
+    } else {
+        val format = DecimalFormat("#,###")
+        format.format(this.toInt()) ?: ""
+    }
+}
+
+private fun powerLevelToFormat(powerLevel : Int) : String {
+    val formattedValue = DecimalFormat("#,####").format(powerLevel) ?: ""
+    val parts = formattedValue.split(",")
+    return when (parts.size) {
+        2 -> "${parts[0]}만 ${parts[1]}"
+        3 -> "${parts[0]}억 ${parts[1]}만 ${parts[2]}"
+        else -> formattedValue
+    }
+}
+
+private val filterStat = listOf<String>(
+    "최소 스텟공격력",
+    "스탠스",
+    "방어력",
+    "이동속도",
+    "점프력",
+    "전투력" // 전투력은 기존의 response에서 추출해서 model 클래스에 기재하므로 삭제
+)
 
 fun CharacterHyperStatResponse.toModel() : CharacterHyperStat {
     val hyperStatList = listOf<List<HyperStat>>(hyperStatPreset1,hyperStatPreset2,hyperStatPreset3).map {
