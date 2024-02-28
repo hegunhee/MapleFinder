@@ -122,20 +122,26 @@ fun MapleAppDrawer(
     ) {
         content()
     }
+}
 
+enum class DrawerGroup {
+    Personal,Ranking,Others
 }
 
 enum class DrawerItem(
+    private val group : DrawerGroup,
     val titleString : String,
     val icon : ImageVector,
     val navRoute : String
 ) {
     Info(
+        group = DrawerGroup.Personal,
         titleString = "캐릭터 정보 조회",
         icon = Icons.Default.Search,
         navRoute = InfoNavGraph.infoRoute
     ),
     Dojang(
+        group = DrawerGroup.Personal,
         titleString = "무릉도장",
         icon = Icons.Default.Search,
         navRoute = DojangNavGraph.dojangRoute
@@ -145,9 +151,11 @@ enum class DrawerItem(
             return values().firstOrNull { it.navRoute == route }
         }
     }
-
     val isLastItem: Boolean
         get() = ordinal == DrawerItem.values().lastIndex
+
+    val isGroupLastItem: Boolean
+        get() = isLastItem || group != DrawerItem.values()[ordinal + 1].group
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -173,7 +181,7 @@ fun DrawerSheetContent(
                 },
                 modifier = Modifier.padding(vertical = 10.dp)
             )
-            if (!drawerItem.isLastItem) {
+            if (!drawerItem.isLastItem && drawerItem.isGroupLastItem) {
                 Divider(
                     thickness = 1.dp,
                     modifier = Modifier.padding(horizontal = 28.dp, vertical = 8.dp)
