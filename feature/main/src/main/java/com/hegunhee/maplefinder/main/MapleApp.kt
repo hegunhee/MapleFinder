@@ -1,12 +1,11 @@
 package com.hegunhee.maplefinder.main
 
+import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
@@ -21,13 +20,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import com.hegunhee.maplefinder.character_info.InfoNavGraph
@@ -131,19 +131,19 @@ enum class DrawerGroup {
 enum class DrawerItem(
     private val group : DrawerGroup,
     val titleString : String,
-    val icon : ImageVector,
+    @DrawableRes val iconRes : Int,
     val navRoute : String
 ) {
     Info(
         group = DrawerGroup.Personal,
         titleString = "캐릭터 정보 조회",
-        icon = Icons.Default.Search,
+        iconRes = com.hegunhee.maplefinder.designsystem.R.drawable.ic_search_24,
         navRoute = InfoNavGraph.infoRoute
     ),
     Dojang(
         group = DrawerGroup.Personal,
         titleString = "무릉도장",
-        icon = Icons.Default.Search,
+        iconRes = com.hegunhee.maplefinder.designsystem.R.drawable.dojangicon,
         navRoute = DojangNavGraph.dojangRoute
     );
     companion object {
@@ -170,7 +170,7 @@ fun DrawerSheetContent(
         DrawerItem.values().forEach { drawerItem ->
             NavigationDrawerItem(
                 icon = {
-                    Icon(imageVector = drawerItem.icon, contentDescription = null)
+                    Icon(painter = painterResource(id = drawerItem.iconRes), contentDescription = null,tint = Color.Unspecified)
                 },
                 label = {
                     Text(drawerItem.titleString)
