@@ -3,6 +3,7 @@ package com.hegunhee.maplefinder.main
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -28,7 +29,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import com.hegunhee.maplefinder.character_info.InfoNavGraph
 import com.hegunhee.maplefinder.character_info.infoNavGraph
@@ -167,6 +170,7 @@ fun DrawerSheetContent(
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
     ) {
+        DrawerSheetHeader()
         DrawerItem.values().forEach { drawerItem ->
             NavigationDrawerItem(
                 icon = {
@@ -189,4 +193,9 @@ fun DrawerSheetContent(
             }
         }
     }
+}
+
+@Composable
+private fun DrawerSheetHeader() {
+    Text(modifier = Modifier.fillMaxWidth().padding(10.dp), text = "Maple 정보 검색", fontSize = 30.sp, textAlign = TextAlign.Center)
 }
