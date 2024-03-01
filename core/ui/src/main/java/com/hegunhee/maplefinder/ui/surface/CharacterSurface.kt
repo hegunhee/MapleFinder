@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.Button
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -15,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -27,7 +29,8 @@ import com.hegunhee.maplefinder.ui.tag.WorldTag
 
 @Composable
 fun CharacterSurface(
-    character : Character
+    character : Character,
+    onItemDetailButtonClick: (String) -> Unit
 ) {
     val scrollState = rememberScrollState()
     Surface(
@@ -41,6 +44,10 @@ fun CharacterSurface(
                 characterStat = character.stat,
                 characterHyperStat = character.hyperStat,
                 characterAbility = character.ability
+            )
+            CharacterDetailButton(
+                ocid = character.ocid,
+                onItemDetailButtonClick = onItemDetailButtonClick
             )
         }
     }
@@ -67,7 +74,7 @@ fun CharacterHeader(
 }
 
 @Composable
-fun CharacterStat(
+private fun CharacterStat(
     characterStat: CharacterStat,
     characterHyperStat: CharacterHyperStat,
     characterAbility: CharacterAbility
@@ -76,4 +83,14 @@ fun CharacterStat(
     HyperStat(hyperStat = characterHyperStat)
     val (abilityNum, onAbilityNumChange) = remember { mutableIntStateOf(characterAbility.presetNo) }
     AbilityPreset(currentNum = abilityNum, abilityInfo = characterAbility.abilityInfo,abilityPresetList = characterAbility.abilityPresetList, onAbilityClickButton = onAbilityNumChange)
+}
+
+@Composable
+private fun CharacterDetailButton(
+    ocid : String,
+    onItemDetailButtonClick : (String) -> Unit
+) {
+    Button(modifier = Modifier.fillMaxWidth(),onClick = { onItemDetailButtonClick(ocid) }) {
+        Text(modifier = Modifier.fillMaxWidth(),text = "착용 장비 정보 탐색", textAlign = TextAlign.Center)
+    }
 }

@@ -40,6 +40,7 @@ import com.hegunhee.maplefinder.dojang_record.DojangNavGraph
 import com.hegunhee.maplefinder.dojang_record.dojangNavGraph
 import com.hegunhee.maplefinder.item.ItemNavGraph
 import com.hegunhee.maplefinder.item.itemNavGraph
+import com.hegunhee.maplefinder.item.navigateItemDetail
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,7 +61,8 @@ fun MapleApp(
                 onNavigationIconClick = mapleAppScaffoldState::openDrawer
             )
             infoNavGraph(
-                onNavigationIconClick = mapleAppScaffoldState::openDrawer
+                onNavigationIconClick = mapleAppScaffoldState::openDrawer,
+                onItemDetailButtonClick = mapleAppScaffoldState::navigateItemDetail
             )
             itemNavGraph(
                 onNavigationIconClick = mapleAppScaffoldState::openDrawer
@@ -97,6 +99,11 @@ class MapleAppScaffoldState @OptIn(ExperimentalMaterial3Api::class) constructor(
             drawerState.close()
         }
     }
+
+    fun navigateItemDetail(ocid : String) {
+        navController.navigateItemDetail(ocid)
+    }
+
 
     fun openDrawer() {
         coroutineScope.launch {

@@ -4,7 +4,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
 @Composable
-fun ItemSearchScreenRoot() {
+fun ItemSearchScreenRoot(
+    onNavigationIconClick : () -> Unit
+) {
     ItemSearchScreen()
 }
 
