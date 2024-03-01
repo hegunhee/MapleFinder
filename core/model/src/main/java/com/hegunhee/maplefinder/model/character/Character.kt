@@ -4,6 +4,7 @@ import com.hegunhee.maplefinder.model.ImageUrl
 import com.hegunhee.maplefinder.model.World
 
 data class Character(
+    val ocid : String,
     val basic : CharacterBasic,
     val stat : CharacterStat,
     val hyperStat : CharacterHyperStat,
