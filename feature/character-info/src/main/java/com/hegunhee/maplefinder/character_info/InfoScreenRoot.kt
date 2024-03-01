@@ -19,7 +19,8 @@ import com.hegunhee.maplefinder.ui.surface.CharacterSurface
 @Composable
 fun InfoScreenRoot(
     viewModel : InfoViewModel = hiltViewModel(),
-    onNavigationIconClick : () -> Unit
+    onNavigationIconClick : () -> Unit,
+    onItemDetailButtonClick : (String) -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val searchQuery = viewModel.searchQuery.collectAsStateWithLifecycle()
@@ -28,7 +29,8 @@ fun InfoScreenRoot(
         searchQuery = searchQuery.value,
         onNavigationIconClick = onNavigationIconClick,
         onSearchCharacterClick = viewModel::onSearchCharacterClick,
-        onQueryChange = viewModel::onSearchQueryChange
+        onQueryChange = viewModel::onSearchQueryChange,
+        onItemDetailButtonClick = onItemDetailButtonClick
     )
 }
 
@@ -39,7 +41,8 @@ private fun InfoScreen(
     searchQuery : String,
     onNavigationIconClick: () -> Unit,
     onSearchCharacterClick : (String) -> Unit,
-    onQueryChange : (String) -> Unit
+    onQueryChange : (String) -> Unit,
+    onItemDetailButtonClick : (String) -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
     Scaffold(
@@ -63,7 +66,10 @@ private fun InfoScreen(
             when(uiState) {
                 InfoUiState.Loading -> { }
                 is InfoUiState.Search -> {
-                    CharacterSurface(character = uiState.character)
+                    CharacterSurface(
+                        character = uiState.character,
+                        onItemDetailButtonClick = onItemDetailButtonClick
+                    )
                 }
                 InfoUiState.Error -> { }
             }
