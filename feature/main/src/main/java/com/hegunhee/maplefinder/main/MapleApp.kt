@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
@@ -37,6 +38,8 @@ import com.hegunhee.maplefinder.character_info.InfoNavGraph
 import com.hegunhee.maplefinder.character_info.infoNavGraph
 import com.hegunhee.maplefinder.dojang_record.DojangNavGraph
 import com.hegunhee.maplefinder.dojang_record.dojangNavGraph
+import com.hegunhee.maplefinder.item.ItemNavGraph
+import com.hegunhee.maplefinder.item.itemNavGraph
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -57,6 +60,9 @@ fun MapleApp(
                 onNavigationIconClick = mapleAppScaffoldState::openDrawer
             )
             infoNavGraph(
+                onNavigationIconClick = mapleAppScaffoldState::openDrawer
+            )
+            itemNavGraph(
                 onNavigationIconClick = mapleAppScaffoldState::openDrawer
             )
         }
@@ -143,6 +149,13 @@ enum class DrawerItem(
         iconRes = com.hegunhee.maplefinder.designsystem.R.drawable.ic_search_24,
         navRoute = InfoNavGraph.infoRoute
     ),
+
+    ItemInfo(
+        group = DrawerGroup.Personal,
+        titleString = "착용장비 정보 조회",
+        iconRes = com.hegunhee.maplefinder.designsystem.R.drawable.work_gloves,
+        navRoute = ItemNavGraph.searchRoute
+    ),
     Dojang(
         group = DrawerGroup.Personal,
         titleString = "무릉도장",
@@ -174,7 +187,7 @@ fun DrawerSheetContent(
         DrawerItem.values().forEach { drawerItem ->
             NavigationDrawerItem(
                 icon = {
-                    Icon(painter = painterResource(id = drawerItem.iconRes), contentDescription = null,tint = Color.Unspecified)
+                    Icon(modifier = Modifier.size(38.dp),painter = painterResource(id = drawerItem.iconRes), contentDescription = null,tint = Color.Unspecified)
                 },
                 label = {
                     Text(drawerItem.titleString)
