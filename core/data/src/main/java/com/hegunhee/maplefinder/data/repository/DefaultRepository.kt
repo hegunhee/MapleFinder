@@ -30,6 +30,7 @@ class DefaultRepository @Inject constructor(
             val hyperStatInfo = async { remoteDataSource.getCharacterHyperStat(ocid, date).toModel() }
             val abilityInfo = remoteDataSource.getCharacterAbility(ocid, date).toModel()
             Character(
+                ocid = ocid,
                 basic = basicInfo.await(),
                 stat = statInfo.await(),
                 hyperStat = hyperStatInfo.await(),
