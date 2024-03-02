@@ -4,10 +4,10 @@ import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.hegunhee.maplefinder.data.api.model.character.CharacterDojangResponse
 import com.hegunhee.maplefinder.data.api.model.OcidResponse
-import com.hegunhee.maplefinder.data.api.model.character.CharacterAbilityResponse
+import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterAbilityResponse
 import com.hegunhee.maplefinder.data.api.model.character.CharacterBasicResponse
-import com.hegunhee.maplefinder.data.api.model.character.CharacterHyperStatResponse
-import com.hegunhee.maplefinder.data.api.model.character.CharacterStatResponse
+import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterHyperStatResponse
+import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterStatResponse
 import javax.inject.Inject
 
 class DefaultRemoteDataSource @Inject constructor(
