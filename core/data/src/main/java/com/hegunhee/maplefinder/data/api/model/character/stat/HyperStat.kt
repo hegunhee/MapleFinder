@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.data.api.model.character
+package com.hegunhee.maplefinder.data.api.model.character.stat
 
 import com.hegunhee.maplefinder.model.character.HyperStat
 import com.squareup.moshi.Json
@@ -28,6 +28,6 @@ data class HyperStat(
     }
 }
 
-fun List<com.hegunhee.maplefinder.data.api.model.character.HyperStat>.toModel() : List<HyperStat> {
-    return this.map(com.hegunhee.maplefinder.data.api.model.character.HyperStat::toModel)
+fun List<com.hegunhee.maplefinder.data.api.model.character.stat.HyperStat>.toModel() : List<HyperStat> {
+    return this.map(com.hegunhee.maplefinder.data.api.model.character.stat.HyperStat::toModel)
 }

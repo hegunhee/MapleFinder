@@ -1,14 +1,13 @@
 package com.hegunhee.maplefinder.data.mapper
 
 import com.hegunhee.maplefinder.data.R
-import com.hegunhee.maplefinder.data.api.model.character.CharacterAbilityResponse
+import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterAbilityResponse
 import com.hegunhee.maplefinder.data.api.model.character.CharacterBasicResponse
 import com.hegunhee.maplefinder.data.api.model.character.CharacterDojangResponse
-import com.hegunhee.maplefinder.data.api.model.character.CharacterHyperStatResponse
-import com.hegunhee.maplefinder.data.api.model.character.CharacterStatResponse
-import com.hegunhee.maplefinder.data.api.model.character.DetailStat
-import com.hegunhee.maplefinder.data.api.model.character.HyperStat
-import com.hegunhee.maplefinder.data.api.model.character.toModel
+import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterHyperStatResponse
+import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterStatResponse
+import com.hegunhee.maplefinder.data.api.model.character.stat.HyperStat
+import com.hegunhee.maplefinder.data.api.model.character.stat.toModel
 import com.hegunhee.maplefinder.model.Grade
 import com.hegunhee.maplefinder.model.World
 import com.hegunhee.maplefinder.model.character.CharacterAbility

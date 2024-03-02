@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.data.api.model.character
+package com.hegunhee.maplefinder.data.api.model.character.stat
 
 import com.hegunhee.maplefinder.data.mapper.toGrade
 import com.hegunhee.maplefinder.model.character.AbilityInfo
@@ -20,6 +20,6 @@ data class AbilityInfo(
     }
 }
 
-fun List<com.hegunhee.maplefinder.data.api.model.character.AbilityInfo>.toModel() : List<AbilityInfo> {
-    return map(com.hegunhee.maplefinder.data.api.model.character.AbilityInfo::toModel)
+fun List<com.hegunhee.maplefinder.data.api.model.character.stat.AbilityInfo>.toModel() : List<AbilityInfo> {
+    return map(com.hegunhee.maplefinder.data.api.model.character.stat.AbilityInfo::toModel)
 }
