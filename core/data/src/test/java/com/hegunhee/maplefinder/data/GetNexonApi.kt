@@ -61,4 +61,5 @@ private class NexonInterceptor : Interceptor {
 
 private fun getJson() : Json = Json {
     ignoreUnknownKeys = true
+    coerceInputValues = true
 }
