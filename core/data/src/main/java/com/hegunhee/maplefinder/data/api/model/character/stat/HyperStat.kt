@@ -1,8 +1,8 @@
 package com.hegunhee.maplefinder.data.api.model.character.stat
 
 import com.hegunhee.maplefinder.model.character.HyperStat
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
 /**
  *       "stat_type": "크리티컬 확률",
@@ -10,12 +10,12 @@ import com.squareup.moshi.JsonClass
  *       "stat_level": 7,
  *       "stat_increase": "크리티컬 확률 9% 증가"
  */
-@JsonClass(generateAdapter = true)
+@Serializable
 data class HyperStat(
-    @Json(name = "stat_increase") val statIncrease: String?,
-    @Json(name = "stat_level") val statLevel: Int,
-    @Json(name = "stat_point") val statPoint: Int?,
-    @Json(name = "stat_type") val statType: String
+    @SerialName("stat_increase") val statIncrease: String?,
+    @SerialName("stat_level") val statLevel: Int,
+    @SerialName("stat_point") val statPoint: Int?,
+    @SerialName("stat_type") val statType: String
 ) {
     fun toModel() : HyperStat {
         val statSplit = statIncrease?.split(" ")

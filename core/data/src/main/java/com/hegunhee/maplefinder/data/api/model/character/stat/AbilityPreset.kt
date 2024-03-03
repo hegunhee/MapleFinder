@@ -2,13 +2,13 @@ package com.hegunhee.maplefinder.data.api.model.character.stat
 
 import com.hegunhee.maplefinder.data.mapper.toGrade
 import com.hegunhee.maplefinder.model.character.AbilityPreset
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class AbilityPreset(
-    @Json(name = "ability_info")val abilityInfo: List<AbilityInfo>,
-    @Json(name = "ability_preset_grade")val abilityGrade: String
+    @SerialName("ability_info")val abilityInfo: List<AbilityInfo>,
+    @SerialName("ability_preset_grade")val abilityGrade: String
 ) {
 
     fun toModel() : AbilityPreset {

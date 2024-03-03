@@ -2,6 +2,7 @@ plugins {
     id("maplefinder.android.library")
     id("maplefinder.android.hilt")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
+    id("kotlinx-serialization")
 }
 
 android {
@@ -20,6 +21,9 @@ dependencies {
     implementation(libs.core.ktx)
     implementation(libs.appcompat)
     implementation(libs.material)
+    implementation(libs.retrofit.kotlin.serialization)
+    implementation(libs.okhttp.logging)
+    implementation(libs.kotlinx.serialization.json)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
