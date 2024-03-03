@@ -1,9 +1,9 @@
 package com.hegunhee.maplefinder.data.api.model
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class OcidResponse(
-    @Json(name = "ocid") val id : String
+    @SerialName("ocid") val id : String
 )

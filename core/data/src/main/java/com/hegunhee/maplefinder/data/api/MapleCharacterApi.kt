@@ -3,6 +3,7 @@ package com.hegunhee.maplefinder.data.api
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterAbilityResponse
 import com.hegunhee.maplefinder.data.api.model.character.CharacterDojangResponse
 import com.hegunhee.maplefinder.data.api.model.character.CharacterBasicResponse
+import com.hegunhee.maplefinder.data.api.model.character.item.ItemResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterHyperStatResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterStatResponse
 import retrofit2.http.GET
@@ -39,4 +40,10 @@ interface MapleCharacterApi {
         @Query("ocid") ocid: String,
         @Query("date") date: String
     ) : CharacterAbilityResponse
+
+    @GET("item-equipment")
+    suspend fun getCharacterItem(
+        @Query("ocid") ocid : String,
+        @Query("date") date : String
+    ) : ItemResponse
 }

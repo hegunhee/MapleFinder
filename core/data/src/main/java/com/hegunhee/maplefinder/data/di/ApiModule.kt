@@ -13,7 +13,11 @@ import retrofit2.Retrofit
 import javax.inject.Singleton
 import com.hegunhee.maplefinder.data.BuildConfig
 import com.hegunhee.maplefinder.data.api.MapleCharacterApi
+import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import kotlinx.serialization.json.Json
+import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import retrofit2.Converter
 import retrofit2.converter.moshi.MoshiConverterFactory
 
 @InstallIn(SingletonComponent::class)
@@ -24,14 +28,23 @@ class ApiModule {
     @Provides
     fun provideMapleMoshi() : Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
+    @Provides
+    @Singleton
+    fun provideConverterFactory(
+        json: Json,
+    ): Converter.Factory {
+        return json.asConverterFactory("application/json".toMediaType())
+    }
+
+
     @Singleton
     @Provides
     fun provideMapleOcidApi(
-        moshi : Moshi
+        converterFactory :Converter.Factory
     ) : MapleOcidApi {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.GET_OCID_MAPLE_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(converterFactory)
             .client(provideOkHttpClient(NexonInterceptor()))
             .build()
             .create(MapleOcidApi::class.java)
@@ -40,11 +53,11 @@ class ApiModule {
     @Singleton
     @Provides
     fun provideMapleApi(
-        moshi : Moshi
+        converterFactory :Converter.Factory
     ) : MapleCharacterApi {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.GET_CHARACTER_MAPLE_BASE_URL)
-            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .addConverterFactory(converterFactory)
             .client(provideOkHttpClient(NexonInterceptor()))
             .build()
             .create(MapleCharacterApi::class.java)
@@ -67,5 +80,11 @@ class ApiModule {
                 proceed(newRequest)
             }
         }
+    }
+
+    @Provides
+    @Singleton
+    fun provideJson(): Json = Json {
+        ignoreUnknownKeys = true
     }
 }

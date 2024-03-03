@@ -42,6 +42,7 @@ class GetCharacterModelClassUnitTest {
                     val hyperStatInfo = async { mapleCharacterApi.getCharacterHyperStat(ocid,date).toModel() }
                     val abilityInfo = mapleCharacterApi.getCharacterAbility(ocid,date).toModel()
                     Character(
+                        ocid = ocid,
                         basic = basicInfo.await(),
                         stat = statInfo.await(),
                         hyperStat = hyperStatInfo.await(),
@@ -79,6 +80,7 @@ class GetCharacterModelClassUnitTest {
                     val hyperStatInfo = mapleCharacterApi.getCharacterHyperStat(ocid, date).toModel()
                     val abilityInfo = mapleCharacterApi.getCharacterAbility(ocid, date).toModel()
                     Character(
+                        ocid = ocid,
                         basic = basicInfo,
                         stat = statInfo,
                         hyperStat = hyperStatInfo,
@@ -109,6 +111,7 @@ class GetCharacterModelClassUnitTest {
                     val hyperStatInfo = async { mapleCharacterApi.getCharacterHyperStat(ocid, date).toModel() }
                     val abilityInfo = mapleCharacterApi.getCharacterAbility(ocid, date).toModel()
                     Character(
+                        ocid = ocid,
                         basic = basicInfo.await(),
                         stat = statInfo.await(),
                         hyperStat = hyperStatInfo.await(),

@@ -1,12 +1,12 @@
 package com.hegunhee.maplefinder.data.api.model.character.stat
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import kotlinx.serialization.SerialName
+import kotlinx.serialization.Serializable
 
-@JsonClass(generateAdapter = true)
+@Serializable
 data class CharacterStatResponse(
-    @Json(name = "character_class")val jobName: String,
-    @Json(name = "date")val date: String,
-    @Json(name = "final_stat")val detailStatList: List<DetailStat>,
-    @Json(name = "remain_ap")val remainAp: Int
+    @SerialName("character_class")val jobName: String,
+    @SerialName("date")val date: String,
+    @SerialName("final_stat")val detailStatList: List<DetailStat>,
+    @SerialName("remain_ap")val remainAp: Int
 )
