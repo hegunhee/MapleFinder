@@ -1,6 +1,6 @@
 package com.hegunhee.maplefinder.data.api.model.character.stat
 
-import com.hegunhee.maplefinder.model.character.DetailStat
+import com.hegunhee.maplefinder.model.character.stat.DetailStat
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

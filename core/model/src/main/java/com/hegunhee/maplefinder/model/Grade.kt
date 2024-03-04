@@ -13,5 +13,5 @@ sealed class Grade(
 
     object Legendary : Grade(name = "레전드리",color = 0xFF80F680)
 
-    object Unknown : Grade(name = "알 수 없음",color = 0xFF000000)
+    object Unknown : Grade(name = "알 수 없음",color = 0x00FF0000)
 }

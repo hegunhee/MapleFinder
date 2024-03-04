@@ -10,11 +10,11 @@ import com.hegunhee.maplefinder.data.api.model.character.stat.HyperStat
 import com.hegunhee.maplefinder.data.api.model.character.stat.toModel
 import com.hegunhee.maplefinder.model.Grade
 import com.hegunhee.maplefinder.model.World
-import com.hegunhee.maplefinder.model.character.CharacterAbility
+import com.hegunhee.maplefinder.model.character.stat.CharacterAbility
 import com.hegunhee.maplefinder.model.character.CharacterBasic
 import com.hegunhee.maplefinder.model.character.CharacterDojang
-import com.hegunhee.maplefinder.model.character.CharacterHyperStat
-import com.hegunhee.maplefinder.model.character.CharacterStat
+import com.hegunhee.maplefinder.model.character.stat.CharacterHyperStat
+import com.hegunhee.maplefinder.model.character.stat.CharacterStat
 import com.hegunhee.maplefinder.util.TimeUtil
 import java.text.DecimalFormat
 

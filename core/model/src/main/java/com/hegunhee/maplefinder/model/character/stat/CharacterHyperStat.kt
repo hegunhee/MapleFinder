@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.model.character
+package com.hegunhee.maplefinder.model.character.stat
 
 data class CharacterHyperStat(
     val jobName : String,

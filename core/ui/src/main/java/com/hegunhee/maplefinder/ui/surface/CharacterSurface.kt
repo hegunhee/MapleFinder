@@ -21,10 +21,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.hegunhee.maplefinder.model.character.Character
-import com.hegunhee.maplefinder.model.character.CharacterAbility
+import com.hegunhee.maplefinder.model.character.stat.CharacterAbility
 import com.hegunhee.maplefinder.model.character.CharacterBasic
-import com.hegunhee.maplefinder.model.character.CharacterHyperStat
-import com.hegunhee.maplefinder.model.character.CharacterStat
+import com.hegunhee.maplefinder.model.character.stat.CharacterHyperStat
+import com.hegunhee.maplefinder.model.character.stat.CharacterStat
 import com.hegunhee.maplefinder.ui.tag.WorldTag
 
 @Composable

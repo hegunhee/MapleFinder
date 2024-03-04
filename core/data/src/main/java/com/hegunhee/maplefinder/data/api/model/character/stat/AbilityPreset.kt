@@ -1,7 +1,7 @@
 package com.hegunhee.maplefinder.data.api.model.character.stat
 
 import com.hegunhee.maplefinder.data.mapper.toGrade
-import com.hegunhee.maplefinder.model.character.AbilityPreset
+import com.hegunhee.maplefinder.model.character.stat.AbilityPreset
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 

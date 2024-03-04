@@ -2,6 +2,9 @@ package com.hegunhee.maplefinder.model.character
 
 import com.hegunhee.maplefinder.model.ImageUrl
 import com.hegunhee.maplefinder.model.World
+import com.hegunhee.maplefinder.model.character.stat.CharacterAbility
+import com.hegunhee.maplefinder.model.character.stat.CharacterHyperStat
+import com.hegunhee.maplefinder.model.character.stat.CharacterStat
 
 data class Character(
     val ocid : String,

@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.model.character
+package com.hegunhee.maplefinder.model.character.stat
 
 data class CharacterStat(
     val jobName : String,
