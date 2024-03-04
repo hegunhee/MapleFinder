@@ -2,6 +2,7 @@ package com.hegunhee.maplefinder.domain.repository
 
 import com.hegunhee.maplefinder.model.character.Character
 import com.hegunhee.maplefinder.model.character.CharacterDojang
+import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
 
 interface Repository {
 
@@ -14,5 +15,10 @@ interface Repository {
         characterName: String,
         date : String
     ) : Result<Character>
+
+    suspend fun getCharacterItem(
+        ocid : String,
+        date : String
+    ) : Result<CharacterEquipmentItem>
 
 }
