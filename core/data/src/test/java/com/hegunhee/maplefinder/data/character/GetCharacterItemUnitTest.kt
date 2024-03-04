@@ -5,6 +5,7 @@ import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.hegunhee.maplefinder.data.getMapleApi
 import com.hegunhee.maplefinder.data.getMapleOcidApi
+import com.hegunhee.maplefinder.data.mapper.toModel
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -102,6 +103,24 @@ class GetCharacterItemUnitTest {
     }
 
     @Test
+    fun `get item model class`() {
+        runBlocking {
+            runCatching {
+                val ocid = mapleOcidApi.getOcid(characterName = "세븐").id
+                mapleCharacterApi.getCharacterItem(
+                    ocid = ocid,
+                    date = "2024-03-01"
+                ).toModel()
+            }.onSuccess { item ->
+                println(item.toString())
+            }.onFailure {
+                println(it.message)
+                assert(false)
+            }
+        }
+    }
+
+    @Test
     fun `get character item to json`() {
         runBlocking {
             runCatching {
@@ -112,7 +131,7 @@ class GetCharacterItemUnitTest {
                 )
             }.onSuccess { item ->
                 if (item.preset1.isNotEmpty()) {
-                    val list = Json.encodeToString(item.itemEquipmentResponse[0].itemTotalOption)
+                    val list = Json.encodeToString(item.itemEquipmentResponse[0].totalOption)
                     val jsonObject = Json.parseToJsonElement(list)
                     val optionMap = (jsonObject as JsonObject).map {
                         ItemOptionMap(key = it.key, value = it.value.toString().substring(1,it.value.toString().length-1))
