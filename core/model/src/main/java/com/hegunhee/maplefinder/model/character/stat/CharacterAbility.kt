@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.model.character
+package com.hegunhee.maplefinder.model.character.stat
 
 import com.hegunhee.maplefinder.model.Grade
 

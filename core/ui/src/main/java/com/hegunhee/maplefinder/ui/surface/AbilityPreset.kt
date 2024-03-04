@@ -18,8 +18,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.hegunhee.maplefinder.model.character.AbilityInfo
-import com.hegunhee.maplefinder.model.character.AbilityPreset
+import com.hegunhee.maplefinder.model.character.stat.AbilityInfo
+import com.hegunhee.maplefinder.model.character.stat.AbilityPreset
 
 @Composable
 fun AbilityPreset(

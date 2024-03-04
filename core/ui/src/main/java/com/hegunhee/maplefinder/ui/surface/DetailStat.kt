@@ -10,8 +10,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
-import com.hegunhee.maplefinder.model.character.CharacterStat
-import com.hegunhee.maplefinder.model.character.DetailStat
+import com.hegunhee.maplefinder.model.character.stat.CharacterStat
+import com.hegunhee.maplefinder.model.character.stat.DetailStat
 
 @Composable
 fun DetailStat(

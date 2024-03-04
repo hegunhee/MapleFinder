@@ -1,6 +1,5 @@
 package com.hegunhee.maplefinder.ui.surface
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,8 +12,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.hegunhee.maplefinder.model.character.CharacterHyperStat
-import com.hegunhee.maplefinder.model.character.HyperStat
+import com.hegunhee.maplefinder.model.character.stat.CharacterHyperStat
+import com.hegunhee.maplefinder.model.character.stat.HyperStat
 
 @Composable
 fun HyperStat(

@@ -1,9 +1,7 @@
 package com.hegunhee.maplefinder.data.api.model.character.stat
 
 import com.hegunhee.maplefinder.data.mapper.toGrade
-import com.hegunhee.maplefinder.model.character.AbilityInfo
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.hegunhee.maplefinder.model.character.stat.AbilityInfo
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
