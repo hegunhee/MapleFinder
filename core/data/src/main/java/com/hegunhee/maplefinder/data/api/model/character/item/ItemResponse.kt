@@ -21,6 +21,6 @@ data class ItemResponse(
     @SerialName("item_equipment_preset_3")val preset3: List<ItemEquipmentResponse> = emptyList(),
     @SerialName("mechanic_equipment")val mechanicEquipment: List<ItemEquipmentResponse> = emptyList(),
     @SerialName("preset_no")val presetNo: Int = 0,
-    @SerialName("title") val title: Title = Title.EMPTY
+    @SerialName("title") val titleResponse: TitleResponse = TitleResponse.EMPTY
 )
 
