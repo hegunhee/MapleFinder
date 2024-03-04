@@ -5,7 +5,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class Title(
+data class TitleResponse(
     @SerialName("date_expire")val dateExpire: String = "",
     @SerialName("date_option_expire")val dateOptionExpire: String = "",
     @SerialName("title_description")val description: String,
@@ -14,6 +14,6 @@ data class Title(
 ) {
 
     companion object {
-        val EMPTY = Title(dateExpire = "", dateOptionExpire = "", description = "",icon = "",name = "")
+        val EMPTY = TitleResponse(dateExpire = "", dateOptionExpire = "", description = "",icon = "",name = "")
     }
 }

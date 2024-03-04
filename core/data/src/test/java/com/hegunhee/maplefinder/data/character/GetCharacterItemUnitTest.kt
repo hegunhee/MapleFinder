@@ -115,10 +115,9 @@ class GetCharacterItemUnitTest {
                     val list = Json.encodeToString(item.itemEquipmentResponse[0].itemTotalOption)
                     val jsonObject = Json.parseToJsonElement(list)
                     val optionMap = (jsonObject as JsonObject).map {
-                        Pair(first = it.key,second = it.value.toString().substring(1,it.value.toString().length-1))
-                    }.toMap()
-                    val itemOptionMap = ItemOptionMap(optionMap)
-                    println(itemOptionMap.toString())
+                        ItemOptionMap(key = it.key, value = it.value.toString().substring(1,it.value.toString().length-1))
+                    }.toList()
+                    println(optionMap)
                     assert(true)
                 } else {
                     println(item.toString())
@@ -131,6 +130,7 @@ class GetCharacterItemUnitTest {
         }
     }
     private data class ItemOptionMap(
-        val map : Map<String,String>
+        val key : String,
+        val value : String
     )
 }
