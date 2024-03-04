@@ -6,6 +6,7 @@ import com.hegunhee.maplefinder.data.mapper.toModel
 import com.hegunhee.maplefinder.domain.repository.Repository
 import com.hegunhee.maplefinder.model.character.Character
 import com.hegunhee.maplefinder.model.character.CharacterDojang
+import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import javax.inject.Inject
@@ -35,6 +36,18 @@ class DefaultRepository @Inject constructor(
                 stat = statInfo.await(),
                 hyperStat = hyperStatInfo.await(),
                 ability = abilityInfo
+            )
+        }
+    }
+
+    override suspend fun getCharacterItem(ocid : String, date: String): Result<CharacterEquipmentItem> = coroutineScope {
+        runCatching {
+            val basicInfo = async { remoteDataSource.getCharacterBasic(ocid,date).toModel() }
+            val itemInfo = remoteDataSource.getCharacterItem(ocid,date)
+            CharacterEquipmentItem(
+                ocid = ocid,
+                basic = basicInfo.await(),
+                equipmentItem = itemInfo.toModel(),
             )
         }
     }

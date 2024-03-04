@@ -6,6 +6,7 @@ import com.hegunhee.maplefinder.data.api.model.character.CharacterDojangResponse
 import com.hegunhee.maplefinder.data.api.model.OcidResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterAbilityResponse
 import com.hegunhee.maplefinder.data.api.model.character.CharacterBasicResponse
+import com.hegunhee.maplefinder.data.api.model.character.item.ItemResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterHyperStatResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterStatResponse
 import javax.inject.Inject
@@ -37,5 +38,9 @@ class DefaultRemoteDataSource @Inject constructor(
 
     override suspend fun getCharacterAbility(ocid: String, date: String): CharacterAbilityResponse {
         return mapleCharacterApi.getCharacterAbility(ocid,date)
+    }
+
+    override suspend fun getCharacterItem(ocid: String, date: String): ItemResponse {
+        return mapleCharacterApi.getCharacterItem(ocid,date)
     }
 }
