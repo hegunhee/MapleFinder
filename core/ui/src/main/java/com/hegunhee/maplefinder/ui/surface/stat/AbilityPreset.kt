@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.ui.surface
+package com.hegunhee.maplefinder.ui.surface.stat
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
