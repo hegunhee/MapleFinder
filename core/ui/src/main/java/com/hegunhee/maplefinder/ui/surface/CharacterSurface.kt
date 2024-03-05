@@ -25,6 +25,9 @@ import com.hegunhee.maplefinder.model.character.stat.CharacterAbility
 import com.hegunhee.maplefinder.model.character.CharacterBasic
 import com.hegunhee.maplefinder.model.character.stat.CharacterHyperStat
 import com.hegunhee.maplefinder.model.character.stat.CharacterStat
+import com.hegunhee.maplefinder.ui.surface.stat.AbilityPreset
+import com.hegunhee.maplefinder.ui.surface.stat.DetailStat
+import com.hegunhee.maplefinder.ui.surface.stat.HyperStat
 import com.hegunhee.maplefinder.ui.tag.WorldTag
 
 @Composable
