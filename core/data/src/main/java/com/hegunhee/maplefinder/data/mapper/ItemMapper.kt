@@ -89,7 +89,7 @@ private fun cubeOptionToModel(grade : String,option1 : String,option2 :String, o
     )
 }
 
-private fun optionKeyToKorean(key : String) : String {
+internal fun optionKeyToKorean(key : String) : String {
     return optionKoreanMap[key] ?: ""
 }
 

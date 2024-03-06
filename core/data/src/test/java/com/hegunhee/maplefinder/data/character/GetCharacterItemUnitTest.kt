@@ -106,13 +106,17 @@ class GetCharacterItemUnitTest {
     fun `get item model class`() {
         runBlocking {
             runCatching {
-                val ocid = mapleOcidApi.getOcid(characterName = "세븐").id
+                val ocid = mapleOcidApi.getOcid(characterName = "엔버는함초롱").id
                 mapleCharacterApi.getCharacterItem(
                     ocid = ocid,
                     date = "2024-03-01"
                 ).toModel()
             }.onSuccess { item ->
                 println(item.toString())
+                item.itemList.forEach {
+                    println(it.getItemStatGrade("덱스"))
+                }
+                assert(true)
             }.onFailure {
                 println(it.message)
                 assert(false)

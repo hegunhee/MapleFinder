@@ -5,6 +5,7 @@ import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.hegunhee.maplefinder.data.getMapleApi
 import com.hegunhee.maplefinder.data.getMapleOcidApi
+import com.hegunhee.maplefinder.data.mapper.findMainStatName
 import com.hegunhee.maplefinder.data.mapper.toModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
@@ -63,6 +64,28 @@ class GetCharacterStatUnitTest {
                     assert(true)
                 }else {
                     println(characterStat.toString())
+                    assert(false)
+                }
+            }.onFailure {
+                println(it.message)
+                assert(false)
+            }
+        }
+    }
+
+    @Test
+    fun `find min sub stat test`() {
+        runBlocking {
+            runCatching {
+                val ocid = mapleOcidApi.getOcid(characterName = TestParameter.CHARACTER_NAME).id
+                mapleCharacterApi.getCharacterStat(
+                    ocid = ocid,
+                    date = "2024-02-20"
+                ).detailStatList.findMainStatName()
+            }.onSuccess { mainStat ->
+                if(mainStat == "덱스") {
+                    assert(true)
+                }else {
                     assert(false)
                 }
             }.onFailure {

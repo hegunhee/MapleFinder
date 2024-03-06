@@ -34,6 +34,7 @@ import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
 import com.hegunhee.maplefinder.model.character.item.Item
 import com.hegunhee.maplefinder.ui.tag.CubeOptionTag
 import com.hegunhee.maplefinder.ui.tag.StarforceTag
+import com.hegunhee.maplefinder.ui.tag.StatGradeTag
 
 @Composable
 fun CharacterEquipmentItemSurface(
@@ -53,7 +54,7 @@ fun CharacterEquipmentItemSurface(
                 contentPadding = PaddingValues(10.dp)
             ) {
                 items(items = characterEquipmentItem.equipmentItem.itemList, key = {it.slot}) { item ->
-                    EquipmentItem(ocid = characterEquipmentItem.ocid,item = item, onDetailItemClick)
+                    EquipmentItem(ocid = characterEquipmentItem.ocid,item = item,mainStat = characterEquipmentItem.mainStat, onDetailItemClick)
                 }
             }
         }
@@ -64,14 +65,21 @@ fun CharacterEquipmentItemSurface(
 private fun EquipmentItem(
     ocid : String,
     item : Item,
+    mainStat : String,
     onDetailItemClick : (String) -> Unit
 ) {
     Column(modifier = Modifier
         .fillMaxWidth()
         .height(IntrinsicSize.Max)) {
-        Spacer(modifier = Modifier.weight(1f).fillMaxWidth().size(1.dp).background(Color.Black))
+        Spacer(modifier = Modifier
+            .weight(1f)
+            .fillMaxWidth()
+            .size(1.dp)
+            .background(Color.Black))
         Row(
-            modifier = Modifier.fillMaxWidth().clickable { onDetailItemClick(ocid) },
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable { onDetailItemClick(ocid) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(imageVector = Icons.Rounded.Search, contentDescription = "아이템 자세히보기")
@@ -92,7 +100,14 @@ private fun EquipmentItem(
             Spacer(modifier = Modifier.size(5.dp))
             Column {
                 Text(text = item.part,fontSize = 12.sp)
-                StarforceTag(option = item.starforceCountOption)
+                Row {
+                    StarforceTag(option = item.starforceCountOption)
+                    val statGrade = item.getItemStatGrade(mainStat)
+                    if(statGrade.isNotEmpty()) {
+                        Spacer(modifier = Modifier.size(3.dp))
+                        StatGradeTag(statGrade = statGrade)
+                    }
+                }
             }
         }
         item.totalOption.forEach { option ->

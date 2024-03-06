@@ -6,6 +6,7 @@ import com.hegunhee.maplefinder.model.character.CharacterBasic
 
 data class CharacterEquipmentItem(
     val ocid : String,
+    val mainStat : String,
     val basic : CharacterBasic,
     val equipmentItem : EquipmentItem,
     val name : String = basic.name,

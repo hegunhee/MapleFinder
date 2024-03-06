@@ -3,12 +3,10 @@ package com.hegunhee.maplefinder.item.detail
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.hegunhee.maplefinder.domain.usecase.GetCharacterEquipmentItemUseCase
-import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 

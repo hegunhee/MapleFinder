@@ -32,4 +32,30 @@ data class Item(
     val soulName : String,
     val soulOption : String,
     val specialRingLevel : Int
-)
+) {
+    fun getItemStatGrade(mainStat : String) : String {
+        if(addOption.isEmpty()) {
+            return ""
+        }
+        if(isItemStatGradeExist()) {
+            val statValue = addOption.find { it.key == mainStat}?.value?.toInt() ?: 0
+            val attackValue = if(mainStat == "인트") {
+                addOption.find { it.key == "마력" }
+            } else {
+                addOption.find { it.key == "공격력" }
+            }?.value?.toInt() ?: 0
+            val allStatValue = addOption.find { it.key == "올스텟(%)" }?.value?.toInt() ?: 0
+            println()
+            return (statValue + (attackValue * 4) + (allStatValue * 10)).toString()
+        }
+        return ""
+    }
+
+    private fun isItemStatGradeExist() : Boolean {
+        return itemStatGradeParts.contains(part)
+    }
+
+    companion object {
+        private val itemStatGradeParts = listOf<String>("얼굴장식","눈장식","펜던트","모자","상의","하의","신발","장갑","망토","벨트","어깨장식")
+    }
+}

@@ -6,6 +6,7 @@ import com.hegunhee.maplefinder.data.api.model.character.CharacterBasicResponse
 import com.hegunhee.maplefinder.data.api.model.character.CharacterDojangResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterHyperStatResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterStatResponse
+import com.hegunhee.maplefinder.data.api.model.character.stat.DetailStat
 import com.hegunhee.maplefinder.data.api.model.character.stat.HyperStat
 import com.hegunhee.maplefinder.data.api.model.character.stat.toModel
 import com.hegunhee.maplefinder.model.Grade
@@ -154,4 +155,13 @@ private fun Int.toTimeStamp(): String {
     val second = this % 60
     val minute = this / 60
     return "${minute}분 ${second}초"
+}
+
+internal fun List<DetailStat>.findMainStatName() : String {
+    val strStat = this.find { it.statName == "STR" } ?: DetailStat("STR","0")
+    val dexStat = this.find { it.statName == "DEX"} ?: DetailStat("DEX","0")
+    val intStat = this.find { it.statName == "INT"} ?: DetailStat("INT", "0")
+    val lukStat = this.find { it.statName == "LUK" } ?: DetailStat("LUX","0")
+    val statList = listOf<DetailStat>(strStat,dexStat,intStat,lukStat).sortedBy { it.statValue.toInt() }.map { optionKeyToKorean(it.statName.lowercase()) }
+    return statList[3]
 }

@@ -1,6 +1,7 @@
 package com.hegunhee.maplefinder.data.repository
 
 import com.hegunhee.maplefinder.data.datasource.remote.RemoteDataSource
+import com.hegunhee.maplefinder.data.mapper.findMainStatName
 import com.hegunhee.maplefinder.data.mapper.toCharacterDojang
 import com.hegunhee.maplefinder.data.mapper.toModel
 import com.hegunhee.maplefinder.domain.repository.Repository
@@ -43,11 +44,14 @@ class DefaultRepository @Inject constructor(
     override suspend fun getCharacterItem(ocid : String, date: String): Result<CharacterEquipmentItem> = coroutineScope {
         runCatching {
             val basicInfo = async { remoteDataSource.getCharacterBasic(ocid,date).toModel() }
-            val itemInfo = remoteDataSource.getCharacterItem(ocid,date)
+            val itemInfo = async{ remoteDataSource.getCharacterItem(ocid, date) }
+            val statInfo = remoteDataSource.getCharacterStat(ocid,date)
+            val mainStat = statInfo.detailStatList.findMainStatName()
             CharacterEquipmentItem(
                 ocid = ocid,
+                mainStat = mainStat,
                 basic = basicInfo.await(),
-                equipmentItem = itemInfo.toModel(),
+                equipmentItem = itemInfo.await().toModel(),
             )
         }
     }
