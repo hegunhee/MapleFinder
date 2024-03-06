@@ -25,7 +25,10 @@ fun NavGraphBuilder.itemNavGraph(
             }
         )){ navBackStackEntry ->
         val ocid = navBackStackEntry.arguments?.getString("ocid") ?: ""
-        ItemDetailScreenRoot(ocid = ocid)
+        ItemDetailScreenRoot(
+            ocid = ocid,
+            onNavigationIconClick = onNavigationIconClick
+        )
     }
 }
 
