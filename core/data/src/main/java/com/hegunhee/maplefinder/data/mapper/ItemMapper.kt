@@ -75,7 +75,7 @@ private fun ItemOptionResponse.toModel() : List<ItemOption>{
     val jsonOptionList = Json.encodeToString(this)
     val jsonObject = (Json.parseToJsonElement(jsonOptionList) as JsonObject)
     val itemOptionList = jsonObject.map {
-        ItemOption(key = it.key, value = it.value.toString().substring(1,it.value.toString().length-1))
+        ItemOption(key = optionKeyToKorean(it.key), value = it.value.toString().substring(1,it.value.toString().length-1))
     }.toList()
     return itemOptionList
 }
@@ -88,3 +88,28 @@ private fun cubeOptionToModel(grade : String,option1 : String,option2 :String, o
         thirdOption = option3
     )
 }
+
+private fun optionKeyToKorean(key : String) : String {
+    return optionKoreanMap[key] ?: ""
+}
+
+private val optionKoreanMap = mapOf<String,String>(
+    Pair("str","힘"),
+    Pair("dex","덱스"),
+    Pair("int","인트"),
+    Pair("luk","럭"),
+    Pair("max_hp","최대 HP"),
+    Pair("max_mp","최대 MP"),
+    Pair("attack_power","공격력"),
+    Pair("magic_power","마력"),
+    Pair("armor","방어력"),
+    Pair("speed","이동속도"),
+    Pair("jump","점프력"),
+    Pair("boss_damage","보스 데미지 증가(%)"),
+    Pair("ignore_monster_armor","몬스터 방어력 무시(%)"),
+    Pair("all_stat","올스텟(%)"),
+    Pair("damage","데미지(%)"),
+    Pair("equipment_level_decrease","착용 레벨 감소"),
+    Pair("max_hp_rate","최대 HP(%)"),
+    Pair("max_mp_rate","최대 MP(%)"),
+)
