@@ -6,13 +6,19 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.hegunhee.maplefinder.item.detail.ItemDetailScreenRoot
+import com.hegunhee.maplefinder.item.list.ItemListScreenRoot
 
 fun NavController.navigateItemDetail(ocid : String) {
     navigate(ItemNavGraph.detailRoute(ocid))
 }
 
+fun NavController.navigateItemList(ocid : String) {
+    navigate(ItemNavGraph.detailListRoute(ocid))
+}
 fun NavGraphBuilder.itemNavGraph(
-    onNavigationIconClick : () -> Unit
+    onNavigationIconClick : () -> Unit,
+    onPopBackStack : () -> Unit,
+    onItemListButtonClick : (String) -> Unit
 ) {
     composable(route = ItemNavGraph.searchRoute) {
         ItemSearchScreenRoot(onNavigationIconClick)
@@ -27,7 +33,20 @@ fun NavGraphBuilder.itemNavGraph(
         val ocid = navBackStackEntry.arguments?.getString("ocid") ?: ""
         ItemDetailScreenRoot(
             ocid = ocid,
-            onNavigationIconClick = onNavigationIconClick
+            onNavigationIconClick = onNavigationIconClick,
+            onItemListButtonClick = onItemListButtonClick
+        )
+    }
+    composable(route = ItemNavGraph.detailListRoute("{ocid}"),
+        arguments = listOf(
+            navArgument("ocid") {
+                type = NavType.StringType
+            }
+        )) { navBackStackEntry ->
+        val ocid = navBackStackEntry.arguments?.getString("ocid") ?: ""
+        ItemListScreenRoot(
+            ocid = ocid,
+            popBackStack = onPopBackStack
         )
     }
 }
@@ -35,7 +54,13 @@ fun NavGraphBuilder.itemNavGraph(
 object ItemNavGraph {
     const val searchRoute = "Search"
 
+    private const val listRoute = "List"
+
     fun detailRoute(ocid : String) : String {
         return "$searchRoute/$ocid"
+    }
+
+    fun detailListRoute(ocid : String) : String {
+        return "$listRoute/$ocid"
     }
 }
