@@ -12,13 +12,13 @@ fun NavController.navigateItemDetail(ocid : String) {
     navigate(ItemNavGraph.detailRoute(ocid))
 }
 
-fun NavController.navigateItemList(ocid : String) {
-    navigate(ItemNavGraph.detailListRoute(ocid))
+fun NavController.navigateItemList(ocid : String,slotName: String) {
+    navigate(ItemNavGraph.detailListRoute(ocid,slotName))
 }
 fun NavGraphBuilder.itemNavGraph(
     onNavigationIconClick : () -> Unit,
     onPopBackStack : () -> Unit,
-    onItemListButtonClick : (String) -> Unit
+    onItemListButtonClick : (String,String) -> Unit
 ) {
     composable(route = ItemNavGraph.searchRoute) {
         ItemSearchScreenRoot(onNavigationIconClick)
@@ -37,15 +37,17 @@ fun NavGraphBuilder.itemNavGraph(
             onItemListButtonClick = onItemListButtonClick
         )
     }
-    composable(route = ItemNavGraph.detailListRoute("{ocid}"),
+    composable(route = ItemNavGraph.detailListRoute("{ocid}","{slotName}"),
         arguments = listOf(
             navArgument("ocid") {
                 type = NavType.StringType
             }
         )) { navBackStackEntry ->
         val ocid = navBackStackEntry.arguments?.getString("ocid") ?: ""
+        val slotName = navBackStackEntry.arguments?.getString("slotName") ?: ""
         ItemListScreenRoot(
             ocid = ocid,
+            slot = slotName,
             popBackStack = onPopBackStack
         )
     }
@@ -60,7 +62,7 @@ object ItemNavGraph {
         return "$searchRoute/$ocid"
     }
 
-    fun detailListRoute(ocid : String) : String {
-        return "$listRoute/$ocid"
+    fun detailListRoute(ocid : String,slotName : String) : String {
+        return "$listRoute/$ocid/$slotName"
     }
 }

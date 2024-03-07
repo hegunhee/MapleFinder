@@ -39,7 +39,7 @@ import com.hegunhee.maplefinder.ui.tag.StatGradeTag
 @Composable
 fun CharacterEquipmentItemSurface(
     characterEquipmentItem: CharacterEquipmentItem,
-    onDetailItemClick: (String) -> Unit
+    onDetailItemClick: (String,String) -> Unit
 ) {
     Surface(
         modifier = Modifier
@@ -66,7 +66,7 @@ private fun EquipmentItem(
     ocid : String,
     item : Item,
     mainStat : String,
-    onDetailItemClick : (String) -> Unit
+    onDetailItemClick : (String,String) -> Unit
 ) {
     Column(modifier = Modifier
         .fillMaxWidth()
@@ -79,7 +79,7 @@ private fun EquipmentItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { onDetailItemClick(ocid) },
+                .clickable { onDetailItemClick(ocid,item.slot) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(imageVector = Icons.Rounded.Search, contentDescription = "아이템 자세히보기")
