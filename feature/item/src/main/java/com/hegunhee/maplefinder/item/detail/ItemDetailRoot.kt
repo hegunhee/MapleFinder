@@ -17,7 +17,8 @@ import com.hegunhee.maplefinder.ui.surface.CharacterEquipmentItemSurface
 fun ItemDetailScreenRoot(
     viewModel : ItemDetailViewModel = hiltViewModel(),
     ocid : String,
-    onNavigationIconClick : () -> Unit
+    onNavigationIconClick : () -> Unit,
+    onItemListButtonClick : (String) -> Unit
 ) {
     LaunchedEffect(key1 = viewModel.uiState) {
         viewModel.fetchItemData(ocid)
@@ -25,7 +26,8 @@ fun ItemDetailScreenRoot(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     ItemDetailScreen(
         uiState = uiState,
-        onNavigationIconClick = onNavigationIconClick
+        onNavigationIconClick = onNavigationIconClick,
+        onItemListButtonClick = onItemListButtonClick
     )
 }
 
@@ -33,7 +35,8 @@ fun ItemDetailScreenRoot(
 @Composable
 private fun ItemDetailScreen(
     uiState : ItemDetailUiState,
-    onNavigationIconClick: () -> Unit
+    onNavigationIconClick: () -> Unit,
+    onItemListButtonClick : (String) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -51,7 +54,7 @@ private fun ItemDetailScreen(
             when(uiState) {
                 ItemDetailUiState.Loading -> { }
                 is ItemDetailUiState.Success -> {
-                    CharacterEquipmentItemSurface(uiState.equipmentItem, { })
+                    CharacterEquipmentItemSurface(uiState.equipmentItem, onItemListButtonClick)
                 }
                 ItemDetailUiState.Error -> {
 

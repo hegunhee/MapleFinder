@@ -41,6 +41,7 @@ import com.hegunhee.maplefinder.dojang_record.dojangNavGraph
 import com.hegunhee.maplefinder.item.ItemNavGraph
 import com.hegunhee.maplefinder.item.itemNavGraph
 import com.hegunhee.maplefinder.item.navigateItemDetail
+import com.hegunhee.maplefinder.item.navigateItemList
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -65,7 +66,9 @@ fun MapleApp(
                 onItemDetailButtonClick = mapleAppScaffoldState::navigateItemDetail
             )
             itemNavGraph(
-                onNavigationIconClick = mapleAppScaffoldState::openDrawer
+                onNavigationIconClick = mapleAppScaffoldState::openDrawer,
+                onItemListButtonClick = mapleAppScaffoldState::navigateItemList,
+                onPopBackStack = mapleAppScaffoldState::popBackStack
             )
         }
     }
@@ -102,6 +105,14 @@ class MapleAppScaffoldState @OptIn(ExperimentalMaterial3Api::class) constructor(
 
     fun navigateItemDetail(ocid : String) {
         navController.navigateItemDetail(ocid)
+    }
+
+    fun navigateItemList(ocid : String) {
+        navController.navigateItemList(ocid)
+    }
+
+    fun popBackStack()  {
+        navController.popBackStack()
     }
 
 
