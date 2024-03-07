@@ -23,5 +23,6 @@ data class ItemOptionResponse(
     @SerialName("max_mp_rate")val maxMpRate: String = "0",
     @SerialName("speed")val speed: String = "0",
     @SerialName("jump")val jump: String = "0",
+    @SerialName("base_equipment_level") val baseLevel : Int = 0
 )
 
