@@ -55,5 +55,5 @@ fun StarforceTag(
 @Preview
 @Composable
 private fun StarforceTagPreview() {
-    StarforceTag(option = StarforceOption("17", "미적용"))
+    StarforceTag(option = StarforceOption(true,25,"17", "미적용"))
 }

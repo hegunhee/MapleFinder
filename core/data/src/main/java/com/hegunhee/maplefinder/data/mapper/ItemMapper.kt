@@ -27,9 +27,11 @@ internal fun ItemResponse.toModel() : EquipmentItem {
     )
 }
 
-private fun ItemEquipmentResponse.toModel() : Item {
+internal fun ItemEquipmentResponse.toModel() : Item {
     val scrollOption = ScrollOption(scrollUpgradeCount,scrollUpgradeableCount,scrollRecoverableCount,goldenHammerFlag)
-    val starforceOption = StarforceOption(starforce,starforceScrollFlag)
+    val isStarforceItem = isStarforceItemSlot(slot)
+    val starCountMax = starMaxCount(baseOption.baseLevel)
+    val starforceOption = StarforceOption(isStarforceItem,starCountMax,starforce,starforceScrollFlag)
     return Item(
         part = part,
         slot = slot,
@@ -88,6 +90,26 @@ private fun cubeOptionToModel(grade : String,option1 : String,option2 :String, o
         thirdOption = option3
     )
 }
+
+internal fun starMaxCount(itemLevel : Int) : Int {
+    return when(itemLevel) {
+        in 138..300 -> 25
+        in 128..137 -> 20
+        in 118..127 -> 15
+        in 108..117 -> 10
+        in 95..107 -> 8
+        else -> 5
+    }
+}
+internal fun isStarforceItemSlot(slot : String) : Boolean = !hasNoStarforceItemSlotMap.contains(slot)
+
+private val hasNoStarforceItemSlotMap : List<String> = listOf<String>(
+    "보조무기",
+    "훈장",
+    "포켓 아이템",
+    "뱃지",
+    "엠블렘"
+)
 
 internal fun optionKeyToKorean(key : String) : String {
     return optionKoreanMap[key] ?: ""
