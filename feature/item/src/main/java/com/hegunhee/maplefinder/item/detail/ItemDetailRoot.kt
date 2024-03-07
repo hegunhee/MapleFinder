@@ -18,7 +18,7 @@ fun ItemDetailScreenRoot(
     viewModel : ItemDetailViewModel = hiltViewModel(),
     ocid : String,
     onNavigationIconClick : () -> Unit,
-    onItemListButtonClick : (String) -> Unit
+    onItemListButtonClick : (String,String) -> Unit
 ) {
     LaunchedEffect(key1 = viewModel.uiState) {
         viewModel.fetchItemData(ocid)
@@ -36,7 +36,7 @@ fun ItemDetailScreenRoot(
 private fun ItemDetailScreen(
     uiState : ItemDetailUiState,
     onNavigationIconClick: () -> Unit,
-    onItemListButtonClick : (String) -> Unit
+    onItemListButtonClick : (String,String) -> Unit
 ) {
     Scaffold(
         topBar = {

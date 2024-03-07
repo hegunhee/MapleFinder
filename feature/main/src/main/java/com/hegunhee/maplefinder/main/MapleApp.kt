@@ -107,8 +107,8 @@ class MapleAppScaffoldState @OptIn(ExperimentalMaterial3Api::class) constructor(
         navController.navigateItemDetail(ocid)
     }
 
-    fun navigateItemList(ocid : String) {
-        navController.navigateItemList(ocid)
+    fun navigateItemList(ocid : String,slotName : String) {
+        navController.navigateItemList(ocid,slotName)
     }
 
     fun popBackStack()  {
