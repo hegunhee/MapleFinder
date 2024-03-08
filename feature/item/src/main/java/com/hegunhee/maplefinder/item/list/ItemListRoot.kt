@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.Button
@@ -51,6 +52,7 @@ private fun ItemListScreen(
     popBackStack: () -> Unit,
     slot : String
 ) {
+    val scrollState = rememberScrollState()
     Scaffold(
         topBar = {
             TopAppBar(
@@ -77,13 +79,11 @@ private fun ItemListScreen(
                         initialPage = uiState.itemList.indexOf(uiState.itemList.find { it.slot == slot })
                     )
                     HorizontalPager(state = pagerState) { page ->
-                        DetailItemSurface(item = uiState.itemList[page])
+                        DetailItemSurface(scrollState = scrollState,item = uiState.itemList[page])
                     }
                 }
                 ItemListUiState.Error -> { }
-
             }
         }
-
     }
 }
