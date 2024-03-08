@@ -1,6 +1,7 @@
 package com.hegunhee.maplefinder.model.character.item
 
 import com.hegunhee.maplefinder.model.ImageUrl
+import com.hegunhee.maplefinder.model.character.item.upgrade.BaseOption
 import com.hegunhee.maplefinder.model.character.item.upgrade.CubeOption
 import com.hegunhee.maplefinder.model.character.item.upgrade.ScrollOption
 import com.hegunhee.maplefinder.model.character.item.upgrade.StarforceOption
@@ -22,7 +23,7 @@ data class Item(
     val growthExp : Int,
     val growthLevel : Int,
     val totalOption : List<ItemOption>,
-    val baseOption : List<ItemOption>,
+    val baseOption : BaseOption,
     val addOption : List<ItemOption>,
     val etcOption : List<ItemOption>,
     val exceptionalOption : List<ItemOption>,
