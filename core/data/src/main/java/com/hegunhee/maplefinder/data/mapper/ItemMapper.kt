@@ -8,6 +8,7 @@ import com.hegunhee.maplefinder.model.character.item.EquipmentItem
 import com.hegunhee.maplefinder.model.character.item.Item
 import com.hegunhee.maplefinder.model.character.item.ItemOption
 import com.hegunhee.maplefinder.model.character.item.Title
+import com.hegunhee.maplefinder.model.character.item.upgrade.BaseOption
 import com.hegunhee.maplefinder.model.character.item.upgrade.CubeOption
 import com.hegunhee.maplefinder.model.character.item.upgrade.ScrollOption
 import com.hegunhee.maplefinder.model.character.item.upgrade.StarforceOption
@@ -49,7 +50,7 @@ internal fun ItemEquipmentResponse.toModel() : Item {
         growthExp = growthExp,
         growthLevel = growthLevel,
         totalOption = totalOption.toModel(),
-        baseOption = baseOption.toModel(),
+        baseOption = BaseOption(options = baseOption.toModel(),baseLevel = baseOption.baseLevel),
         addOption = addOption.toModel(),
         etcOption = etcOption.toModel(),
         exceptionalOption = exceptionalOption.toModel(),
@@ -77,6 +78,7 @@ private fun ItemOptionResponse.toModel() : List<ItemOption>{
     val jsonOptionList = Json.encodeToString(this)
     val jsonObject = (Json.parseToJsonElement(jsonOptionList) as JsonObject)
     val itemOptionList = jsonObject.map {
+        it.value.toString().toIntOrNull() ?: it.value.toString().substring(1,it.value.toString().length-1)
         ItemOption(key = optionKeyToKorean(it.key), value = it.value.toString().substring(1,it.value.toString().length-1))
     }.toList()
     return itemOptionList
@@ -134,4 +136,5 @@ private val optionKoreanMap = mapOf<String,String>(
     Pair("equipment_level_decrease","착용 레벨 감소"),
     Pair("max_hp_rate","최대 HP(%)"),
     Pair("max_mp_rate","최대 MP(%)"),
+    Pair("base_equipment_level","착용 레벨")
 )
