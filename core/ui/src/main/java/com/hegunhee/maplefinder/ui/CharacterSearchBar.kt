@@ -24,10 +24,10 @@ import androidx.compose.ui.text.input.ImeAction
 @Composable
 fun CharacterSearchBar(
     searchQuery : String,
-    date : String = "",
+    date : String ,
     onSearchCharacterClick : (String) -> Unit,
     onQueryChange : (String) -> Unit,
-    onDatePickerShowClick : () -> Unit = {},
+    onDatePickerShowClick : () -> Unit,
     keyboardController: SoftwareKeyboardController?
 ) {
     Column {

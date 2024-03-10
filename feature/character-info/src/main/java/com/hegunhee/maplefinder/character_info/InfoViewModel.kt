@@ -22,7 +22,7 @@ class InfoViewModel @Inject constructor(
     private val _searchQuery : MutableStateFlow<String> = MutableStateFlow("")
     val searchQuery : StateFlow<String> = _searchQuery.asStateFlow()
 
-    private val _searchDate : MutableStateFlow<String> = MutableStateFlow(SelectedDateFormatUtil.defaultDate())
+    private val _searchDate : MutableStateFlow<String> = MutableStateFlow(SelectedDateFormatUtil.defaultDateString())
     val searchDate : StateFlow<String> = _searchDate.asStateFlow()
 
     fun onSearchQueryChange(query : String) {
@@ -38,5 +38,8 @@ class InfoViewModel @Inject constructor(
                     _uiState.value = InfoUiState.Error
                 }
         }
+    }
+    fun onDateSelectClick(date : String) {
+        _searchDate.value = date
     }
 }
