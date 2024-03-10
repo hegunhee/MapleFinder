@@ -19,7 +19,7 @@ class ItemListViewModel @Inject constructor(
     private val _uiState : MutableStateFlow<ItemListUiState> = MutableStateFlow(ItemListUiState.Loading)
     val uiState : StateFlow<ItemListUiState> = _uiState.asStateFlow()
 
-    private val _searchDate : MutableStateFlow<String> = MutableStateFlow(SelectedDateFormatUtil.defaultDate())
+    private val _searchDate : MutableStateFlow<String> = MutableStateFlow(SelectedDateFormatUtil.defaultDateString())
     val searchDate : StateFlow<String> = _searchDate.asStateFlow()
 
     fun fetchData(ocid : String) {

@@ -22,7 +22,7 @@ class DojangViewModel @Inject constructor(
     private val _searchQuery : MutableStateFlow<String> = MutableStateFlow("")
     val searchQuery : StateFlow<String> = _searchQuery.asStateFlow()
 
-    private val _searchDate : MutableStateFlow<String> = MutableStateFlow(SelectedDateFormatUtil.defaultDate())
+    private val _searchDate : MutableStateFlow<String> = MutableStateFlow(SelectedDateFormatUtil.defaultDateString())
     val searchDate : StateFlow<String> = _searchDate.asStateFlow()
 
     fun onQueryChange(query : String) {
@@ -38,5 +38,9 @@ class DojangViewModel @Inject constructor(
                     _uiState.value = DojangUiState.Error
                 }
         }
+    }
+
+    fun onDateSelectClick(date : String) {
+        _searchDate.value = date
     }
 }
