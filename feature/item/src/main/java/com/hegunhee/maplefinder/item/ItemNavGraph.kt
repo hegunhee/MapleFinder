@@ -7,6 +7,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.hegunhee.maplefinder.item.detail.ItemDetailScreenRoot
 import com.hegunhee.maplefinder.item.list.ItemListScreenRoot
+import com.hegunhee.maplefinder.item.search.ItemSearchScreenRoot
 
 fun NavController.navigateItemDetail(ocid : String) {
     navigate(ItemNavGraph.detailRoute(ocid))
@@ -18,10 +19,14 @@ fun NavController.navigateItemList(ocid : String,slotName: String) {
 fun NavGraphBuilder.itemNavGraph(
     onNavigationIconClick : () -> Unit,
     onPopBackStack : () -> Unit,
-    onItemListButtonClick : (String,String) -> Unit
+    onItemListButtonClick : (String,String) -> Unit,
+    onItemDetailButtonClick : (String) -> Unit
 ) {
     composable(route = ItemNavGraph.searchRoute) {
-        ItemSearchScreenRoot(onNavigationIconClick)
+        ItemSearchScreenRoot(
+            onNavigationIconClick = onNavigationIconClick,
+            onSearchCharacterItemClick = onItemDetailButtonClick
+        )
     }
 
     composable(route = ItemNavGraph.detailRoute("{ocid}"),

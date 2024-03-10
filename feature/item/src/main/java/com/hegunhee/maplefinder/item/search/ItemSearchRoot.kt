@@ -1,0 +1,73 @@
+package com.hegunhee.maplefinder.item.search
+
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.ExperimentalComposeUiApi
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.hegunhee.maplefinder.ui.CharacterNameSearchBar
+import com.hegunhee.maplefinder.ui.MapleTopBar
+
+@Composable
+fun ItemSearchScreenRoot(
+    viewModel: ItemSearchViewModel = hiltViewModel(),
+    onNavigationIconClick : () -> Unit,
+    onSearchCharacterItemClick : (String) -> Unit,
+) {
+    val searchQuery = viewModel.searchQuery.collectAsStateWithLifecycle().value
+    LaunchedEffect(true) {
+        viewModel.navActions.collect {
+            when(it) {
+                is ItemNavActions.Detail -> {
+                    onSearchCharacterItemClick(it.ocid)
+                }
+            }
+        }
+    }
+
+    ItemSearchScreen(
+        searchQuery = searchQuery,
+        onNavigationIconClick = onNavigationIconClick,
+        onSearchCharacterItemClick = viewModel::characterOcidSearch,
+        onQueryChange = viewModel::onQueryChange
+    )
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+private fun ItemSearchScreen(
+    searchQuery : String,
+    onNavigationIconClick: () -> Unit,
+    onSearchCharacterItemClick : (String) -> Unit,
+    onQueryChange : (String) -> Unit
+) {
+    val keyboardController = LocalSoftwareKeyboardController.current
+    Scaffold(
+        topBar = { MapleTopBar(
+            title = "캐릭터 아이템 조회",
+            onNavigationIconClick = onNavigationIconClick
+        ) }
+    ) { paddingValues ->
+        Column(
+            modifier = Modifier
+                .padding(paddingValues)
+                .padding(10.dp)
+        ) {
+            CharacterNameSearchBar(
+                searchQuery = searchQuery,
+                onSearchCharacterClick = onSearchCharacterItemClick,
+                onQueryChange = onQueryChange,
+                keyboardController = keyboardController
+            )
+            Spacer(modifier = Modifier.padding(vertical = 10.dp))
+        }
+
+    }
+}
