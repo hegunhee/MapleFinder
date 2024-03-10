@@ -26,6 +26,7 @@ dependencies {
     implementation(libs.findLibrary("core.ktx").get())
     implementation(libs.findLibrary("appcompat").get())
     implementation(libs.findLibrary("material").get())
+    implementation(libs.findLibrary("material3").get())
 
     implementation(libs.findLibrary("lifecycle-ktx").get())
     implementation(libs.findLibrary("lifecycle-viewmodel").get())
