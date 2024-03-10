@@ -68,6 +68,7 @@ fun MapleApp(
             itemNavGraph(
                 onNavigationIconClick = mapleAppScaffoldState::openDrawer,
                 onItemListButtonClick = mapleAppScaffoldState::navigateItemList,
+                onItemDetailButtonClick = mapleAppScaffoldState::navigateItemDetail,
                 onPopBackStack = mapleAppScaffoldState::popBackStack
             )
         }

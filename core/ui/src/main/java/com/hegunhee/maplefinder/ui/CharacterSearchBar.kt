@@ -37,25 +37,39 @@ fun CharacterSearchBar(
                 Icon(imageVector = Icons.Default.DateRange, contentDescription ="selectDate")
             }
         }
-        Row {
-            OutlinedTextField(
-                modifier = Modifier.fillMaxWidth(),
-                value = searchQuery,
-                onValueChange = onQueryChange,
-                label = { Text("캐릭터 이름을 입력해주세요") },
-                singleLine = true,
-                maxLines = 1,
-                trailingIcon = {
-                    Icon(imageVector = Icons.Default.Search, contentDescription = null, tint = Color.Black)
-                },
-                keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
-                keyboardActions = KeyboardActions(onSearch = {
-                    onSearchCharacterClick(searchQuery)
-                    keyboardController?.hide()
-                }),
-            )
-        }
+        CharacterNameSearchBar(
+            searchQuery = searchQuery,
+            onSearchCharacterClick = onSearchCharacterClick,
+            onQueryChange = onQueryChange,
+            keyboardController = keyboardController
+        )
     }
+}
 
-
+@OptIn(ExperimentalComposeUiApi::class)
+@Composable
+fun CharacterNameSearchBar(
+    searchQuery: String,
+    onSearchCharacterClick: (String) -> Unit,
+    onQueryChange: (String) -> Unit,
+    keyboardController: SoftwareKeyboardController?
+) {
+    Row {
+        OutlinedTextField(
+            modifier = Modifier.fillMaxWidth(),
+            value = searchQuery,
+            onValueChange = onQueryChange,
+            label = { Text("캐릭터 이름을 입력해주세요") },
+            singleLine = true,
+            maxLines = 1,
+            trailingIcon = {
+                Icon(imageVector = Icons.Default.Search, contentDescription = null, tint = Color.Black)
+            },
+            keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
+            keyboardActions = KeyboardActions(onSearch = {
+                onSearchCharacterClick(searchQuery)
+                keyboardController?.hide()
+            }),
+        )
+    }
 }

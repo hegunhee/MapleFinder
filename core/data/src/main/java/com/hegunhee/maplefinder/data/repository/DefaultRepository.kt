@@ -7,6 +7,7 @@ import com.hegunhee.maplefinder.data.mapper.toModel
 import com.hegunhee.maplefinder.domain.repository.Repository
 import com.hegunhee.maplefinder.model.character.Character
 import com.hegunhee.maplefinder.model.character.CharacterDojang
+import com.hegunhee.maplefinder.model.character.Ocid
 import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
 import com.hegunhee.maplefinder.model.character.item.Item
 import kotlinx.coroutines.async
@@ -16,6 +17,12 @@ import javax.inject.Inject
 class DefaultRepository @Inject constructor(
     private val remoteDataSource: RemoteDataSource
 ) : Repository {
+
+    override suspend fun getCharacterOcid(characterName: String): Result<Ocid> {
+        return runCatching {
+            remoteDataSource.getCharacterOcid(characterName).toModel()
+        }
+    }
 
     override suspend fun getCharacterDojangInfo(characterName: String,date : String): Result<CharacterDojang> = coroutineScope {
         runCatching {
