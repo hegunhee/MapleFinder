@@ -18,7 +18,6 @@ import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import retrofit2.Converter
-import retrofit2.converter.moshi.MoshiConverterFactory
 
 @InstallIn(SingletonComponent::class)
 @Module
@@ -75,7 +74,7 @@ class ApiModule {
         override fun intercept(chain: Interceptor.Chain): Response {
             return with(chain) {
                 val newRequest = request().newBuilder()
-                    .addHeader("x-nxopen-api-key",BuildConfig.MAPLE_API_KEY)
+                    .addHeader("x-nxopen-api-key", BuildConfig.MAPLE_API_KEY)
                     .build()
                 proceed(newRequest)
             }
