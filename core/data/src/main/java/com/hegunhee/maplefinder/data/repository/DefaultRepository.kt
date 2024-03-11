@@ -1,5 +1,6 @@
 package com.hegunhee.maplefinder.data.repository
 
+import com.hegunhee.maplefinder.data.api.createResult
 import com.hegunhee.maplefinder.data.datasource.remote.RemoteDataSource
 import com.hegunhee.maplefinder.data.mapper.findMainStatName
 import com.hegunhee.maplefinder.data.mapper.toCharacterDojang
@@ -19,13 +20,13 @@ class DefaultRepository @Inject constructor(
 ) : Repository {
 
     override suspend fun getCharacterOcid(characterName: String): Result<Ocid> {
-        return runCatching {
+        return createResult {
             remoteDataSource.getCharacterOcid(characterName).toModel()
         }
     }
 
     override suspend fun getCharacterDojangInfo(characterName: String,date : String): Result<CharacterDojang> = coroutineScope {
-        runCatching {
+        createResult {
             val ocid = remoteDataSource.getCharacterOcid(characterName).id
             val characterDojangResponse = remoteDataSource.getCharacterDojang(ocid,date).toCharacterDojang(characterName)
             characterDojangResponse
@@ -33,7 +34,7 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun getCharacter(characterName: String, date: String): Result<Character> = coroutineScope{
-        runCatching {
+        createResult {
             val ocid = remoteDataSource.getCharacterOcid(characterName).id
             val basicInfo = async { remoteDataSource.getCharacterBasic(ocid, date).toModel() }
             val statInfo = async { remoteDataSource.getCharacterStat(ocid, date).toModel() }
@@ -50,7 +51,7 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun getCharacterItem(ocid : String, date: String): Result<CharacterEquipmentItem> = coroutineScope {
-        runCatching {
+        createResult {
             val basicInfo = async { remoteDataSource.getCharacterBasic(ocid,date).toModel() }
             val itemInfo = async{ remoteDataSource.getCharacterItem(ocid, date) }
             val statInfo = remoteDataSource.getCharacterStat(ocid,date)
@@ -65,7 +66,7 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun getCharacterItemList(ocid: String, date: String): Result<List<Item>> {
-        return runCatching {
+        return createResult {
             val itemInfo = remoteDataSource.getCharacterItem(ocid,date)
             itemInfo.itemEquipmentResponse.map { it.toModel() } + itemInfo.dragonEquipment.map { it.toModel() } + itemInfo.mechanicEquipment.map { it.toModel() }
         }
