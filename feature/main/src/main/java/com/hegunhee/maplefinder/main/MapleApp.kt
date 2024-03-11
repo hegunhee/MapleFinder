@@ -224,6 +224,11 @@ fun DrawerSheetContent(
                 )
             }
         }
+        Divider(
+            thickness = 1.dp,
+            modifier = Modifier.padding(horizontal = 28.dp, vertical = 8.dp)
+        )
+        Text(modifier = Modifier.fillMaxWidth(),text = "Data based on NEXON Open API", textAlign = TextAlign.End)
     }
 }
 
