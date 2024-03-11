@@ -14,6 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hegunhee.maplefinder.ui.MapleTopBar
 import com.hegunhee.maplefinder.ui.surface.CharacterEquipmentItemSurface
+import com.hegunhee.maplefinder.ui.surface.ErrorSurface
 import com.hegunhee.maplefinder.util.SelectedDateFormatUtil
 
 @Composable
@@ -58,8 +59,8 @@ private fun ItemDetailScreen(
                 is ItemDetailUiState.Success -> {
                     CharacterEquipmentItemSurface(uiState.equipmentItem, onItemListButtonClick)
                 }
-                ItemDetailUiState.Error -> {
-
+                is ItemDetailUiState.Error -> {
+                    ErrorSurface(exception = uiState.throwable)
                 }
             }
         }

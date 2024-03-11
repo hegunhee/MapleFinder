@@ -10,5 +10,7 @@ sealed interface DojangUiState {
         val characterDojang : CharacterDojang
     ) : DojangUiState
 
-    object Error : DojangUiState
+    data class Error(
+        val throwable : Throwable
+    ) : DojangUiState
 }

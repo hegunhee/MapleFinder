@@ -14,6 +14,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hegunhee.maplefinder.ui.CharacterNameSearchBar
 import com.hegunhee.maplefinder.ui.MapleTopBar
+import com.hegunhee.maplefinder.ui.surface.ErrorSurface
 
 @Composable
 fun ItemSearchScreenRoot(
@@ -22,6 +23,8 @@ fun ItemSearchScreenRoot(
     onSearchCharacterItemClick : (String) -> Unit,
 ) {
     val searchQuery = viewModel.searchQuery.collectAsStateWithLifecycle().value
+    val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
+    
     LaunchedEffect(true) {
         viewModel.navActions.collect {
             when(it) {
@@ -33,6 +36,7 @@ fun ItemSearchScreenRoot(
     }
 
     ItemSearchScreen(
+        uiState = uiState,
         searchQuery = searchQuery,
         onNavigationIconClick = onNavigationIconClick,
         onSearchCharacterItemClick = viewModel::characterOcidSearch,
@@ -43,6 +47,7 @@ fun ItemSearchScreenRoot(
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun ItemSearchScreen(
+    uiState: ItemSearchUiState,
     searchQuery : String,
     onNavigationIconClick: () -> Unit,
     onSearchCharacterItemClick : (String) -> Unit,
@@ -67,6 +72,9 @@ private fun ItemSearchScreen(
                 keyboardController = keyboardController
             )
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
+            if(uiState is ItemSearchUiState.Error) {
+                ErrorSurface(exception = uiState.throwable)
+            }
         }
 
     }

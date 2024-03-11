@@ -35,7 +35,7 @@ class DojangViewModel @Inject constructor(
                 .onSuccess { characterDojang ->
                     _uiState.value = DojangUiState.Search(characterDojang = characterDojang)
                 }.onFailure {
-                    _uiState.value = DojangUiState.Error
+                    _uiState.value = DojangUiState.Error(it)
                 }
         }
     }

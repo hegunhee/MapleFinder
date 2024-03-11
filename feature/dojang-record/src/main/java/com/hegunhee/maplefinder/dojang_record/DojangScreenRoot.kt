@@ -18,6 +18,7 @@ import com.hegunhee.maplefinder.ui.CharacterSearchBar
 import com.hegunhee.maplefinder.ui.MapleTopBar
 import com.hegunhee.maplefinder.ui.dialog.MapleDatePickerDialog
 import com.hegunhee.maplefinder.ui.surface.DojangSurface
+import com.hegunhee.maplefinder.ui.surface.ErrorSurface
 import com.hegunhee.maplefinder.util.SelectedDateFormatUtil
 import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toTimeMills
 
@@ -86,8 +87,8 @@ private fun DojangScreen(
                 is DojangUiState.Search -> {
                     DojangSurface(characterDojang = uiState.characterDojang)
                 }
-                DojangUiState.Error -> {
-                    Text("존재하지 않는 캐릭터입니다.")
+                is DojangUiState.Error -> {
+                    ErrorSurface(exception = uiState.throwable)
                 }
             }
         }
