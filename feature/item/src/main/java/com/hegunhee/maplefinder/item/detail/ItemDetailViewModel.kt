@@ -24,7 +24,7 @@ class ItemDetailViewModel @Inject constructor(
                 .onSuccess {
                     _uiState.value = ItemDetailUiState.Success(it)
                 }.onFailure {
-
+                    _uiState.value = ItemDetailUiState.Error(it)
                 }
         }
     }

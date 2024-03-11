@@ -8,5 +8,7 @@ sealed interface ItemDetailUiState {
 
     data class Success(val equipmentItem : CharacterEquipmentItem) : ItemDetailUiState
 
-    object Error : ItemDetailUiState
+    data class Error(
+        val throwable : Throwable
+    ) : ItemDetailUiState
 }

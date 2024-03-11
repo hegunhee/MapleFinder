@@ -4,9 +4,7 @@ sealed interface ItemSearchUiState {
 
     object Loading : ItemSearchUiState
 
-    data class Success(
-        val ocid : String
+    data class Error(
+        val throwable : Throwable
     ) : ItemSearchUiState
-
-    object Error : ItemSearchUiState
 }

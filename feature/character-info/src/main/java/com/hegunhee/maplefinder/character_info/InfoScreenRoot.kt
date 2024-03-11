@@ -17,6 +17,7 @@ import com.hegunhee.maplefinder.ui.CharacterSearchBar
 import com.hegunhee.maplefinder.ui.MapleTopBar
 import com.hegunhee.maplefinder.ui.dialog.MapleDatePickerDialog
 import com.hegunhee.maplefinder.ui.surface.CharacterSurface
+import com.hegunhee.maplefinder.ui.surface.ErrorSurface
 import com.hegunhee.maplefinder.util.SelectedDateFormatUtil
 import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toTimeMills
 
@@ -90,7 +91,9 @@ private fun InfoScreen(
                         onItemDetailButtonClick = onItemDetailButtonClick
                     )
                 }
-                InfoUiState.Error -> { }
+                is InfoUiState.Error -> {
+                    ErrorSurface(exception = uiState.throwable)
+                }
             }
         }
     }

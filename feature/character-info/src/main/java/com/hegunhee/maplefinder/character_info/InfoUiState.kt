@@ -1,6 +1,7 @@
 package com.hegunhee.maplefinder.character_info
 
 import com.hegunhee.maplefinder.model.character.Character
+import java.lang.Exception
 
 sealed interface InfoUiState {
 
@@ -10,5 +11,8 @@ sealed interface InfoUiState {
         val character : Character
     ) : InfoUiState
 
-    object Error : InfoUiState
+    data class Error(
+        val throwable : Throwable
+    ): InfoUiState
+
 }

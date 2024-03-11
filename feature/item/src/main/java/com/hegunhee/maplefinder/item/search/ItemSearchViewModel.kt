@@ -21,6 +21,9 @@ class ItemSearchViewModel @Inject constructor(
     private val _navActions : MutableSharedFlow<ItemNavActions> = MutableSharedFlow()
     val navActions : SharedFlow<ItemNavActions> = _navActions.asSharedFlow()
 
+    private val _uiState : MutableStateFlow<ItemSearchUiState> = MutableStateFlow(ItemSearchUiState.Loading)
+    val uiState : StateFlow<ItemSearchUiState> = _uiState.asStateFlow()
+
     private val _searchQuery : MutableStateFlow<String> = MutableStateFlow("")
     val searchQuery : StateFlow<String> = _searchQuery.asStateFlow()
 
@@ -29,7 +32,9 @@ class ItemSearchViewModel @Inject constructor(
             getCharacterOcidUseCase(characterName)
                 .onSuccess { ocid ->
                     _navActions.emit(ItemNavActions.Detail(ocid.id))
+                    _uiState.value = ItemSearchUiState.Loading
                 }.onFailure {
+                    _uiState.value = ItemSearchUiState.Error(it)
                 }
         }
     }
