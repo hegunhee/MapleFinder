@@ -51,4 +51,18 @@ retrofit2.httpException 타입으로 내려오게 되고 presentation module의 
 해당 exception을 처리할 수 없었습니다.  
 data module에서 httpException을 파싱해 model module에서 exception class를 작성해 presentation module에서도  
 해당 에러를 파싱해 유저에게 적합한 에러 화면을 보여줄 수 있었습니다.  
-https://hegunhee.tistory.com/34
+https://hegunhee.tistory.com/34  
+
+## 앱 화면  
+![캐릭터 정보검색창 (빈칸)](https://github.com/hegunhee/MapleFinder/assets/57277631/70344b6d-c3ea-4852-a8cd-42c2c26b8265)  
+캐릭터 정보 검색창 (날짜와 캐릭터 이름을 작성할 수 있음)  
+![캐릭터 정보검색창 (에러)](https://github.com/hegunhee/MapleFinder/assets/57277631/cf5cdd4b-0cc9-4861-ae74-c7ecd84b51ec)  
+만약 잘못된 파라미터를 입력하거나 서버 에러가 발생했을때 나오는 화면  
+![캐릭터 정보](https://github.com/hegunhee/MapleFinder/assets/57277631/7cdebe17-3c5f-450c-b99e-714ee120569b)  
+캐릭터 정보  
+![캐릭터 장비 정보](https://github.com/hegunhee/MapleFinder/assets/57277631/88b822c0-8599-4bce-a0db-55d8ab7cf187)  
+캐릭터 장비 정보  
+![캐릭터 장비 상세 정보](https://github.com/hegunhee/MapleFinder/assets/57277631/9772d803-13ff-4ffc-8b97-3f0bf01d110b)  
+캐릭터 장비 상세 정보  
+![drawerLayout](https://github.com/hegunhee/MapleFinder/assets/57277631/9fa95370-74a9-4022-af0f-ac272b0b08ed)  
+여러가지 정보 검색을 선택하는 화면  
