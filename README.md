@@ -28,9 +28,9 @@ test - Junit
 - **kotlinx.serialization 도입**  
   json의 특정 파라미터를 무시하고 kotlin과의 호환성을 높이기 위해서 moshi -> serialization으로 변경하였습니다.  
 - **multi-module + build-logic 도입**  
-  앱의 모듈간 의존성을 직관적으로 보고 분리하고 빌드 시간을 감소시키기 위해 multi-module으로 분리했습니다.  
-  그리고 모듈 분리로 인한 의존성 설정 증가를 방지하기 위해 build-logic을 사용했습니다.  
-  의존성 버전과 의존성 관리를 위해 version-catalog를 도입했습니다.  
+  앱의 모듈간 의존성을 **직관적으로** 보고 분리하고 **빌드 시간을 감소**시키기 위해 multi-module으로 분리했습니다.  
+  그리고 모듈 분리로 인한 **의존성 설정 증가**를 방지하기 위해 build-logic을 사용했습니다.  
+  **의존성 버전**과 **의존성 관리**를 위해 version-catalog를 도입했습니다.  
 - **custom exception 도입**  
   retrofit2.httpException을 presentation module에서도 사용하기 위해  
   data module에서 httpException을 분리해 custom exception을 만들어 UI에서 오류를 표시할 수 있게 하였습니다.  
@@ -39,10 +39,10 @@ test - Junit
 https://github.com/hegunhee/MapleFinder/issues/3  
 
 ## issue(트러블 슈팅)  
-**Json 직렬화/역직렬화 라이브러리를 moshi에서 serialization으로 변경하게 된 계기**
-비슷한 캐릭터 능력치 데이터에 대한 클래스 선언 중복을 줄이기 위해  
+**Json 직렬화/역직렬화 라이브러리를 moshi에서 serialization으로 변경하게 된 계기**  
+비슷한 캐릭터 능력치 데이터에 대한 **클래스 선언 중복**을 줄이기 위해  
 Json의 특정 key-value값을 무시할 수 있는것에 대해 찾던중 serialization의 Json Builder값을 수정해 특정 값을 무시할 수 있다는걸 찾고  
-능력치 클래스를 하나만 만들어 보일러 플레이트 코드를 줄이고 매퍼 함수가 줄어들기때문에 유지보수에 용이해졌습니다.  
+능력치 클래스를 하나만 만들어 **보일러 플레이트 코드를 줄이고** 매퍼 함수가 줄어들기때문에 **유지보수에 용이**해졌습니다.  
 코틀린 호환성과 default value를 사용할 수 있어 not-null한 코드를 작성할 수 있게 되었습니다.  
 https://hegunhee.tistory.com/33  
 **custom exception 적용**  
