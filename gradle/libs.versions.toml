@@ -1,5 +1,5 @@
 [versions]
-androidGradleVersion = "8.0.2"
+androidGradleVersion = "8.3.2"
 kotlinGradleVersion = "1.8.10"
 androidxComposeCompiler = "1.4.3"
 org-jetbrains-kotlin-jvm = "1.8.10"
