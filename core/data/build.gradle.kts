@@ -1,6 +1,6 @@
 plugins {
     id("maplefinder.android.library")
-    id("maplefinder.android.hilt")
+    id("maplefinder.hilt")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("kotlinx-serialization")
 }
