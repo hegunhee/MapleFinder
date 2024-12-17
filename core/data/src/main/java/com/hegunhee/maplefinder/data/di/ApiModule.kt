@@ -17,6 +17,7 @@ import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFact
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 
 @InstallIn(SingletonComponent::class)
@@ -62,11 +63,21 @@ class ApiModule {
             .create(MapleCharacterApi::class.java)
     }
 
-    private fun provideOkHttpClient(vararg interceptor: Interceptor) : OkHttpClient =
-        OkHttpClient.Builder().run {
+    private fun provideOkHttpClient(vararg interceptor: Interceptor): OkHttpClient {
+        val loggingInterceptor = HttpLoggingInterceptor().apply {
+            level = if(BuildConfig.DEBUG) {
+                HttpLoggingInterceptor.Level.BODY
+            } else {
+                HttpLoggingInterceptor.Level.NONE
+            }
+        }
+
+        return OkHttpClient.Builder().run {
+            addNetworkInterceptor(loggingInterceptor)
             interceptor.forEach { addInterceptor(it) }
             build()
         }
+    }
 
 
     private class NexonInterceptor : Interceptor {

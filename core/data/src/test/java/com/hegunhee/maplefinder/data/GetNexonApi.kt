@@ -10,6 +10,7 @@ import okhttp3.Interceptor
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.Response
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Converter
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
@@ -41,11 +42,21 @@ internal fun getMapleApi(converterFactory : Converter.Factory = getConverterFact
         .create(MapleCharacterApi::class.java)
 
 
-private fun provideOkHttpClient(vararg interceptor: Interceptor) : OkHttpClient =
-    OkHttpClient.Builder().run {
+private fun provideOkHttpClient(vararg interceptor: Interceptor) : OkHttpClient {
+    val loggingInterceptor = HttpLoggingInterceptor().apply {
+        level = if(BuildConfig.DEBUG) {
+            HttpLoggingInterceptor.Level.BODY
+        } else {
+            HttpLoggingInterceptor.Level.NONE
+        }
+    }
+
+    return OkHttpClient.Builder().run {
+        addNetworkInterceptor(loggingInterceptor)
         interceptor.forEach { addInterceptor(it) }
         build()
     }
+}
 
 private class NexonInterceptor : Interceptor {
 
