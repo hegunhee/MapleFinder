@@ -22,8 +22,6 @@ internal fun Project.configureComposeAndroid() {
 
             add("implementation", libs.findLibrary("material3").get())
             add("implementation",libs.findBundle("compose-ui").get())
-            add("androidTestImplementation", libs.findLibrary("ext-junit").get())
-            add("androidTestImplementation", libs.findLibrary("espresso-core").get())
             add("androidTestImplementation", libs.findLibrary("compose-junit").get())
             add("debugImplementation", libs.findLibrary("ui-tooling").get())
             add("debugImplementation", libs.findLibrary("ui-test-manifest").get())
