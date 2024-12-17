@@ -21,16 +21,3 @@ android {
         }
     }
 }
-
-dependencies {
-
-    implementation(project(":core:data"))
-    implementation(project(":core:domain"))
-
-    implementation(project(":feature:main"))
-
-    implementation(libs.core.ktx)
-    implementation(libs.lifecycle.ktx)
-    implementation(libs.activity.compose)
-    implementation(libs.compose.navigation)
-}
