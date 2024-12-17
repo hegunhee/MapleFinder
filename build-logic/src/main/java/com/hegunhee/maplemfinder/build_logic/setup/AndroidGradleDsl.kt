@@ -21,5 +21,5 @@ internal val Project.androidExtension: CommonExtension<*, *, *, *,*,*>
         .onFailure { println("Could not find Library or Application extension from this project") }
         .getOrThrow()
 
-internal val ExtensionContainer.libs: VersionCatalog
-    get() = getByType<VersionCatalogsExtension>().named("libs")
+internal val Project.libs: VersionCatalog
+    get() = extensions.getByType<VersionCatalogsExtension>().named("libs")

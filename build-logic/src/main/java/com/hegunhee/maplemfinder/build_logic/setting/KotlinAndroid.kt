@@ -41,7 +41,6 @@ internal fun Project.configureKotlinAndroid() {
 
     configureKotlin()
 
-    val libs = extensions.libs
     dependencies {
         add("testImplementation",libs.findLibrary("junit").get())
         add("androidTestImplementation",libs.findLibrary("ext-junit").get())

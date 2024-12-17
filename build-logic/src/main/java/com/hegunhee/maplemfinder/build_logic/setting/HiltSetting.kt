@@ -9,7 +9,7 @@ internal fun Project.configureHilt() {
     with(pluginManager) {
         apply("org.jetbrains.kotlin.kapt")
     }
-    val libs = extensions.libs
+
     dependencies {
         "kapt"(libs.findLibrary("hilt.compiler").get())
     }
