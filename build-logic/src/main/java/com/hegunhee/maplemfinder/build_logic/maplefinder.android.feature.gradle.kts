@@ -1,4 +1,4 @@
-import com.hegunhee.maplemfinder.build_logic.setting.configureHiltAndroid
+import com.hegunhee.maplemfinder.build_logic.setting.configureHilt
 import com.hegunhee.maplemfinder.build_logic.setup.libs
 
 plugins {
@@ -12,7 +12,7 @@ android {
     }
 }
 
-configureHiltAndroid()
+configureHilt()
 
 dependencies {
 
