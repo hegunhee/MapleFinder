@@ -1,4 +1,4 @@
-import com.hegunhee.maplemfinder.build_logic.setting.configureHiltAndroid
+import com.hegunhee.maplemfinder.build_logic.setting.configureHilt
 import com.hegunhee.maplemfinder.build_logic.setup.libs
 
 plugins {
@@ -6,13 +6,7 @@ plugins {
     id("maplefinder.android.compose")
 }
 
-android {
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-}
-
-configureHiltAndroid()
+configureHilt()
 
 dependencies {
 
@@ -21,8 +15,7 @@ dependencies {
     implementation(project(":core:ui"))
     implementation(project(":core:designsystem"))
     implementation(project(":core:util"))
-    
-    val libs = project.extensions.libs
+
     implementation(libs.findLibrary("core.ktx").get())
     implementation(libs.findLibrary("appcompat").get())
     implementation(libs.findLibrary("material").get())
