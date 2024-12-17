@@ -6,12 +6,6 @@ plugins {
     id("maplefinder.android.compose")
 }
 
-android {
-    defaultConfig {
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-    }
-}
-
 configureHilt()
 
 dependencies {

@@ -1,8 +1,10 @@
 package com.hegunhee.maplemfinder.build_logic.setting
 
 import com.hegunhee.maplemfinder.build_logic.setup.androidExtension
+import com.hegunhee.maplemfinder.build_logic.setup.libs
 import org.gradle.api.JavaVersion
 import org.gradle.api.Project
+import org.gradle.kotlin.dsl.dependencies
 import org.gradle.kotlin.dsl.provideDelegate
 import org.gradle.kotlin.dsl.withType
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -17,6 +19,8 @@ internal fun Project.configureKotlinAndroid() {
 
         defaultConfig {
             minSdk = 26
+
+            testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         }
 
         compileOptions {
@@ -36,6 +40,13 @@ internal fun Project.configureKotlinAndroid() {
     }
 
     configureKotlin()
+
+    val libs = extensions.libs
+    dependencies {
+        add("testImplementation",libs.findLibrary("junit").get())
+        add("androidTestImplementation",libs.findLibrary("ext-junit").get())
+        add("androidTestImplementation",libs.findLibrary("espresso-core").get())
+    }
 }
 
 internal fun Project.configureKotlin() {
