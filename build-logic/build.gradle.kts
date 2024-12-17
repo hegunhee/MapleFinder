@@ -23,12 +23,8 @@ dependencies {
 gradlePlugin {
     plugins {
         register("HiltAndroid") {
-            id = "maplefinder.android.hilt"
-            implementationClass = "com.hegunhee.maplemfinder.build_logic.setting.HiltAndroidPlugin"
-        }
-        register("HiltKotlin") {
-            id = "maplefinder.kotlin.hilt"
-            implementationClass = "com.hegunhee.maplemfinder.build_logic.setting.HiltKotlinPlugin"
+            id = "maplefinder.hilt"
+            implementationClass = "com.hegunhee.maplemfinder.build_logic.setting.HiltPlugin"
         }
     }
 }

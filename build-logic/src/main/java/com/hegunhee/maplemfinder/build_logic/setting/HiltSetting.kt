@@ -29,7 +29,7 @@ internal fun Project.configureHilt() {
 
 }
 
-class HiltAndroidPlugin : Plugin<Project> {
+class HiltPlugin : Plugin<Project> {
 
     override fun apply(target: Project) {
         with(target) {

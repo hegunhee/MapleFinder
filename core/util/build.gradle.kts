@@ -1,6 +1,6 @@
 plugins {
     id("maplefinder.android.library")
-    id("maplefinder.android.hilt")
+    id("maplefinder.hilt")
 }
 
 android {

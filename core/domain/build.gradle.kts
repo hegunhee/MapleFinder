@@ -1,6 +1,7 @@
 plugins {
     id("java-library")
     id("org.jetbrains.kotlin.jvm")
+    id("maplefinder.hilt")
 }
 
 java {
@@ -13,6 +14,5 @@ dependencies {
     implementation(project(":core:model"))
 
     implementation(libs.kotlin.stdlib)
-    implementation(libs.javax.inject)
     implementation(libs.coroutine.core)
 }
