@@ -34,7 +34,7 @@ object ApiModule {
         ignoreUnknownKeys = true
         coerceInputValues = true
     }
-    
+
     @Provides
     @Singleton
     fun provideConverterFactory(

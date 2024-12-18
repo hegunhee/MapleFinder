@@ -17,4 +17,5 @@ abstract class RepositoryModule(){
     abstract fun bindRepository(
         defaultRepository: DefaultRepository
     ) : Repository
+
 }
