@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.data.character
+package com.hegunhee.maplefinder.data.api.character
 
 import com.hegunhee.maplefinder.data.TestParameter
 import com.hegunhee.maplefinder.data.api.MapleCharacterApi

@@ -1,16 +1,17 @@
-package com.hegunhee.maplefinder.data.character
+package com.hegunhee.maplefinder.data.api.character
 
 import com.hegunhee.maplefinder.data.TestParameter
 import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.hegunhee.maplefinder.data.getMapleApi
 import com.hegunhee.maplefinder.data.getMapleOcidApi
+import com.hegunhee.maplefinder.data.mapper.findMainStatName
 import com.hegunhee.maplefinder.data.mapper.toModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
 
-class GetCharacterHyperStatUnitTest {
+class GetCharacterStatUnitTest {
 
     private lateinit var mapleOcidApi: MapleOcidApi
     private lateinit var mapleCharacterApi : MapleCharacterApi
@@ -25,20 +26,20 @@ class GetCharacterHyperStatUnitTest {
     // 테스트 결과 캐릭터명 = 엔젤릭버스터
     // 새로운 규칙 : 2023-12-22 이후 ~ 어제의 날짜까지 조회 가능함
     @Test
-    fun `get hyper stat info test`() {
+    fun `get character stat info test`() {
         runBlocking {
             runCatching {
                 val ocid = mapleOcidApi.getOcid(characterName = TestParameter.CHARACTER_NAME).id
-                mapleCharacterApi.getCharacterHyperStat(
+                mapleCharacterApi.getCharacterStat(
                     ocid = ocid,
-                    date = "2024-01-22"
+                    date = "2024-02-20"
                 )
-            }.onSuccess { characterHyperStat ->
-                if(characterHyperStat.jobName == "엔젤릭버스터") {
-                    println(characterHyperStat.toString())
+            }.onSuccess { characterStat ->
+                if(characterStat.jobName == "엔젤릭버스터") {
+                    println(characterStat.toString())
                     assert(true)
                 }else {
-                    println(characterHyperStat.toString())
+                    println(characterStat.toString())
                     assert(false)
                 }
             }.onFailure {
@@ -49,20 +50,42 @@ class GetCharacterHyperStatUnitTest {
     }
 
     @Test
-    fun `get hyper stat model test`() {
+    fun `get character stat model test`() {
         runBlocking {
             runCatching {
                 val ocid = mapleOcidApi.getOcid(characterName = TestParameter.CHARACTER_NAME).id
-                mapleCharacterApi.getCharacterHyperStat(
+                mapleCharacterApi.getCharacterStat(
                     ocid = ocid,
-                    date = "2024-01-22"
+                    date = "2024-02-20"
                 ).toModel()
-            }.onSuccess { characterHyperStat ->
-                if(characterHyperStat.jobName == "엔젤릭버스터") {
-                    println(characterHyperStat.toString())
+            }.onSuccess { characterStat ->
+                if(characterStat.jobName == "엔젤릭버스터") {
+                    println(characterStat.toString())
                     assert(true)
                 }else {
-                    println(characterHyperStat.toString())
+                    println(characterStat.toString())
+                    assert(false)
+                }
+            }.onFailure {
+                println(it.message)
+                assert(false)
+            }
+        }
+    }
+
+    @Test
+    fun `find min sub stat test`() {
+        runBlocking {
+            runCatching {
+                val ocid = mapleOcidApi.getOcid(characterName = TestParameter.CHARACTER_NAME).id
+                mapleCharacterApi.getCharacterStat(
+                    ocid = ocid,
+                    date = "2024-02-20"
+                ).detailStatList.findMainStatName()
+            }.onSuccess { mainStat ->
+                if(mainStat == "덱스") {
+                    assert(true)
+                }else {
                     assert(false)
                 }
             }.onFailure {
