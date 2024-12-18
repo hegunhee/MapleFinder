@@ -22,11 +22,18 @@ import retrofit2.Converter
 
 @InstallIn(SingletonComponent::class)
 @Module
-class ApiModule {
+object ApiModule {
 
     @Singleton
     @Provides
     fun provideMapleMoshi() : Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
+    @Provides
+    @Singleton
+    fun provideJson(): Json = Json {
+        ignoreUnknownKeys = true
+        coerceInputValues = true
+    }
 
     @Provides
     @Singleton
@@ -35,7 +42,6 @@ class ApiModule {
     ): Converter.Factory {
         return json.asConverterFactory("application/json".toMediaType())
     }
-
 
     @Singleton
     @Provides
@@ -92,10 +98,4 @@ class ApiModule {
         }
     }
 
-    @Provides
-    @Singleton
-    fun provideJson(): Json = Json {
-        ignoreUnknownKeys = true
-        coerceInputValues = true
-    }
 }
