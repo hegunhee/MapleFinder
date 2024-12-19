@@ -1,6 +1,10 @@
-package com.hegunhee.maplefinder.data
+package com.hegunhee.maplefinder.data.api.ocid
 
+import com.hegunhee.maplefinder.data.api.TestParameter
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
+import com.hegunhee.maplefinder.data.di.ApiModule.provideConverterFactory
+import com.hegunhee.maplefinder.data.di.ApiModule.provideJson
+import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleOcidApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -11,7 +15,7 @@ class GetOcidUnitTest {
 
     @Before
     fun initApi() {
-        mapleOcidApi = getMapleOcidApi()
+        mapleOcidApi = provideMapleOcidApi(provideConverterFactory(provideJson()))
     }
 
     // 테스트 닉네임 = 엔버는함초롱
