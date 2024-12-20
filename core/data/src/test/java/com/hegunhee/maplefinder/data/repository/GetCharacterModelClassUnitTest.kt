@@ -1,15 +1,16 @@
-package com.hegunhee.maplefinder.data.character
+package com.hegunhee.maplefinder.data.repository
 
-import com.hegunhee.maplefinder.data.TestParameter
+import com.hegunhee.maplefinder.data.api.TestParameter
 import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
-import com.hegunhee.maplefinder.data.getMapleApi
-import com.hegunhee.maplefinder.data.getMapleOcidApi
+import com.hegunhee.maplefinder.data.di.ApiModule.provideConverterFactory
+import com.hegunhee.maplefinder.data.di.ApiModule.provideJson
+import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleApi
+import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleOcidApi
 import com.hegunhee.maplefinder.data.mapper.toModel
 import com.hegunhee.maplefinder.model.character.Character
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.runBlocking
 import org.junit.Before
 import org.junit.Test
@@ -23,8 +24,8 @@ class GetCharacterModelClassUnitTest {
 
     @Before
     fun initApi() {
-        mapleOcidApi = getMapleOcidApi()
-        mapleCharacterApi = getMapleApi()
+        mapleOcidApi = provideMapleOcidApi(provideConverterFactory(provideJson()))
+        mapleCharacterApi = provideMapleApi(provideConverterFactory(provideJson()))
     }
 
     // 테스트 닉네임 = 엔버는함초롱
