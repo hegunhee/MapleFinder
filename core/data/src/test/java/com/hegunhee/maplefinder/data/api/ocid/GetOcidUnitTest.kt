@@ -1,6 +1,5 @@
 package com.hegunhee.maplefinder.data.api.ocid
 
-import com.hegunhee.maplefinder.data.api.TestParameter
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.hegunhee.maplefinder.data.api.TestParameter.CHARACTER_NAME
 import com.hegunhee.maplefinder.data.api.TestParameter.CHARACTER_OCID
