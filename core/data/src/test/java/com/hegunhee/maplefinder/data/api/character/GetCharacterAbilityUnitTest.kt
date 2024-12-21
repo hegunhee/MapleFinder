@@ -1,6 +1,5 @@
 package com.hegunhee.maplefinder.data.api.character
 
-import com.hegunhee.maplefinder.data.api.TestParameter
 import com.hegunhee.maplefinder.data.api.MapleCharacterApi
 import com.hegunhee.maplefinder.data.api.MapleOcidApi
 import com.hegunhee.maplefinder.data.api.TestParameter.CHARACTER_NAME
@@ -41,6 +40,7 @@ class GetCharacterAbilityUnitTest {
 
             // Then
             assertEquals(ability.abilityPreset1, null)
+            assertEquals(ability.presetNo, null)
         }
     }
 
@@ -56,6 +56,7 @@ class GetCharacterAbilityUnitTest {
 
             // Then
             assertTrue(ability.abilityPreset1 != null)
+            assertTrue(ability.presetNo != null)
         }
     }
 

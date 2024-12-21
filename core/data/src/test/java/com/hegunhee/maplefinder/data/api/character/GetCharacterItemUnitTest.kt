@@ -9,6 +9,7 @@ import com.hegunhee.maplefinder.data.di.ApiModule.provideJson
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleApi
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleOcidApi
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
@@ -56,5 +57,23 @@ class GetCharacterItemUnitTest {
             assertTrue(items.preset1.isNotEmpty())
         }
     }
+
+    // 자아정체감 캐릭터는 현재 프리셋이 존재함 그러므로 프리셋이 empty가 아니어야함
+    @Test
+    fun givenHasPresetCharacterOcid_whenGetCharacterItem_thenReturnPresetNumber() {
+        runBlocking {
+            // Given
+            val ocid = mapleOcidApi.getOcid(characterName = "자아정체감").id
+
+            // When
+            val items = mapleCharacterApi.getCharacterItem(ocid = ocid, date = INQUIRY_DATE)
+
+            val presets = listOf(items.preset1,items.preset2,items.preset3)
+
+            // Then
+            assertEquals(items.itemEquipmentResponse,presets[items.presetNo-1])
+        }
+    }
+
 
 }

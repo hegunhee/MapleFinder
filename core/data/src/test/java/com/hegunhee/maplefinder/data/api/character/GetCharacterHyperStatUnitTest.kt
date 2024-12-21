@@ -10,6 +10,7 @@ import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleApi
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleOcidApi
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -27,6 +28,7 @@ class GetCharacterHyperStatUnitTest {
     // 테스트 닉네임 = 엔버는함초롱
     // 테스트 결과 캐릭터명 = 엔젤릭버스터
     // 새로운 규칙 : 2023-12-22 이후 ~ 어제의 날짜까지 조회 가능함
+    // 계정마다 현재 사용중인 프리셋이 다를 수 있음
     @Test
     fun givenCharacterOcid_whenGetHyperStat_thenReturnHyperStat() {
         runBlocking {
@@ -37,7 +39,9 @@ class GetCharacterHyperStatUnitTest {
             val hyperStat = mapleCharacterApi.getCharacterHyperStat(ocid = ocid, date = INQUIRY_DATE)
 
             // Then
-            Assert.assertEquals(hyperStat.jobName, "엔젤릭버스터")
+            assertEquals(hyperStat.jobName, "엔젤릭버스터")
+            assertEquals(hyperStat.remainHyperStat,hyperStat.hyperStatPreset3RemainPoint)
+
         }
     }
 
