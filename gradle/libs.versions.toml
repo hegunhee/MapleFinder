@@ -22,6 +22,7 @@ navigation = "2.5.3"
 junit-junit = "4.13.2"
 ext-junit = "1.1.5"
 espresso-core = "3.5.1"
+mockito = "5.4.0"
 
 hilt = "2.44.2"
 
@@ -63,6 +64,7 @@ junit = { module = "junit:junit", version.ref = "junit-junit" }
 ext-junit = { module = "androidx.test.ext:junit", version.ref = "ext-junit" }
 espresso-core = { module = "androidx.test.espresso:espresso-core", version.ref = "espresso-core" }
 compose-junit = { module = "androidx.compose.ui:ui-test-junit4" }
+mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito" }
 
 ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest" }
