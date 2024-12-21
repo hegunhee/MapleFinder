@@ -9,7 +9,7 @@ import com.hegunhee.maplefinder.data.di.ApiModule.provideJson
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleApi
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleOcidApi
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -37,7 +37,7 @@ class GetCharacterBasicUnitTest {
             val basicInfo = mapleCharacterApi.getCharacterBasic(ocid = ocid, date = INQUIRY_DATE)
 
             // Then
-            Assert.assertEquals(basicInfo.jobName, "엔젤릭버스터")
+            assertEquals(basicInfo.jobName, "엔젤릭버스터")
         }
     }
 

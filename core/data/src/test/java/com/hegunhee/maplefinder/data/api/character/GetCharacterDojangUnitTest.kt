@@ -9,7 +9,7 @@ import com.hegunhee.maplefinder.data.di.ApiModule.provideJson
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleApi
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleOcidApi
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 
@@ -37,7 +37,7 @@ class GetCharacterDojangUnitTest {
             val dojang = mapleCharacterApi.getCharacterDojang(ocid = ocid, date = INQUIRY_DATE)
 
             // Then
-            Assert.assertEquals(dojang.characterClass, "엔젤릭버스터")
+            assertEquals(dojang.characterClass, "엔젤릭버스터")
         }
     }
 
