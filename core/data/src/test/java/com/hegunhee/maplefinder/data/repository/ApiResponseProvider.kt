@@ -1,6 +1,8 @@
 package com.hegunhee.maplefinder.data.repository
 
 import com.hegunhee.maplefinder.data.api.model.character.CharacterBasicResponse
+import com.hegunhee.maplefinder.data.api.model.character.item.ItemResponse
+import com.hegunhee.maplefinder.data.api.model.character.item.TitleResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterAbilityResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterHyperStatResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterStatResponse
@@ -65,16 +67,19 @@ object ApiResponseProvider {
         )
     }
 
-    fun createItem() : CharacterEquipmentItem {
-        return CharacterEquipmentItem(
-            ocid = "",
-            mainStat = "luck",
-            basic = createBasic().toModel(),
-            equipmentItem = EquipmentItem("","", emptyList(), emptyList(), emptyList(), Title("","","","",""),""),
-            name = "",
-            job = "",
-            world = World("",0),
-            image = ""
+    fun createItem() : ItemResponse {
+        return ItemResponse(
+            characterClass = "",
+            characterGender = "",
+            date = "2023-12-22T00:00+09:00",
+            dragonEquipment = emptyList(),
+            itemEquipmentResponse = emptyList(),
+            preset1 = emptyList(),
+            preset2 = emptyList(),
+            preset3 = emptyList(),
+            mechanicEquipment = emptyList(),
+            presetNo = 1,
+            titleResponse = TitleResponse("","","","","")
         )
     }
 }
