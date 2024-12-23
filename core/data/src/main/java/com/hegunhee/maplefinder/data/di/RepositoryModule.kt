@@ -10,12 +10,12 @@ import javax.inject.Singleton
 
 @InstallIn(SingletonComponent::class)
 @Module
-abstract class RepositoryModule(){
+abstract class RepositoryModule() {
 
     @Singleton
     @Binds
     abstract fun bindRepository(
         defaultRepository: DefaultRepository
-    ) : Repository
+    ): Repository
 
 }

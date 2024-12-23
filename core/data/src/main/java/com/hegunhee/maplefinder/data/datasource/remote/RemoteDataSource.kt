@@ -11,36 +11,37 @@ import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterStatRespo
 interface RemoteDataSource {
 
     suspend fun getCharacterOcid(
-        characterName : String
-    ) : OcidResponse
+        characterName: String
+    ): OcidResponse
 
     suspend fun getCharacterDojang(
-        ocid : String,
-        date : String
-    ) : CharacterDojangResponse
+        ocid: String,
+        date: String
+    ): CharacterDojangResponse
 
     suspend fun getCharacterBasic(
-        ocid : String,
-        date : String
-    ) : CharacterBasicResponse
+        ocid: String,
+        date: String
+    ): CharacterBasicResponse
 
     suspend fun getCharacterStat(
-        ocid : String,
-        date : String
-    ) : CharacterStatResponse
+        ocid: String,
+        date: String
+    ): CharacterStatResponse
 
     suspend fun getCharacterHyperStat(
-        ocid : String,
-        date : String
-    ) : CharacterHyperStatResponse
+        ocid: String,
+        date: String
+    ): CharacterHyperStatResponse
 
     suspend fun getCharacterAbility(
-        ocid : String,
-        date : String
-    ) : CharacterAbilityResponse
+        ocid: String,
+        date: String
+    ): CharacterAbilityResponse
 
     suspend fun getCharacterItem(
-        ocid : String,
-        date : String
-    ) : ItemResponse
+        ocid: String,
+        date: String
+    ): ItemResponse
+
 }
