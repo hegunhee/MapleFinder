@@ -25,36 +25,43 @@ class DefaultRepository @Inject constructor(
         }
     }
 
-    override suspend fun getCharacterDojangInfo(characterName: String,date : String): Result<CharacterDojang> = coroutineScope {
+    override suspend fun getCharacterDojangInfo(
+        characterName: String,
+        date: String
+    ): Result<CharacterDojang> = coroutineScope {
         createResult {
             val ocid = remoteDataSource.getCharacterOcid(characterName).id
-            val characterDojangResponse = remoteDataSource.getCharacterDojang(ocid,date).toCharacterDojang(characterName)
-            characterDojangResponse
+            remoteDataSource.getCharacterDojang(ocid, date).toCharacterDojang(characterName)
         }
     }
 
-    override suspend fun getCharacter(characterName: String, date: String): Result<Character> = coroutineScope{
+    override suspend fun getCharacter(characterName: String, date: String): Result<Character> =
+        coroutineScope {
+            createResult {
+                val ocid = remoteDataSource.getCharacterOcid(characterName).id
+                val basicInfo = async { remoteDataSource.getCharacterBasic(ocid, date).toModel() }
+                val statInfo = async { remoteDataSource.getCharacterStat(ocid, date).toModel() }
+                val hyperStatInfo =
+                    async { remoteDataSource.getCharacterHyperStat(ocid, date).toModel() }
+                val abilityInfo = remoteDataSource.getCharacterAbility(ocid, date).toModel()
+                Character(
+                    ocid = ocid,
+                    basic = basicInfo.await(),
+                    stat = statInfo.await(),
+                    hyperStat = hyperStatInfo.await(),
+                    ability = abilityInfo
+                )
+            }
+        }
+
+    override suspend fun getCharacterItem(
+        ocid: String,
+        date: String
+    ): Result<CharacterEquipmentItem> = coroutineScope {
         createResult {
-            val ocid = remoteDataSource.getCharacterOcid(characterName).id
             val basicInfo = async { remoteDataSource.getCharacterBasic(ocid, date).toModel() }
-            val statInfo = async { remoteDataSource.getCharacterStat(ocid, date).toModel() }
-            val hyperStatInfo = async { remoteDataSource.getCharacterHyperStat(ocid, date).toModel() }
-            val abilityInfo = remoteDataSource.getCharacterAbility(ocid, date).toModel()
-            Character(
-                ocid = ocid,
-                basic = basicInfo.await(),
-                stat = statInfo.await(),
-                hyperStat = hyperStatInfo.await(),
-                ability = abilityInfo
-            )
-        }
-    }
-
-    override suspend fun getCharacterItem(ocid : String, date: String): Result<CharacterEquipmentItem> = coroutineScope {
-        createResult {
-            val basicInfo = async { remoteDataSource.getCharacterBasic(ocid,date).toModel() }
-            val itemInfo = async{ remoteDataSource.getCharacterItem(ocid, date) }
-            val statInfo = remoteDataSource.getCharacterStat(ocid,date)
+            val itemInfo = async { remoteDataSource.getCharacterItem(ocid, date) }
+            val statInfo = remoteDataSource.getCharacterStat(ocid, date)
             val mainStat = statInfo.detailStatList.findMainStatName()
             CharacterEquipmentItem(
                 ocid = ocid,
@@ -67,8 +74,9 @@ class DefaultRepository @Inject constructor(
 
     override suspend fun getCharacterItemList(ocid: String, date: String): Result<List<Item>> {
         return createResult {
-            val itemInfo = remoteDataSource.getCharacterItem(ocid,date)
+            val itemInfo = remoteDataSource.getCharacterItem(ocid, date)
             itemInfo.itemEquipmentResponse.map { it.toModel() } + itemInfo.dragonEquipment.map { it.toModel() } + itemInfo.mechanicEquipment.map { it.toModel() }
         }
     }
+
 }

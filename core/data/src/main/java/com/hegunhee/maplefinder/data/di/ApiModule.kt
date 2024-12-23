@@ -22,11 +22,18 @@ import retrofit2.Converter
 
 @InstallIn(SingletonComponent::class)
 @Module
-class ApiModule {
+object ApiModule {
 
     @Singleton
     @Provides
-    fun provideMapleMoshi() : Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+    fun provideMapleMoshi(): Moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
+
+    @Provides
+    @Singleton
+    fun provideJson(): Json = Json {
+        ignoreUnknownKeys = true
+        coerceInputValues = true
+    }
 
     @Provides
     @Singleton
@@ -36,12 +43,11 @@ class ApiModule {
         return json.asConverterFactory("application/json".toMediaType())
     }
 
-
     @Singleton
     @Provides
     fun provideMapleOcidApi(
-        converterFactory :Converter.Factory
-    ) : MapleOcidApi {
+        converterFactory: Converter.Factory
+    ): MapleOcidApi {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.GET_OCID_MAPLE_BASE_URL)
             .addConverterFactory(converterFactory)
@@ -53,8 +59,8 @@ class ApiModule {
     @Singleton
     @Provides
     fun provideMapleApi(
-        converterFactory :Converter.Factory
-    ) : MapleCharacterApi {
+        converterFactory: Converter.Factory
+    ): MapleCharacterApi {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.GET_CHARACTER_MAPLE_BASE_URL)
             .addConverterFactory(converterFactory)
@@ -65,7 +71,7 @@ class ApiModule {
 
     private fun provideOkHttpClient(vararg interceptor: Interceptor): OkHttpClient {
         val loggingInterceptor = HttpLoggingInterceptor().apply {
-            level = if(BuildConfig.DEBUG) {
+            level = if (BuildConfig.DEBUG) {
                 HttpLoggingInterceptor.Level.BODY
             } else {
                 HttpLoggingInterceptor.Level.NONE
@@ -92,10 +98,4 @@ class ApiModule {
         }
     }
 
-    @Provides
-    @Singleton
-    fun provideJson(): Json = Json {
-        ignoreUnknownKeys = true
-        coerceInputValues = true
-    }
 }
