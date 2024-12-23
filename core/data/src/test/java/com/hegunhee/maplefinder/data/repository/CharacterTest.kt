@@ -1,14 +1,12 @@
 package com.hegunhee.maplefinder.data.repository
 
 import com.hegunhee.maplefinder.data.api.model.OcidResponse
-import com.hegunhee.maplefinder.data.api.model.character.CharacterBasicResponse
 import com.hegunhee.maplefinder.data.datasource.remote.RemoteDataSource
 import com.hegunhee.maplefinder.data.repository.ApiResponseProvider.createAbility
 import com.hegunhee.maplefinder.data.repository.ApiResponseProvider.createBasic
 import com.hegunhee.maplefinder.data.repository.ApiResponseProvider.createHyperstat
 import com.hegunhee.maplefinder.data.repository.ApiResponseProvider.createStat
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import org.junit.runner.RunWith

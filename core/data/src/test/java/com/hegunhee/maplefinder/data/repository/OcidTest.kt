@@ -58,8 +58,8 @@ class OcidTest {
         }
     }
 
-
     private fun create400Error(): HttpException {
         return HttpException(Response.error<HttpException>(400, ResponseBody.create(null, "")))
     }
+
 }

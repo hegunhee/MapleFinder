@@ -16,7 +16,7 @@ import org.junit.Test
 class GetCharacterStatUnitTest {
 
     private lateinit var mapleOcidApi: MapleOcidApi
-    private lateinit var mapleCharacterApi : MapleCharacterApi
+    private lateinit var mapleCharacterApi: MapleCharacterApi
 
     @Before
     fun initApi() {

@@ -66,4 +66,5 @@ class ItemTest {
             verify(remoteDataSource).getCharacterItem(ocid, date)
         }
     }
+
 }

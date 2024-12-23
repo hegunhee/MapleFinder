@@ -16,6 +16,6 @@ abstract class DataSourceModule {
     @Binds
     abstract fun bindRemoteDataSource(
         defaultRemoteDataSource: DefaultRemoteDataSource
-    ) : RemoteDataSource
+    ): RemoteDataSource
 
 }

@@ -24,7 +24,7 @@ fun CharacterDojangResponse.toCharacterDojang(
 ): CharacterDojang {
     return CharacterDojang(
         characterName = characterName,
-        characterClass =characterClass,
+        characterClass = characterClass,
         worldName = worldName,
         recordDate = TimeUtil.apiFormatToUiFormat(dojangRecordDate),
         bestFloor = dojangBestFloor,
@@ -55,7 +55,7 @@ fun CharacterStatResponse.toModel(): CharacterStat {
     }.filterNot {
         it.statName.contains("AP")
     }.map {
-        it.copy(statName =it.statName,statValue = it.statValue.toStatFormat()).toModel()
+        it.copy(statName = it.statName, statValue = it.statValue.toStatFormat()).toModel()
     }
     val powerLevel = this.detailStatList.find { it.statName == "전투력" }?.statValue ?: "0"
 
@@ -68,8 +68,8 @@ fun CharacterStatResponse.toModel(): CharacterStat {
     )
 }
 
-private fun String.toStatFormat() : String {
-    return if(this.contains(".")) {
+private fun String.toStatFormat(): String {
+    return if (this.contains(".")) {
         "${this.split(".")[0]}%"
     } else {
         val format = DecimalFormat("#,###")
@@ -77,7 +77,7 @@ private fun String.toStatFormat() : String {
     }
 }
 
-private fun powerLevelToFormat(powerLevel : Int) : String {
+private fun powerLevelToFormat(powerLevel: Int): String {
     val formattedValue = DecimalFormat("#,####").format(powerLevel) ?: ""
     val parts = formattedValue.split(",")
     return when (parts.size) {
@@ -96,24 +96,29 @@ private val filterStat = listOf<String>(
     "전투력" // 전투력은 기존의 response에서 추출해서 model 클래스에 기재하므로 삭제
 )
 
-fun CharacterHyperStatResponse.toModel() : CharacterHyperStat {
-    val hyperStatList = listOf<List<HyperStat>>(hyperStatPreset1,hyperStatPreset2,hyperStatPreset3).map {
-        it.toModel()
-    }
+fun CharacterHyperStatResponse.toModel(): CharacterHyperStat {
+    val hyperStatList =
+        listOf<List<HyperStat>>(hyperStatPreset1, hyperStatPreset2, hyperStatPreset3).map {
+            it.toModel()
+        }
     return CharacterHyperStat(
         jobName = jobName,
-        currentPreset = hyperStatList[currentPresetNum.toInt()-1],
+        currentPreset = hyperStatList[currentPresetNum.toInt() - 1],
         hyperStatPresetList = hyperStatList,
         remainHyperStat = remainHyperStat,
-        currentPresetNum =currentPresetNum
+        currentPresetNum = currentPresetNum
     )
 }
 
-fun CharacterAbilityResponse.toModel() : CharacterAbility {
+fun CharacterAbilityResponse.toModel(): CharacterAbility {
     return CharacterAbility(
         abilityGrade = abilityGrade.toGrade(),
         abilityInfo = abilityInfo.toModel(),
-        abilityPresetList = listOf(abilityPreset1,abilityPreset2,abilityPreset3).map { it?.toModel() },
+        abilityPresetList = listOf(
+            abilityPreset1,
+            abilityPreset2,
+            abilityPreset3
+        ).map { it?.toModel() },
         presetNo = presetNo ?: 1,
         remainFame = remainFame
     )
@@ -121,28 +126,28 @@ fun CharacterAbilityResponse.toModel() : CharacterAbility {
 
 internal val mapleWorldList = listOf<World>(
     World("아케인", R.drawable.arcane),
-    World("베라",R.drawable.bera),
-    World("크로아",R.drawable.croa),
-    World("엘리시움",R.drawable.elysium),
-    World("루나",R.drawable.luna),
-    World("노바",R.drawable.noba),
-    World("오로라",R.drawable.orora),
-    World("레드",R.drawable.red),
-    World("스카니아",R.drawable.scania),
-    World("유니온",R.drawable.union),
-    World("제니스",R.drawable.zenith),
-    World("리부트",R.drawable.reboot),
-    World("리부트2",R.drawable.reboot),
+    World("베라", R.drawable.bera),
+    World("크로아", R.drawable.croa),
+    World("엘리시움", R.drawable.elysium),
+    World("루나", R.drawable.luna),
+    World("노바", R.drawable.noba),
+    World("오로라", R.drawable.orora),
+    World("레드", R.drawable.red),
+    World("스카니아", R.drawable.scania),
+    World("유니온", R.drawable.union),
+    World("제니스", R.drawable.zenith),
+    World("리부트", R.drawable.reboot),
+    World("리부트2", R.drawable.reboot),
 )
 
 private val mapleMWorldNameMap = mapleWorldList.associateBy { it.name }
 
-fun String.toWorld() : World {
-    return mapleMWorldNameMap[this] ?: World(this,R.drawable.ic_default_server_mark_24)
+fun String.toWorld(): World {
+    return mapleMWorldNameMap[this] ?: World(this, R.drawable.ic_default_server_mark_24)
 }
 
-internal fun String.toGrade() : Grade {
-    return when(this) {
+internal fun String.toGrade(): Grade {
+    return when (this) {
         "레어" -> Grade.Rare
         "에픽" -> Grade.Epic
         "유니크" -> Grade.Unique
@@ -157,11 +162,13 @@ private fun Int.toTimeStamp(): String {
     return "${minute}분 ${second}초"
 }
 
-internal fun List<DetailStat>.findMainStatName() : String {
-    val strStat = this.find { it.statName == "STR" } ?: DetailStat("STR","0")
-    val dexStat = this.find { it.statName == "DEX"} ?: DetailStat("DEX","0")
-    val intStat = this.find { it.statName == "INT"} ?: DetailStat("INT", "0")
-    val lukStat = this.find { it.statName == "LUK" } ?: DetailStat("LUX","0")
-    val statList = listOf<DetailStat>(strStat,dexStat,intStat,lukStat).sortedBy { it.statValue.toInt() }.map { optionKeyToKorean(it.statName.lowercase()) }
+internal fun List<DetailStat>.findMainStatName(): String {
+    val strStat = this.find { it.statName == "STR" } ?: DetailStat("STR", "0")
+    val dexStat = this.find { it.statName == "DEX" } ?: DetailStat("DEX", "0")
+    val intStat = this.find { it.statName == "INT" } ?: DetailStat("INT", "0")
+    val lukStat = this.find { it.statName == "LUK" } ?: DetailStat("LUX", "0")
+    val statList =
+        listOf<DetailStat>(strStat, dexStat, intStat, lukStat).sortedBy { it.statValue.toInt() }
+            .map { optionKeyToKorean(it.statName.lowercase()) }
     return statList[3]
 }
