@@ -31,9 +31,7 @@ class DefaultRepository @Inject constructor(
     ): Result<CharacterDojang> = coroutineScope {
         createResult {
             val ocid = remoteDataSource.getCharacterOcid(characterName).id
-            val characterDojangResponse =
-                remoteDataSource.getCharacterDojang(ocid, date).toCharacterDojang(characterName)
-            characterDojangResponse
+            remoteDataSource.getCharacterDojang(ocid, date).toCharacterDojang(characterName)
         }
     }
 
