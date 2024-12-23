@@ -6,15 +6,10 @@ import com.hegunhee.maplefinder.data.api.model.character.item.TitleResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterAbilityResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterHyperStatResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterStatResponse
-import com.hegunhee.maplefinder.data.mapper.toModel
-import com.hegunhee.maplefinder.model.World
-import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
-import com.hegunhee.maplefinder.model.character.item.EquipmentItem
-import com.hegunhee.maplefinder.model.character.item.Title
 
 object ApiResponseProvider {
 
-    fun createBasic() : CharacterBasicResponse {
+    fun createBasic(): CharacterBasicResponse {
         return CharacterBasicResponse(
             jobName = "엔젤릭버스터",
             jobLevel = "6",
@@ -30,7 +25,7 @@ object ApiResponseProvider {
         )
     }
 
-    fun createStat() : CharacterStatResponse {
+    fun createStat(): CharacterStatResponse {
         return CharacterStatResponse(
             jobName = "엔젤릭버스터",
             date = "2023-12-22T00:00+09:00",
@@ -39,7 +34,7 @@ object ApiResponseProvider {
         )
     }
 
-    fun createHyperstat() : CharacterHyperStatResponse {
+    fun createHyperstat(): CharacterHyperStatResponse {
         return CharacterHyperStatResponse(
             jobName = "엔젤릭버스터",
             date = "2023-12-22T00:00+09:00",
@@ -54,7 +49,7 @@ object ApiResponseProvider {
         )
     }
 
-    fun createAbility() : CharacterAbilityResponse {
+    fun createAbility(): CharacterAbilityResponse {
         return CharacterAbilityResponse(
             abilityGrade = "",
             abilityInfo = emptyList(),
@@ -67,7 +62,7 @@ object ApiResponseProvider {
         )
     }
 
-    fun createItem() : ItemResponse {
+    fun createItem(): ItemResponse {
         return ItemResponse(
             characterClass = "",
             characterGender = "",
@@ -79,7 +74,8 @@ object ApiResponseProvider {
             preset3 = emptyList(),
             mechanicEquipment = emptyList(),
             presetNo = 1,
-            titleResponse = TitleResponse("","","","","")
+            titleResponse = TitleResponse("", "", "", "", "")
         )
     }
+
 }

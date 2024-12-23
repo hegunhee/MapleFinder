@@ -68,12 +68,11 @@ class GetCharacterItemUnitTest {
             // When
             val items = mapleCharacterApi.getCharacterItem(ocid = ocid, date = INQUIRY_DATE)
 
-            val presets = listOf(items.preset1,items.preset2,items.preset3)
+            val presets = listOf(items.preset1, items.preset2, items.preset3)
 
             // Then
-            assertEquals(items.itemEquipmentResponse,presets[items.presetNo-1])
+            assertEquals(items.itemEquipmentResponse, presets[items.presetNo - 1])
         }
     }
-
 
 }

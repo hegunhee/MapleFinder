@@ -9,7 +9,6 @@ import com.hegunhee.maplefinder.data.di.ApiModule.provideJson
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleApi
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleOcidApi
 import kotlinx.coroutines.runBlocking
-import org.junit.Assert
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
