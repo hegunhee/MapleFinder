@@ -33,8 +33,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
-import com.hegunhee.maplefinder.character_info.InfoNavGraph
-import com.hegunhee.maplefinder.character_info.infoNavGraph
+import com.hegunhee.maplefinder.character_info.navigation.CHARACTER_INFO_ROUTE
+import com.hegunhee.maplefinder.character_info.navigation.infoNavGraph
 import com.hegunhee.maplefinder.dojang_record.DojangNavGraph
 import com.hegunhee.maplefinder.dojang_record.dojangNavGraph
 import com.hegunhee.maplefinder.item.ItemNavGraph
@@ -57,7 +57,7 @@ fun MapleApp(
     ) {
         NavHost(
             navController = mapleAppScaffoldState.navController,
-            startDestination = InfoNavGraph.infoRoute
+            startDestination = CHARACTER_INFO_ROUTE
         ) {
             dojangNavGraph(
                 onNavigationIconClick = mapleAppScaffoldState::openDrawer
@@ -166,7 +166,7 @@ enum class DrawerItem(
         group = DrawerGroup.Personal,
         titleString = "캐릭터 정보 조회",
         iconRes = com.hegunhee.maplefinder.designsystem.R.drawable.ic_search_24,
-        navRoute = InfoNavGraph.infoRoute
+        navRoute = CHARACTER_INFO_ROUTE
     ),
 
     ItemInfo(
