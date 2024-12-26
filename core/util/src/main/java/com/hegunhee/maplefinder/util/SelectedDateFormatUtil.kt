@@ -36,7 +36,20 @@ object SelectedDateFormatUtil {
         return LocalDate.parse(this, DateFormat).atStartOfDay().toInstant(ZoneOffset.UTC).toEpochMilli()
     }
 
+    fun String?.toDateFormat() : String? {
+        val result = runCatching {
+            LocalDate.parse(this, longDateFormat)
+        }
+        return if(result.isSuccess) {
+            LocalDate.parse(this, longDateFormat).format(DateFormat)
+        } else {
+            this
+        }
+    }
+
     private val yesterdayDate = LocalDateTime.now().minusDays(1)
     private val startDate = LocalDateTime.of(2023,12,22,0,0)
     private val DateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+    private val longDateFormat = DateTimeFormatter.ISO_DATE_TIME
+
 }
