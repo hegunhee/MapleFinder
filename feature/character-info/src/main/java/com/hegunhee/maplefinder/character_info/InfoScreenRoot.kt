@@ -11,6 +11,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -102,4 +103,19 @@ private fun InfoScreen(
             }
         }
     }
+}
+
+@Preview
+@Composable
+private fun InfoScreenPreview() {
+    InfoScreen(
+        uiState = InfoUiState.Loading,
+        searchQuery = "",
+        searchDate = defaultDateString(),
+        onNavigationIconClick = {  },
+        onSearchCharacterClick = {name,date->},
+        onQueryChange = {  },
+        onItemDetailButtonClick = {  },
+        onDateSelected = {},
+    )
 }
