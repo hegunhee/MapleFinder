@@ -17,8 +17,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
@@ -78,4 +80,18 @@ fun CharacterNameSearchBar(
             }),
         )
     }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Preview
+@Composable
+private fun CharacterSearchBarPreview() {
+    CharacterSearchBar(
+        "검색",
+        "2024-12-25",
+        { name, date -> },
+        {},
+        {},
+        LocalSoftwareKeyboardController.current,
+    )
 }
