@@ -7,8 +7,8 @@ import com.hegunhee.maplefinder.character_info.InfoScreenRoot
 const val CHARACTER_INFO_ROUTE = "Character-Info"
 
 fun NavGraphBuilder.infoNavGraph(
-    onNavigationIconClick : () -> Unit,
-    onItemDetailButtonClick : (String) -> Unit
+    onNavigationIconClick: () -> Unit,
+    onItemDetailButtonClick: (String) -> Unit
 ) {
     composable(route = CHARACTER_INFO_ROUTE) {
         InfoScreenRoot(

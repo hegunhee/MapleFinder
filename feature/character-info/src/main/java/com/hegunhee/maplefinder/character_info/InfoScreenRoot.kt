@@ -25,9 +25,9 @@ import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toTimeMills
 
 @Composable
 fun InfoScreenRoot(
-    viewModel : InfoViewModel = hiltViewModel(),
-    onNavigationIconClick : () -> Unit,
-    onItemDetailButtonClick : (String) -> Unit,
+    viewModel: InfoViewModel = hiltViewModel(),
+    onNavigationIconClick: () -> Unit,
+    onItemDetailButtonClick: (String) -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val (searchQuery, onQueryChanged) = rememberSaveable { mutableStateOf("") }
@@ -48,51 +48,54 @@ fun InfoScreenRoot(
 @Composable
 private fun InfoScreen(
     uiState: InfoUiState,
-    searchQuery : String,
-    searchDate : String,
+    searchQuery: String,
+    searchDate: String,
     onNavigationIconClick: () -> Unit,
-    onSearchCharacterClick : (name: String,date: String) -> Unit,
-    onQueryChange : (String) -> Unit,
-    onItemDetailButtonClick : (String) -> Unit,
-    onDateSelected : (String) -> Unit,
+    onSearchCharacterClick: (name: String, date: String) -> Unit,
+    onQueryChange: (String) -> Unit,
+    onItemDetailButtonClick: (String) -> Unit,
+    onDateSelected: (String) -> Unit,
 ) {
     val (showDateDialog, onDatePickerValueChange) = remember { mutableStateOf(false) }
-    if(showDateDialog) {
+    if (showDateDialog) {
         MapleDatePickerDialog(
             initialSelectedDateMills = searchDate.toTimeMills(),
             onDateSelected = onDateSelected,
             isSelectableDate = SelectedDateFormatUtil::isSelectableDate,
-            onDismiss = { onDatePickerValueChange(false)})
+            onDismiss = { onDatePickerValueChange(false) })
     }
     val keyboardController = LocalSoftwareKeyboardController.current
     Scaffold(
-        topBar = { MapleTopBar(
-            title = "캐릭터 정보 검색",
-            onNavigationIconClick = onNavigationIconClick
-        )}
-    ) {  paddingValues ->
+        topBar = {
+            MapleTopBar(
+                title = "캐릭터 정보 검색",
+                onNavigationIconClick = onNavigationIconClick
+            )
+        }
+    ) { paddingValues ->
         Column(
             modifier = Modifier
                 .padding(paddingValues)
                 .padding(10.dp)
-        ){
+        ) {
             CharacterSearchBar(
                 searchQuery = searchQuery,
                 date = searchDate,
                 onSearchCharacterClick = onSearchCharacterClick,
                 onQueryChange = onQueryChange,
-                onDatePickerShowClick = { onDatePickerValueChange(true)},
+                onDatePickerShowClick = { onDatePickerValueChange(true) },
                 keyboardController = keyboardController
             )
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
-            when(uiState) {
-                InfoUiState.Loading -> { }
+            when (uiState) {
+                InfoUiState.Loading -> {}
                 is InfoUiState.Search -> {
                     CharacterSurface(
                         character = uiState.character,
                         onItemDetailButtonClick = onItemDetailButtonClick
                     )
                 }
+
                 is InfoUiState.Error -> {
                     ErrorSurface(exception = uiState.throwable)
                 }

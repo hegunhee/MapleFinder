@@ -13,14 +13,14 @@ import javax.inject.Inject
 @HiltViewModel
 class InfoViewModel @Inject constructor(
     private val getCharacterUseCase: GetCharacterUseCase
-) : ViewModel(){
+) : ViewModel() {
 
-    private val _uiState : MutableStateFlow<InfoUiState> = MutableStateFlow(InfoUiState.Loading)
-    val uiState : StateFlow<InfoUiState> = _uiState.asStateFlow()
+    private val _uiState: MutableStateFlow<InfoUiState> = MutableStateFlow(InfoUiState.Loading)
+    val uiState: StateFlow<InfoUiState> = _uiState.asStateFlow()
 
-    fun onSearchCharacterClick(query : String,searchDate: String) {
+    fun onSearchCharacterClick(query: String, searchDate: String) {
         viewModelScope.launch {
-            getCharacterUseCase(characterName = query,date = searchDate)
+            getCharacterUseCase(characterName = query, date = searchDate)
                 .onSuccess {
                     _uiState.value = InfoUiState.Search(it)
                 }.onFailure {
