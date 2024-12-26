@@ -47,7 +47,7 @@ fun InfoScreenRoot(
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
-private fun InfoScreen(
+fun InfoScreen(
     uiState: InfoUiState,
     searchQuery: String,
     searchDate: String,
