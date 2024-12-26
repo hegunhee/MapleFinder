@@ -7,6 +7,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -19,6 +20,7 @@ import com.hegunhee.maplefinder.ui.dialog.MapleDatePickerDialog
 import com.hegunhee.maplefinder.ui.surface.CharacterSurface
 import com.hegunhee.maplefinder.ui.surface.ErrorSurface
 import com.hegunhee.maplefinder.util.SelectedDateFormatUtil
+import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.defaultDateString
 import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toTimeMills
 
 @Composable
@@ -28,17 +30,17 @@ fun InfoScreenRoot(
     onItemDetailButtonClick : (String) -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
-    val searchQuery = viewModel.searchQuery.collectAsStateWithLifecycle()
-    val searchDate = viewModel.searchDate.collectAsStateWithLifecycle().value
+    val (searchQuery, onQueryChanged) = rememberSaveable { mutableStateOf("") }
+    val (searchDate, onDateChanged) = rememberSaveable { mutableStateOf(defaultDateString()) }
     InfoScreen(
         uiState = uiState,
-        searchQuery = searchQuery.value,
+        searchQuery = searchQuery,
         searchDate = searchDate,
         onNavigationIconClick = onNavigationIconClick,
         onSearchCharacterClick = viewModel::onSearchCharacterClick,
-        onQueryChange = viewModel::onSearchQueryChange,
+        onQueryChange = onQueryChanged,
         onItemDetailButtonClick = onItemDetailButtonClick,
-        onDateSelected = viewModel::onDateSelectClick,
+        onDateSelected = onDateChanged,
     )
 }
 
@@ -49,7 +51,7 @@ private fun InfoScreen(
     searchQuery : String,
     searchDate : String,
     onNavigationIconClick: () -> Unit,
-    onSearchCharacterClick : (String) -> Unit,
+    onSearchCharacterClick : (name: String,date: String) -> Unit,
     onQueryChange : (String) -> Unit,
     onItemDetailButtonClick : (String) -> Unit,
     onDateSelected : (String) -> Unit,

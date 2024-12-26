@@ -49,7 +49,7 @@ private fun DojangScreen(
     characterQuery : String,
     searchDate : String,
     onNavigationIconClick : () -> Unit,
-    onSearchCharacterDojang : (String) -> Unit,
+    onSearchCharacterDojang : (name: String,date: String) -> Unit,
     onQueryChange : (String) -> Unit,
     onDateSelected : (String) -> Unit,
 ) {
