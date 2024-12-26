@@ -18,20 +18,17 @@ class ItemSearchViewModel @Inject constructor(
     private val getCharacterOcidUseCase: GetCharacterOcidUseCase
 ) : ViewModel() {
 
-    private val _navActions : MutableSharedFlow<ItemNavActions> = MutableSharedFlow()
-    val navActions : SharedFlow<ItemNavActions> = _navActions.asSharedFlow()
+    private val _navActions: MutableSharedFlow<ItemNavActions> = MutableSharedFlow()
+    val navActions: SharedFlow<ItemNavActions> = _navActions.asSharedFlow()
 
-    private val _uiState : MutableStateFlow<ItemSearchUiState> = MutableStateFlow(ItemSearchUiState.Loading)
-    val uiState : StateFlow<ItemSearchUiState> = _uiState.asStateFlow()
+    private val _uiState: MutableStateFlow<ItemSearchUiState> = MutableStateFlow(ItemSearchUiState.Loading)
+    val uiState: StateFlow<ItemSearchUiState> = _uiState.asStateFlow()
 
-    private val _searchQuery : MutableStateFlow<String> = MutableStateFlow("")
-    val searchQuery : StateFlow<String> = _searchQuery.asStateFlow()
-
-    fun characterOcidSearch(characterName : String,searchDate: String) {
+    fun characterOcidSearch(characterName: String, searchDate: String) {
         viewModelScope.launch {
             getCharacterOcidUseCase(characterName)
                 .onSuccess { ocid ->
-                    _navActions.emit(ItemNavActions.Detail(ocid.id))
+                    _navActions.emit(ItemNavActions.Detail(ocid.id, searchDate))
                     _uiState.value = ItemSearchUiState.Loading
                 }.onFailure {
                     _uiState.value = ItemSearchUiState.Error(it)
@@ -39,7 +36,4 @@ class ItemSearchViewModel @Inject constructor(
         }
     }
 
-    fun onQueryChange(query : String) {
-        _searchQuery.value = query
-    }
 }

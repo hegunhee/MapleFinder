@@ -26,17 +26,19 @@ import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toTimeMills
 @Composable
 fun ItemSearchScreenRoot(
     viewModel: ItemSearchViewModel = hiltViewModel(),
-    onNavigationIconClick : () -> Unit,
-    onSearchCharacterItemClick : (ocid: String, date: String) -> Unit,
+    onNavigationIconClick: () -> Unit,
+    onSearchCharacterItemClick: (ocid: String, date: String) -> Unit,
 ) {
-    val searchQuery = viewModel.searchQuery.collectAsStateWithLifecycle().value
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
+
+    val (searchQuery, onQueryChanged) = remember { mutableStateOf("") }
     val (searchDate, onDateSelected) = rememberSaveable { mutableStateOf(defaultDateString()) }
+
     LaunchedEffect(true) {
         viewModel.navActions.collect {
-            when(it) {
+            when (it) {
                 is ItemNavActions.Detail -> {
-                    onSearchCharacterItemClick(it.ocid,searchDate)
+                    onSearchCharacterItemClick(it.ocid, it.date)
                 }
             }
         }
@@ -48,7 +50,7 @@ fun ItemSearchScreenRoot(
         searchDate = searchDate,
         onNavigationIconClick = onNavigationIconClick,
         onSearchCharacterItemClick = viewModel::characterOcidSearch,
-        onQueryChange = viewModel::onQueryChange,
+        onQueryChange = onQueryChanged,
         onDateSelected = onDateSelected
     )
 }
@@ -57,12 +59,12 @@ fun ItemSearchScreenRoot(
 @Composable
 private fun ItemSearchScreen(
     uiState: ItemSearchUiState,
-    searchQuery : String,
-    searchDate : String,
+    searchQuery: String,
+    searchDate: String,
     onNavigationIconClick: () -> Unit,
-    onSearchCharacterItemClick : (name: String,date: String) -> Unit,
-    onQueryChange : (String) -> Unit,
-    onDateSelected : (String) -> Unit,
+    onSearchCharacterItemClick: (name: String, date: String) -> Unit,
+    onQueryChange: (String) -> Unit,
+    onDateSelected: (String) -> Unit,
 ) {
     val (showDateDialog, onDatePickerValueChange) = remember { mutableStateOf(false) }
     if (showDateDialog) {
@@ -74,10 +76,12 @@ private fun ItemSearchScreen(
     }
     val keyboardController = LocalSoftwareKeyboardController.current
     Scaffold(
-        topBar = { MapleTopBar(
-            title = "캐릭터 아이템 조회",
-            onNavigationIconClick = onNavigationIconClick
-        ) }
+        topBar = {
+            MapleTopBar(
+                title = "캐릭터 아이템 조회",
+                onNavigationIconClick = onNavigationIconClick
+            )
+        }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -89,11 +93,11 @@ private fun ItemSearchScreen(
                 date = searchDate,
                 onSearchCharacterClick = onSearchCharacterItemClick,
                 onQueryChange = onQueryChange,
-                onDatePickerShowClick = { onDatePickerValueChange(true)},
+                onDatePickerShowClick = { onDatePickerValueChange(true) },
                 keyboardController = keyboardController,
             )
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
-            if(uiState is ItemSearchUiState.Error) {
+            if (uiState is ItemSearchUiState.Error) {
                 ErrorSurface(exception = uiState.throwable)
             }
         }
