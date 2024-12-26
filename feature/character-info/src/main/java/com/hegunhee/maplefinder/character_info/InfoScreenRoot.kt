@@ -28,7 +28,7 @@ import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toTimeMills
 fun InfoScreenRoot(
     viewModel: InfoViewModel = hiltViewModel(),
     onNavigationIconClick: () -> Unit,
-    onItemDetailButtonClick: (String) -> Unit,
+    onItemDetailButtonClick: (ocid: String,date: String) -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val (searchQuery, onQueryChanged) = rememberSaveable { mutableStateOf("") }
@@ -54,7 +54,7 @@ fun InfoScreen(
     onNavigationIconClick: () -> Unit,
     onSearchCharacterClick: (name: String, date: String) -> Unit,
     onQueryChange: (String) -> Unit,
-    onItemDetailButtonClick: (String) -> Unit,
+    onItemDetailButtonClick: (ocid: String,date: String) -> Unit,
     onDateSelected: (String) -> Unit,
 ) {
     val (showDateDialog, onDatePickerValueChange) = remember { mutableStateOf(false) }
@@ -115,7 +115,7 @@ private fun InfoScreenPreview() {
         onNavigationIconClick = {  },
         onSearchCharacterClick = {name,date->},
         onQueryChange = {  },
-        onItemDetailButtonClick = {  },
+        onItemDetailButtonClick = {ocid, date->  },
         onDateSelected = {},
     )
 }

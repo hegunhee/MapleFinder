@@ -37,10 +37,10 @@ import com.hegunhee.maplefinder.character_info.navigation.CHARACTER_INFO_ROUTE
 import com.hegunhee.maplefinder.character_info.navigation.infoNavGraph
 import com.hegunhee.maplefinder.dojang_record.DojangNavGraph
 import com.hegunhee.maplefinder.dojang_record.dojangNavGraph
-import com.hegunhee.maplefinder.item.ItemNavGraph
-import com.hegunhee.maplefinder.item.itemNavGraph
-import com.hegunhee.maplefinder.item.navigateItemDetail
-import com.hegunhee.maplefinder.item.navigateItemList
+import com.hegunhee.maplefinder.item.navigation.SEARCH_ROUTE
+import com.hegunhee.maplefinder.item.navigation.itemNavGraph
+import com.hegunhee.maplefinder.item.navigation.navigateItemDetail
+import com.hegunhee.maplefinder.item.navigation.navigateItemList
 
 @Composable
 fun MapleApp(
@@ -103,8 +103,8 @@ class MapleAppScaffoldState(
         }
     }
 
-    fun navigateItemDetail(ocid: String) {
-        navController.navigateItemDetail(ocid)
+    fun navigateItemDetail(ocid: String,date: String) {
+        navController.navigateItemDetail(ocid,date)
     }
 
     fun navigateItemList(ocid: String, slotName: String) {
@@ -173,7 +173,7 @@ enum class DrawerItem(
         group = DrawerGroup.Personal,
         titleString = "착용장비 정보 조회",
         iconRes = com.hegunhee.maplefinder.designsystem.R.drawable.work_gloves,
-        navRoute = ItemNavGraph.searchRoute
+        navRoute = SEARCH_ROUTE
     ),
     Dojang(
         group = DrawerGroup.Personal,

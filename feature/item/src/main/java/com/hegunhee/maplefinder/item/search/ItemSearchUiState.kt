@@ -5,6 +5,7 @@ sealed interface ItemSearchUiState {
     object Loading : ItemSearchUiState
 
     data class Error(
-        val throwable : Throwable
+        val throwable: Throwable
     ) : ItemSearchUiState
+
 }
