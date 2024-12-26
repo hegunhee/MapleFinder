@@ -15,6 +15,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hegunhee.maplefinder.ui.CharacterNameSearchBar
 import com.hegunhee.maplefinder.ui.MapleTopBar
 import com.hegunhee.maplefinder.ui.surface.ErrorSurface
+import com.hegunhee.maplefinder.util.SelectedDateFormatUtil
 
 @Composable
 fun ItemSearchScreenRoot(
@@ -50,7 +51,7 @@ private fun ItemSearchScreen(
     uiState: ItemSearchUiState,
     searchQuery : String,
     onNavigationIconClick: () -> Unit,
-    onSearchCharacterItemClick : (String) -> Unit,
+    onSearchCharacterItemClick : (name: String,date: String) -> Unit,
     onQueryChange : (String) -> Unit
 ) {
     val keyboardController = LocalSoftwareKeyboardController.current
@@ -67,6 +68,7 @@ private fun ItemSearchScreen(
         ) {
             CharacterNameSearchBar(
                 searchQuery = searchQuery,
+                searchDate = SelectedDateFormatUtil.defaultDateString(),
                 onSearchCharacterClick = onSearchCharacterItemClick,
                 onQueryChange = onQueryChange,
                 keyboardController = keyboardController

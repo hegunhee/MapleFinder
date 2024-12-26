@@ -17,28 +17,31 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.platform.SoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.tooling.preview.Preview
 
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun CharacterSearchBar(
-    searchQuery : String,
-    date : String ,
-    onSearchCharacterClick : (String) -> Unit,
-    onQueryChange : (String) -> Unit,
-    onDatePickerShowClick : () -> Unit,
+    searchQuery: String,
+    date: String,
+    onSearchCharacterClick: (name: String, date: String) -> Unit,
+    onQueryChange: (String) -> Unit,
+    onDatePickerShowClick: () -> Unit,
     keyboardController: SoftwareKeyboardController?
 ) {
     Column {
         Row(verticalAlignment = Alignment.CenterVertically) {
             Text(text = "선택된 날짜 : $date")
             IconButton(onClick = { onDatePickerShowClick() }) {
-                Icon(imageVector = Icons.Default.DateRange, contentDescription ="selectDate")
+                Icon(imageVector = Icons.Default.DateRange, contentDescription = "selectDate")
             }
         }
         CharacterNameSearchBar(
             searchQuery = searchQuery,
+            searchDate = date,
             onSearchCharacterClick = onSearchCharacterClick,
             onQueryChange = onQueryChange,
             keyboardController = keyboardController
@@ -50,7 +53,8 @@ fun CharacterSearchBar(
 @Composable
 fun CharacterNameSearchBar(
     searchQuery: String,
-    onSearchCharacterClick: (String) -> Unit,
+    searchDate: String,
+    onSearchCharacterClick: (name: String, date: String) -> Unit,
     onQueryChange: (String) -> Unit,
     keyboardController: SoftwareKeyboardController?
 ) {
@@ -63,13 +67,31 @@ fun CharacterNameSearchBar(
             singleLine = true,
             maxLines = 1,
             trailingIcon = {
-                Icon(imageVector = Icons.Default.Search, contentDescription = null, tint = Color.Black)
+                Icon(
+                    imageVector = Icons.Default.Search,
+                    contentDescription = null,
+                    tint = Color.Black
+                )
             },
             keyboardOptions = KeyboardOptions.Default.copy(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = {
-                onSearchCharacterClick(searchQuery)
+                onSearchCharacterClick(searchQuery, searchDate)
                 keyboardController?.hide()
             }),
         )
     }
+}
+
+@OptIn(ExperimentalComposeUiApi::class)
+@Preview
+@Composable
+private fun CharacterSearchBarPreview() {
+    CharacterSearchBar(
+        "검색",
+        "2024-12-25",
+        { name, date -> },
+        {},
+        {},
+        LocalSoftwareKeyboardController.current,
+    )
 }

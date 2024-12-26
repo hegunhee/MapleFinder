@@ -29,9 +29,9 @@ class DojangViewModel @Inject constructor(
         _searchQuery.value = query
     }
 
-    fun getCharacterDojang(characterName : String) {
+    fun getCharacterDojang(characterName : String, searchDate: String) {
         viewModelScope.launch {
-            getCharacterDojangUseCase(characterName = characterName,date = searchDate.value)
+            getCharacterDojangUseCase(characterName = characterName,date = searchDate)
                 .onSuccess { characterDojang ->
                     _uiState.value = DojangUiState.Search(characterDojang = characterDojang)
                 }.onFailure {

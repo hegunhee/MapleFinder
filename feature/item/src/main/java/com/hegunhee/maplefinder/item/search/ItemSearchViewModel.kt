@@ -27,7 +27,7 @@ class ItemSearchViewModel @Inject constructor(
     private val _searchQuery : MutableStateFlow<String> = MutableStateFlow("")
     val searchQuery : StateFlow<String> = _searchQuery.asStateFlow()
 
-    fun characterOcidSearch(characterName : String) {
+    fun characterOcidSearch(characterName : String,searchDate: String) {
         viewModelScope.launch {
             getCharacterOcidUseCase(characterName)
                 .onSuccess { ocid ->
