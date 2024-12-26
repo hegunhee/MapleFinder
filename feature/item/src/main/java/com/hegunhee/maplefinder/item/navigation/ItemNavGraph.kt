@@ -8,6 +8,7 @@ import androidx.navigation.navArgument
 import com.hegunhee.maplefinder.item.detail.ItemDetailScreenRoot
 import com.hegunhee.maplefinder.item.list.ItemListScreenRoot
 import com.hegunhee.maplefinder.item.search.ItemSearchScreenRoot
+import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toDateFormat
 
 const val SEARCH_ROUTE = "Search_Item"
 
@@ -46,7 +47,7 @@ fun NavGraphBuilder.itemNavGraph(
             }
         )){ navBackStackEntry ->
         val ocid = navBackStackEntry.arguments?.getString("ocid") ?: ""
-        val date = navBackStackEntry.arguments?.getString("date") ?: ""
+        val date = navBackStackEntry.arguments?.getString("date").toDateFormat() ?: ""
         ItemDetailScreenRoot(
             ocid = ocid,
             date = date,

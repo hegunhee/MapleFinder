@@ -21,8 +21,9 @@ fun ItemDetailScreenRoot(
     onNavigationIconClick : () -> Unit,
     onItemListButtonClick : (String,String) -> Unit
 ) {
+    date
     LaunchedEffect(key1 = viewModel.uiState) {
-        viewModel.fetchItemData(ocid)
+        viewModel.fetchItemData(ocid,date)
     }
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     ItemDetailScreen(
