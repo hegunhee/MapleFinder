@@ -15,15 +15,14 @@ import com.hegunhee.maplefinder.ui.surface.ErrorSurface
 
 @Composable
 fun ItemDetailScreenRoot(
-    viewModel : ItemDetailViewModel = hiltViewModel(),
-    ocid : String,
-    date : String,
-    onNavigationIconClick : () -> Unit,
-    onItemListButtonClick : (String,String) -> Unit
+    viewModel: ItemDetailViewModel = hiltViewModel(),
+    ocid: String,
+    date: String,
+    onNavigationIconClick: () -> Unit,
+    onItemListButtonClick: (String, String) -> Unit
 ) {
-    date
     LaunchedEffect(key1 = viewModel.uiState) {
-        viewModel.fetchItemData(ocid,date)
+        viewModel.fetchItemData(ocid, date)
     }
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     ItemDetailScreen(
@@ -35,9 +34,9 @@ fun ItemDetailScreenRoot(
 
 @Composable
 private fun ItemDetailScreen(
-    uiState : ItemDetailUiState,
+    uiState: ItemDetailUiState,
     onNavigationIconClick: () -> Unit,
-    onItemListButtonClick : (String,String) -> Unit
+    onItemListButtonClick: (String, String) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -52,11 +51,12 @@ private fun ItemDetailScreen(
                 .padding(paddingValues)
                 .padding(10.dp)
         ) {
-            when(uiState) {
-                ItemDetailUiState.Loading -> { }
+            when (uiState) {
+                ItemDetailUiState.Loading -> {}
                 is ItemDetailUiState.Success -> {
                     CharacterEquipmentItemSurface(uiState.equipmentItem, onItemListButtonClick)
                 }
+
                 is ItemDetailUiState.Error -> {
                     ErrorSurface(exception = uiState.throwable)
                 }
@@ -64,3 +64,4 @@ private fun ItemDetailScreen(
         }
     }
 }
+
