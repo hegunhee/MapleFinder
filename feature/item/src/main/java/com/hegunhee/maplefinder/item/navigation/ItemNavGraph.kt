@@ -11,16 +11,16 @@ import com.hegunhee.maplefinder.item.search.ItemSearchScreenRoot
 
 const val SEARCH_ROUTE = "Search_Item"
 
-fun detailRoute(ocid: String) : String {
-    return "${SEARCH_ROUTE}/${ocid}"
+fun detailRoute(ocid: String,date: String) : String {
+    return "${SEARCH_ROUTE}/${ocid}/${date}"
 }
 
 fun detailListRoute(ocid : String,slotName : String) : String {
     return "${SEARCH_ROUTE}/$ocid/$slotName"
 }
 
-fun NavController.navigateItemDetail(ocid : String) {
-    navigate(detailRoute(ocid))
+fun NavController.navigateItemDetail(ocid : String,date: String) {
+    navigate(detailRoute(ocid,date))
 }
 
 fun NavController.navigateItemList(ocid : String,slotName: String) {
@@ -30,7 +30,7 @@ fun NavGraphBuilder.itemNavGraph(
     onNavigationIconClick : () -> Unit,
     onPopBackStack : () -> Unit,
     onItemListButtonClick : (String,String) -> Unit,
-    onItemDetailButtonClick : (String) -> Unit
+    onItemDetailButtonClick : (ocid: String,date: String) -> Unit
 ) {
     composable(route = SEARCH_ROUTE) {
         ItemSearchScreenRoot(
@@ -39,15 +39,17 @@ fun NavGraphBuilder.itemNavGraph(
         )
     }
 
-    composable(route = detailRoute("{ocid}"),
+    composable(route = detailRoute("{ocid}","{date}"),
         arguments  = listOf(
             navArgument("ocid") {
                 type = NavType.StringType
             }
         )){ navBackStackEntry ->
         val ocid = navBackStackEntry.arguments?.getString("ocid") ?: ""
+        val date = navBackStackEntry.arguments?.getString("date") ?: ""
         ItemDetailScreenRoot(
             ocid = ocid,
+            date = date,
             onNavigationIconClick = onNavigationIconClick,
             onItemListButtonClick = onItemListButtonClick
         )

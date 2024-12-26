@@ -40,7 +40,7 @@ import com.hegunhee.maplefinder.ui.tag.WorldTag
 @Composable
 fun CharacterSurface(
     character : Character,
-    onItemDetailButtonClick: (String) -> Unit
+    onItemDetailButtonClick: (ocid: String,date: String) -> Unit
 ) {
     val scrollState = rememberScrollState()
     Surface(
@@ -57,6 +57,7 @@ fun CharacterSurface(
             )
             CharacterDetailButton(
                 ocid = character.ocid,
+                date = character.basic.date,
                 onItemDetailButtonClick = onItemDetailButtonClick
             )
         }
@@ -98,9 +99,10 @@ private fun ColumnScope.CharacterStat(
 @Composable
 private fun CharacterDetailButton(
     ocid : String,
-    onItemDetailButtonClick : (String) -> Unit
+    date : String,
+    onItemDetailButtonClick : (ocid: String,date: String) -> Unit
 ) {
-    Button(modifier = Modifier.fillMaxWidth(),onClick = { onItemDetailButtonClick(ocid) }) {
+    Button(modifier = Modifier.fillMaxWidth(),onClick = { onItemDetailButtonClick(ocid,date) }) {
         Text(modifier = Modifier.fillMaxWidth(),text = "착용 장비 정보 탐색", textAlign = TextAlign.Center)
     }
 }
@@ -110,7 +112,7 @@ private fun CharacterDetailButton(
 private fun CharacterSurfacePreview() {
     CharacterSurface(
         character = createCharacter(),
-        onItemDetailButtonClick = {  }
+        onItemDetailButtonClick = {ocid, date ->  }
     )
 }
 

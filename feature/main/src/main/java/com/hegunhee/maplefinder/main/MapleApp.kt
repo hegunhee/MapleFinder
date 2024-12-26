@@ -103,8 +103,8 @@ class MapleAppScaffoldState(
         }
     }
 
-    fun navigateItemDetail(ocid: String) {
-        navController.navigateItemDetail(ocid)
+    fun navigateItemDetail(ocid: String,date: String) {
+        navController.navigateItemDetail(ocid,date)
     }
 
     fun navigateItemList(ocid: String, slotName: String) {

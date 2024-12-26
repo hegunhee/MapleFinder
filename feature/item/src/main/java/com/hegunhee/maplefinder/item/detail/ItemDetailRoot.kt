@@ -2,10 +2,7 @@ package com.hegunhee.maplefinder.item.detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.SelectableDates
-import androidx.compose.material3.rememberDatePickerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
@@ -15,12 +12,12 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hegunhee.maplefinder.ui.MapleTopBar
 import com.hegunhee.maplefinder.ui.surface.CharacterEquipmentItemSurface
 import com.hegunhee.maplefinder.ui.surface.ErrorSurface
-import com.hegunhee.maplefinder.util.SelectedDateFormatUtil
 
 @Composable
 fun ItemDetailScreenRoot(
     viewModel : ItemDetailViewModel = hiltViewModel(),
     ocid : String,
+    date : String,
     onNavigationIconClick : () -> Unit,
     onItemListButtonClick : (String,String) -> Unit
 ) {

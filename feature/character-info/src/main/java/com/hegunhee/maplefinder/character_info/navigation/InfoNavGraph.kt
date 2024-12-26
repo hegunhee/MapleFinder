@@ -8,7 +8,7 @@ const val CHARACTER_INFO_ROUTE = "Character-Info"
 
 fun NavGraphBuilder.infoNavGraph(
     onNavigationIconClick: () -> Unit,
-    onItemDetailButtonClick: (String) -> Unit
+    onItemDetailButtonClick: (ocid: String,date: String) -> Unit
 ) {
     composable(route = CHARACTER_INFO_ROUTE) {
         InfoScreenRoot(

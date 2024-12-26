@@ -27,7 +27,7 @@ import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toTimeMills
 fun ItemSearchScreenRoot(
     viewModel: ItemSearchViewModel = hiltViewModel(),
     onNavigationIconClick : () -> Unit,
-    onSearchCharacterItemClick : (String) -> Unit,
+    onSearchCharacterItemClick : (ocid: String, date: String) -> Unit,
 ) {
     val searchQuery = viewModel.searchQuery.collectAsStateWithLifecycle().value
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
@@ -36,7 +36,7 @@ fun ItemSearchScreenRoot(
         viewModel.navActions.collect {
             when(it) {
                 is ItemNavActions.Detail -> {
-                    onSearchCharacterItemClick(it.ocid)
+                    onSearchCharacterItemClick(it.ocid,searchDate)
                 }
             }
         }
