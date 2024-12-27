@@ -6,9 +6,10 @@ sealed interface ItemDetailUiState {
 
     object Loading : ItemDetailUiState
 
-    data class Success(val equipmentItem : CharacterEquipmentItem) : ItemDetailUiState
+    data class Success(val equipmentItem: CharacterEquipmentItem) : ItemDetailUiState
 
     data class Error(
-        val throwable : Throwable
+        val throwable: Throwable
     ) : ItemDetailUiState
+
 }
