@@ -12,12 +12,14 @@ import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toDateFormat
 
 const val SEARCH_ROUTE = "Search_Item"
 
+const val DETAIL_ROUTE = "Item_Detail"
+
 fun detailRoute(ocid: String,date: String) : String {
     return "${SEARCH_ROUTE}/${ocid}/${date}"
 }
 
 fun detailListRoute(ocid : String,slotName : String) : String {
-    return "${SEARCH_ROUTE}/$ocid/$slotName"
+    return "${DETAIL_ROUTE}/${ocid}/${slotName}"
 }
 
 fun NavController.navigateItemDetail(ocid : String,date: String) {
