@@ -5,6 +5,7 @@ import com.hegunhee.maplefinder.model.Grade
 import com.hegunhee.maplefinder.model.World
 import com.hegunhee.maplefinder.model.character.Character
 import com.hegunhee.maplefinder.model.character.CharacterBasic
+import com.hegunhee.maplefinder.model.character.CharacterDojang
 import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
 import com.hegunhee.maplefinder.model.character.item.EquipmentItem
 import com.hegunhee.maplefinder.model.character.item.Item
@@ -268,6 +269,18 @@ internal object PreviewParameter {
             soulName = "",
             soulOption = "",
             specialRingLevel = 0
+        )
+    }
+
+    fun createCharacterDojang() : CharacterDojang {
+        return CharacterDojang(
+            characterName = "엔버는함초롱",
+            characterClass = "엔젤릭버스터",
+            worldName = "스카니아",
+            recordDate = "2024-12-17",
+            bestFloor = 46,
+            bestTimeStamp = "12분 21초",
+            bestTime = 1200,
         )
     }
 }
