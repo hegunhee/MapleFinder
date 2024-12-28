@@ -18,21 +18,21 @@ fun detailRoute(ocid: String,date: String) : String {
     return "${SEARCH_ROUTE}/${ocid}/${date}"
 }
 
-fun detailListRoute(ocid : String,slotName : String) : String {
-    return "${DETAIL_ROUTE}/${ocid}/${slotName}"
+fun detailListRoute(ocid : String,slotName : String,date: String) : String {
+    return "${DETAIL_ROUTE}/${ocid}/${slotName}/${date}"
 }
 
 fun NavController.navigateItemDetail(ocid : String,date: String) {
     navigate(detailRoute(ocid,date))
 }
 
-fun NavController.navigateItemList(ocid : String,slotName: String) {
-    navigate(detailListRoute(ocid, slotName))
+fun NavController.navigateItemList(ocid : String,slotName: String,date: String) {
+    navigate(detailListRoute(ocid, slotName, date))
 }
 fun NavGraphBuilder.itemNavGraph(
     onNavigationIconClick : () -> Unit,
     onPopBackStack : () -> Unit,
-    onItemListButtonClick : (String,String) -> Unit,
+    onItemListButtonClick : (ocid: String,slot: String,date: String) -> Unit,
     onItemDetailButtonClick : (ocid: String,date: String) -> Unit
 ) {
     composable(route = SEARCH_ROUTE) {
@@ -57,7 +57,7 @@ fun NavGraphBuilder.itemNavGraph(
             onItemListButtonClick = onItemListButtonClick
         )
     }
-    composable(route = detailListRoute("{ocid}", "{slotName}"),
+    composable(route = detailListRoute("{ocid}", "{slotName}","{date}"),
         arguments = listOf(
             navArgument("ocid") {
                 type = NavType.StringType
@@ -65,9 +65,11 @@ fun NavGraphBuilder.itemNavGraph(
         )) { navBackStackEntry ->
         val ocid = navBackStackEntry.arguments?.getString("ocid") ?: ""
         val slotName = navBackStackEntry.arguments?.getString("slotName") ?: ""
+        val date = navBackStackEntry.arguments?.getString("date").toDateFormat() ?: ""
         ItemListScreenRoot(
             ocid = ocid,
             slot = slotName,
+            date = date,
             popBackStack = onPopBackStack
         )
     }

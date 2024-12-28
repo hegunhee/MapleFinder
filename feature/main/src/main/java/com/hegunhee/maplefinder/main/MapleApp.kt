@@ -107,8 +107,8 @@ class MapleAppScaffoldState(
         navController.navigateItemDetail(ocid,date)
     }
 
-    fun navigateItemList(ocid: String, slotName: String) {
-        navController.navigateItemList(ocid, slotName)
+    fun navigateItemList(ocid: String, slotName: String,date: String) {
+        navController.navigateItemList(ocid, slotName,date)
     }
 
     fun popBackStack() {

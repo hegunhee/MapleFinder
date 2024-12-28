@@ -42,7 +42,8 @@ import com.hegunhee.maplefinder.ui.tag.StatGradeTag
 @Composable
 fun CharacterEquipmentItemSurface(
     characterEquipmentItem: CharacterEquipmentItem,
-    onDetailItemClick: (String, String) -> Unit
+    date: String,
+    onDetailItemClick: (ocid: String,slot: String,date: String) -> Unit
 ) {
     Surface(
         modifier = Modifier
@@ -62,6 +63,7 @@ fun CharacterEquipmentItemSurface(
                     EquipmentItem(
                         ocid = characterEquipmentItem.ocid,
                         item = item,
+                        date = date,
                         mainStat = characterEquipmentItem.mainStat,
                         onDetailItemClick = onDetailItemClick,
                     )
@@ -74,9 +76,10 @@ fun CharacterEquipmentItemSurface(
 @Composable
 private fun EquipmentItem(
     ocid: String,
+    date: String,
     item: Item,
     mainStat: String,
-    onDetailItemClick: (String, String) -> Unit,
+    onDetailItemClick: (ocid: String,slot: String,date: String) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -93,7 +96,7 @@ private fun EquipmentItem(
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .clickable { onDetailItemClick(ocid, item.slot) },
+                .clickable { onDetailItemClick(ocid, item.slot,date) },
             verticalAlignment = Alignment.CenterVertically
         ) {
             Icon(imageVector = Icons.Rounded.Search, contentDescription = "아이템 자세히보기")
@@ -146,7 +149,8 @@ private fun EquipmentItem(
 private fun CharacterEquipmentItemSurfacePreview() {
     CharacterEquipmentItemSurface(
         createEquipmentItem(),
-        onDetailItemClick = { a, b -> }
+        "",
+        onDetailItemClick = { a, b, c -> }
     )
 }
 
@@ -156,7 +160,8 @@ private fun EquipmentItemPreview() {
     EquipmentItem(
         ocid = "",
         item = createItem(),
+        date = "",
         mainStat = "덱스",
-        onDetailItemClick = { a, b -> }
+        onDetailItemClick = { a, b, c -> }
     )
 }
