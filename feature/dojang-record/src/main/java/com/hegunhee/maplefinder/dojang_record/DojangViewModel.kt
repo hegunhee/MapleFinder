@@ -16,22 +16,23 @@ class DojangViewModel @Inject constructor(
     private val getCharacterDojangUseCase: GetCharacterDojangUseCase
 ) : ViewModel() {
 
-    private val _uiState : MutableStateFlow<DojangUiState> = MutableStateFlow(DojangUiState.Loading)
-    val uiState : StateFlow<DojangUiState> = _uiState.asStateFlow()
+    private val _uiState: MutableStateFlow<DojangUiState> = MutableStateFlow(DojangUiState.Loading)
+    val uiState: StateFlow<DojangUiState> = _uiState.asStateFlow()
 
-    private val _searchQuery : MutableStateFlow<String> = MutableStateFlow("")
-    val searchQuery : StateFlow<String> = _searchQuery.asStateFlow()
+    private val _searchQuery: MutableStateFlow<String> = MutableStateFlow("")
+    val searchQuery: StateFlow<String> = _searchQuery.asStateFlow()
 
-    private val _searchDate : MutableStateFlow<String> = MutableStateFlow(SelectedDateFormatUtil.defaultDateString())
-    val searchDate : StateFlow<String> = _searchDate.asStateFlow()
+    private val _searchDate: MutableStateFlow<String> =
+        MutableStateFlow(SelectedDateFormatUtil.defaultDateString())
+    val searchDate: StateFlow<String> = _searchDate.asStateFlow()
 
-    fun onQueryChange(query : String) {
+    fun onQueryChange(query: String) {
         _searchQuery.value = query
     }
 
-    fun getCharacterDojang(characterName : String, searchDate: String) {
+    fun getCharacterDojang(characterName: String, searchDate: String) {
         viewModelScope.launch {
-            getCharacterDojangUseCase(characterName = characterName,date = searchDate)
+            getCharacterDojangUseCase(characterName = characterName, date = searchDate)
                 .onSuccess { characterDojang ->
                     _uiState.value = DojangUiState.Search(characterDojang = characterDojang)
                 }.onFailure {
@@ -40,7 +41,7 @@ class DojangViewModel @Inject constructor(
         }
     }
 
-    fun onDateSelectClick(date : String) {
+    fun onDateSelectClick(date: String) {
         _searchDate.value = date
     }
 }

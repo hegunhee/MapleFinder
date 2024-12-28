@@ -4,7 +4,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -24,8 +23,8 @@ import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toTimeMills
 
 @Composable
 fun DojangScreenRoot(
-    viewModel : DojangViewModel = hiltViewModel(),
-    onNavigationIconClick : () -> Unit,
+    viewModel: DojangViewModel = hiltViewModel(),
+    onNavigationIconClick: () -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val characterQuery = viewModel.searchQuery.collectAsStateWithLifecycle().value
@@ -45,28 +44,30 @@ fun DojangScreenRoot(
 @OptIn(ExperimentalComposeUiApi::class)
 @Composable
 private fun DojangScreen(
-    uiState : DojangUiState,
-    characterQuery : String,
-    searchDate : String,
-    onNavigationIconClick : () -> Unit,
-    onSearchCharacterDojang : (name: String,date: String) -> Unit,
-    onQueryChange : (String) -> Unit,
-    onDateSelected : (String) -> Unit,
+    uiState: DojangUiState,
+    characterQuery: String,
+    searchDate: String,
+    onNavigationIconClick: () -> Unit,
+    onSearchCharacterDojang: (name: String, date: String) -> Unit,
+    onQueryChange: (String) -> Unit,
+    onDateSelected: (String) -> Unit,
 ) {
     val (showDateDialog, onDatePickerValueChange) = remember { mutableStateOf(false) }
-    if(showDateDialog) {
+    if (showDateDialog) {
         MapleDatePickerDialog(
             initialSelectedDateMills = searchDate.toTimeMills(),
             onDateSelected = onDateSelected,
             isSelectableDate = SelectedDateFormatUtil::isSelectableDate,
-            onDismiss = { onDatePickerValueChange(false)})
+            onDismiss = { onDatePickerValueChange(false) })
     }
     val keyboardController = LocalSoftwareKeyboardController.current
     Scaffold(
-        topBar = { MapleTopBar(
-            title = "무릉도장 검색",
-            onNavigationIconClick = onNavigationIconClick
-        ) }
+        topBar = {
+            MapleTopBar(
+                title = "무릉도장 검색",
+                onNavigationIconClick = onNavigationIconClick
+            )
+        }
     ) { paddingValues ->
         Column(
             modifier = Modifier
@@ -78,15 +79,16 @@ private fun DojangScreen(
                 date = searchDate,
                 onSearchCharacterClick = onSearchCharacterDojang,
                 onQueryChange = onQueryChange,
-                onDatePickerShowClick = { onDatePickerValueChange(true)},
+                onDatePickerShowClick = { onDatePickerValueChange(true) },
                 keyboardController = keyboardController
             )
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
-            when(uiState) {
-                DojangUiState.Loading -> { }
+            when (uiState) {
+                DojangUiState.Loading -> {}
                 is DojangUiState.Search -> {
                     DojangSurface(characterDojang = uiState.characterDojang)
                 }
+
                 is DojangUiState.Error -> {
                     ErrorSurface(exception = uiState.throwable)
                 }
