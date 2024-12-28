@@ -28,11 +28,12 @@ fun ItemListScreenRoot(
     viewModel: ItemListViewModel = hiltViewModel(),
     ocid: String,
     slot: String,
+    date: String,
     popBackStack: () -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
-    LaunchedEffect(key1 = ocid) {
-        viewModel.fetchData(ocid)
+    LaunchedEffect(key1 = ocid,key2 = date) {
+        viewModel.fetchData(ocid,date)
     }
 
     Button(onClick = popBackStack) {

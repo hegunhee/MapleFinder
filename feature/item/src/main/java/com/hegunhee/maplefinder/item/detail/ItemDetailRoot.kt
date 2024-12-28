@@ -19,7 +19,7 @@ fun ItemDetailScreenRoot(
     ocid: String,
     date: String,
     onNavigationIconClick: () -> Unit,
-    onItemListButtonClick: (String, String) -> Unit
+    onItemListButtonClick: (ocid: String,slot: String,date: String) -> Unit
 ) {
     LaunchedEffect(key1 = viewModel.uiState) {
         viewModel.fetchItemData(ocid, date)
@@ -27,6 +27,7 @@ fun ItemDetailScreenRoot(
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     ItemDetailScreen(
         uiState = uiState,
+        date = date,
         onNavigationIconClick = onNavigationIconClick,
         onItemListButtonClick = onItemListButtonClick
     )
@@ -35,8 +36,9 @@ fun ItemDetailScreenRoot(
 @Composable
 private fun ItemDetailScreen(
     uiState: ItemDetailUiState,
+    date: String,
     onNavigationIconClick: () -> Unit,
-    onItemListButtonClick: (String, String) -> Unit
+    onItemListButtonClick: (ocid: String,slot: String,date: String) -> Unit
 ) {
     Scaffold(
         topBar = {
@@ -54,7 +56,7 @@ private fun ItemDetailScreen(
             when (uiState) {
                 ItemDetailUiState.Loading -> {}
                 is ItemDetailUiState.Success -> {
-                    CharacterEquipmentItemSurface(uiState.equipmentItem, onItemListButtonClick)
+                    CharacterEquipmentItemSurface(uiState.equipmentItem,date,onItemListButtonClick)
                 }
 
                 is ItemDetailUiState.Error -> {
