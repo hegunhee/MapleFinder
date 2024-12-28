@@ -7,6 +7,7 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
@@ -19,6 +20,7 @@ import com.hegunhee.maplefinder.ui.dialog.MapleDatePickerDialog
 import com.hegunhee.maplefinder.ui.surface.DojangSurface
 import com.hegunhee.maplefinder.ui.surface.ErrorSurface
 import com.hegunhee.maplefinder.util.SelectedDateFormatUtil
+import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.defaultDateString
 import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toTimeMills
 
 @Composable
@@ -27,17 +29,17 @@ fun DojangScreenRoot(
     onNavigationIconClick: () -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
-    val characterQuery = viewModel.searchQuery.collectAsStateWithLifecycle().value
-    val searchDate = viewModel.searchDate.collectAsStateWithLifecycle().value
+    val (searchQuery, onQueryChanged) = rememberSaveable { mutableStateOf("") }
+    val (searchDate, onDateChanged) = rememberSaveable { mutableStateOf(defaultDateString()) }
 
     DojangScreen(
         uiState = uiState,
-        characterQuery = characterQuery,
+        characterQuery = searchQuery,
         searchDate = searchDate,
         onNavigationIconClick = onNavigationIconClick,
         onSearchCharacterDojang = viewModel::getCharacterDojang,
-        onQueryChange = viewModel::onQueryChange,
-        onDateSelected = viewModel::onDateSelectClick,
+        onQueryChange = onQueryChanged,
+        onDateSelected = onDateChanged,
     )
 }
 
