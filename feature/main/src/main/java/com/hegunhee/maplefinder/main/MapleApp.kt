@@ -35,8 +35,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
 import com.hegunhee.maplefinder.character_info.navigation.CHARACTER_INFO_ROUTE
 import com.hegunhee.maplefinder.character_info.navigation.infoNavGraph
-import com.hegunhee.maplefinder.dojang_record.DojangNavGraph
-import com.hegunhee.maplefinder.dojang_record.dojangNavGraph
+import com.hegunhee.maplefinder.dojang_record.navigation.DOJANG_ROUTE
+import com.hegunhee.maplefinder.dojang_record.navigation.dojangNavGraph
 import com.hegunhee.maplefinder.item.navigation.SEARCH_ROUTE
 import com.hegunhee.maplefinder.item.navigation.itemNavGraph
 import com.hegunhee.maplefinder.item.navigation.navigateItemDetail
@@ -179,7 +179,7 @@ enum class DrawerItem(
         group = DrawerGroup.Personal,
         titleString = "무릉도장",
         iconRes = com.hegunhee.maplefinder.designsystem.R.drawable.dojangicon,
-        navRoute = DojangNavGraph.dojangRoute
+        navRoute = DOJANG_ROUTE
     );
 
     companion object {
