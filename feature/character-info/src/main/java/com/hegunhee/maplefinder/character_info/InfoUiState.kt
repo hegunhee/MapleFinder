@@ -1,18 +1,17 @@
 package com.hegunhee.maplefinder.character_info
 
 import com.hegunhee.maplefinder.model.character.Character
-import java.lang.Exception
 
 sealed interface InfoUiState {
 
     object Loading : InfoUiState
 
     data class Search(
-        val character : Character
+        val character: Character
     ) : InfoUiState
 
     data class Error(
-        val throwable : Throwable
-    ): InfoUiState
+        val throwable: Throwable
+    ) : InfoUiState
 
 }

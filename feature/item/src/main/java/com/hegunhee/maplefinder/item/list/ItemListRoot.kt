@@ -25,14 +25,15 @@ import com.hegunhee.maplefinder.ui.surface.item.DetailItemSurface
 
 @Composable
 fun ItemListScreenRoot(
-    viewModel : ItemListViewModel = hiltViewModel(),
-    ocid : String,
-    slot : String,
-    popBackStack : () -> Unit
+    viewModel: ItemListViewModel = hiltViewModel(),
+    ocid: String,
+    slot: String,
+    date: String,
+    popBackStack: () -> Unit,
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
-    LaunchedEffect(key1 = ocid) {
-        viewModel.fetchData(ocid)
+    LaunchedEffect(key1 = ocid,key2 = date) {
+        viewModel.fetchData(ocid,date)
     }
 
     Button(onClick = popBackStack) {
@@ -50,19 +51,21 @@ fun ItemListScreenRoot(
 private fun ItemListScreen(
     uiState: ItemListUiState,
     popBackStack: () -> Unit,
-    slot : String
+    slot: String,
 ) {
     val scrollState = rememberScrollState()
     Scaffold(
         topBar = {
             TopAppBar(
                 title = { Text(text = "아이템 정보") },
-                navigationIcon = { IconButton(onClick = popBackStack) {
-                    Icon(
-                        imageVector = Icons.Default.Close,
-                        contentDescription = "close ItemList"
-                    )
-                } }
+                navigationIcon = {
+                    IconButton(onClick = popBackStack) {
+                        Icon(
+                            imageVector = Icons.Default.Close,
+                            contentDescription = "close ItemList"
+                        )
+                    }
+                }
             )
         }
     ) { paddingValues ->
@@ -71,18 +74,19 @@ private fun ItemListScreen(
                 .padding(paddingValues)
                 .padding(10.dp)
         ) {
-            when(uiState) {
-                ItemListUiState.Loading -> { }
+            when (uiState) {
+                ItemListUiState.Loading -> {}
                 is ItemListUiState.Success -> {
                     val pagerState = rememberPagerState(
-                        pageCount = { uiState.itemList.size},
+                        pageCount = { uiState.itemList.size },
                         initialPage = uiState.itemList.indexOf(uiState.itemList.find { it.slot == slot })
                     )
                     HorizontalPager(state = pagerState) { page ->
-                        DetailItemSurface(scrollState = scrollState,item = uiState.itemList[page])
+                        DetailItemSurface(scrollState = scrollState, item = uiState.itemList[page])
                     }
                 }
-                ItemListUiState.Error -> { }
+
+                ItemListUiState.Error -> {}
             }
         }
     }

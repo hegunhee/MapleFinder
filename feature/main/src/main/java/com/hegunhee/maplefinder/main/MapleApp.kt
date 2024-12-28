@@ -11,7 +11,6 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Divider
 import androidx.compose.material3.DrawerState
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ModalDrawerSheet
 import androidx.compose.material3.ModalNavigationDrawer
@@ -34,16 +33,15 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.NavHost
-import com.hegunhee.maplefinder.character_info.InfoNavGraph
-import com.hegunhee.maplefinder.character_info.infoNavGraph
-import com.hegunhee.maplefinder.dojang_record.DojangNavGraph
-import com.hegunhee.maplefinder.dojang_record.dojangNavGraph
-import com.hegunhee.maplefinder.item.ItemNavGraph
-import com.hegunhee.maplefinder.item.itemNavGraph
-import com.hegunhee.maplefinder.item.navigateItemDetail
-import com.hegunhee.maplefinder.item.navigateItemList
+import com.hegunhee.maplefinder.character_info.navigation.CHARACTER_INFO_ROUTE
+import com.hegunhee.maplefinder.character_info.navigation.infoNavGraph
+import com.hegunhee.maplefinder.dojang_record.navigation.DOJANG_ROUTE
+import com.hegunhee.maplefinder.dojang_record.navigation.dojangNavGraph
+import com.hegunhee.maplefinder.item.navigation.SEARCH_ROUTE
+import com.hegunhee.maplefinder.item.navigation.itemNavGraph
+import com.hegunhee.maplefinder.item.navigation.navigateItemDetail
+import com.hegunhee.maplefinder.item.navigation.navigateItemList
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapleApp(
     mapleAppScaffoldState: MapleAppScaffoldState = rememberMapleAppScaffoldState()
@@ -51,12 +49,15 @@ fun MapleApp(
     MapleAppDrawer(
         mapleAppScaffoldState = mapleAppScaffoldState,
         drawerSheetContent = {
-            DrawerSheetContent(selectedDrawerItem = mapleAppScaffoldState.selectedDrawerItem, onClickDrawerItem = mapleAppScaffoldState::navigate)
+            DrawerSheetContent(
+                selectedDrawerItem = mapleAppScaffoldState.selectedDrawerItem,
+                onClickDrawerItem = mapleAppScaffoldState::navigate
+            )
         }
     ) {
         NavHost(
             navController = mapleAppScaffoldState.navController,
-            startDestination = InfoNavGraph.infoRoute
+            startDestination = CHARACTER_INFO_ROUTE
         ) {
             dojangNavGraph(
                 onNavigationIconClick = mapleAppScaffoldState::openDrawer
@@ -75,14 +76,13 @@ fun MapleApp(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun rememberMapleAppScaffoldState(
     navController: NavHostController = rememberNavController(),
     coroutineScope: CoroutineScope = rememberCoroutineScope(),
     drawerState: DrawerState = rememberDrawerState(initialValue = DrawerValue.Closed)
-) : MapleAppScaffoldState {
-    return remember(navController,coroutineScope,drawerState) {
+): MapleAppScaffoldState {
+    return remember(navController, coroutineScope, drawerState) {
         MapleAppScaffoldState(
             coroutineScope = coroutineScope,
             navController = navController,
@@ -91,28 +91,27 @@ fun rememberMapleAppScaffoldState(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-class MapleAppScaffoldState @OptIn(ExperimentalMaterial3Api::class) constructor(
-    val coroutineScope : CoroutineScope,
-    val navController : NavHostController,
-    val drawerState : DrawerState
+class MapleAppScaffoldState(
+    val coroutineScope: CoroutineScope,
+    val navController: NavHostController,
+    val drawerState: DrawerState
 ) {
-    fun navigate(drawerItem : DrawerItem) {
+    fun navigate(drawerItem: DrawerItem) {
         navController.navigate(drawerItem.navRoute)
         coroutineScope.launch {
             drawerState.close()
         }
     }
 
-    fun navigateItemDetail(ocid : String) {
-        navController.navigateItemDetail(ocid)
+    fun navigateItemDetail(ocid: String,date: String) {
+        navController.navigateItemDetail(ocid,date)
     }
 
-    fun navigateItemList(ocid : String,slotName : String) {
-        navController.navigateItemList(ocid,slotName)
+    fun navigateItemList(ocid: String, slotName: String,date: String) {
+        navController.navigateItemList(ocid, slotName,date)
     }
 
-    fun popBackStack()  {
+    fun popBackStack() {
         navController.popBackStack()
     }
 
@@ -135,57 +134,60 @@ class MapleAppScaffoldState @OptIn(ExperimentalMaterial3Api::class) constructor(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MapleAppDrawer(
     mapleAppScaffoldState: MapleAppScaffoldState = rememberMapleAppScaffoldState(),
-    drawerSheetContent : @Composable ColumnScope.() -> Unit,
-    content : @Composable () -> Unit
+    drawerSheetContent: @Composable ColumnScope.() -> Unit,
+    content: @Composable () -> Unit
 ) {
     ModalNavigationDrawer(
         drawerState = mapleAppScaffoldState.drawerState,
-        drawerContent = { ModalDrawerSheet {
-            drawerSheetContent()
-        }}
+        drawerContent = {
+            ModalDrawerSheet {
+                drawerSheetContent()
+            }
+        }
     ) {
         content()
     }
 }
 
 enum class DrawerGroup {
-    Personal,Ranking,Others
+    Personal, Ranking, Others
 }
 
 enum class DrawerItem(
-    private val group : DrawerGroup,
-    val titleString : String,
-    @DrawableRes val iconRes : Int,
-    val navRoute : String
+    private val group: DrawerGroup,
+    val titleString: String,
+    @DrawableRes val iconRes: Int,
+    val navRoute: String
 ) {
     Info(
         group = DrawerGroup.Personal,
         titleString = "캐릭터 정보 조회",
         iconRes = com.hegunhee.maplefinder.designsystem.R.drawable.ic_search_24,
-        navRoute = InfoNavGraph.infoRoute
+        navRoute = CHARACTER_INFO_ROUTE
     ),
 
     ItemInfo(
         group = DrawerGroup.Personal,
         titleString = "착용장비 정보 조회",
         iconRes = com.hegunhee.maplefinder.designsystem.R.drawable.work_gloves,
-        navRoute = ItemNavGraph.searchRoute
+        navRoute = SEARCH_ROUTE
     ),
     Dojang(
         group = DrawerGroup.Personal,
         titleString = "무릉도장",
         iconRes = com.hegunhee.maplefinder.designsystem.R.drawable.dojangicon,
-        navRoute = DojangNavGraph.dojangRoute
+        navRoute = DOJANG_ROUTE
     );
+
     companion object {
         fun ofOrNull(route: String): DrawerItem? {
             return values().firstOrNull { it.navRoute == route }
         }
     }
+
     val isLastItem: Boolean
         get() = ordinal == DrawerItem.values().lastIndex
 
@@ -193,11 +195,10 @@ enum class DrawerItem(
         get() = isLastItem || group != DrawerItem.values()[ordinal + 1].group
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DrawerSheetContent(
-    selectedDrawerItem : DrawerItem?,
-    onClickDrawerItem : (DrawerItem) -> Unit
+    selectedDrawerItem: DrawerItem?,
+    onClickDrawerItem: (DrawerItem) -> Unit
 ) {
     Column(
         modifier = Modifier.verticalScroll(rememberScrollState())
@@ -206,7 +207,12 @@ fun DrawerSheetContent(
         DrawerItem.values().forEach { drawerItem ->
             NavigationDrawerItem(
                 icon = {
-                    Icon(modifier = Modifier.size(38.dp),painter = painterResource(id = drawerItem.iconRes), contentDescription = null,tint = Color.Unspecified)
+                    Icon(
+                        modifier = Modifier.size(38.dp),
+                        painter = painterResource(id = drawerItem.iconRes),
+                        contentDescription = null,
+                        tint = Color.Unspecified
+                    )
                 },
                 label = {
                     Text(drawerItem.titleString)
@@ -228,11 +234,22 @@ fun DrawerSheetContent(
             thickness = 1.dp,
             modifier = Modifier.padding(horizontal = 28.dp, vertical = 8.dp)
         )
-        Text(modifier = Modifier.fillMaxWidth(),text = "Data based on NEXON Open API", textAlign = TextAlign.End)
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Data based on NEXON Open API",
+            textAlign = TextAlign.End
+        )
     }
 }
 
 @Composable
 private fun DrawerSheetHeader() {
-    Text(modifier = Modifier.fillMaxWidth().padding(10.dp), text = "Maple 정보 검색", fontSize = 30.sp, textAlign = TextAlign.Center)
+    Text(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(10.dp),
+        text = "Maple 정보 검색",
+        fontSize = 30.sp,
+        textAlign = TextAlign.Center
+    )
 }

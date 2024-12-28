@@ -12,37 +12,46 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hegunhee.maplefinder.model.character.CharacterDojang
+import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createCharacterDojang
 
 @Composable
 fun DojangSurface(
     characterDojang: CharacterDojang
 ) {
     Surface(
-       shape = RoundedCornerShape(10),
-       border = BorderStroke(width = 1.dp, color = Color.Green)
+        shape = RoundedCornerShape(10),
+        border = BorderStroke(width = 1.dp, color = Color.Green)
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Text(
-                modifier = Modifier.fillMaxWidth().background(Color.Green),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Green),
                 text = "무릉 기록 조회",
                 color = Color.White,
                 fontSize = 20.sp,
                 textAlign = TextAlign.Center
             )
-            Text(
-                text = "최고 기록"
-            )
+            Text(text = "최고 기록")
             Text(text = "${characterDojang.bestFloor}층", fontSize = 20.sp)
             Text(text = "시간")
             Text(text = characterDojang.bestTimeStamp, fontSize = 20.sp)
             Text(text = "기록 날짜")
-            Text(text = characterDojang.recordDate,fontSize = 20.sp)
-
+            Text(text = characterDojang.recordDate, fontSize = 20.sp)
         }
     }
+}
+
+@Preview
+@Composable
+private fun DojangSurfacePreview() {
+    DojangSurface(
+        createCharacterDojang()
+    )
 }

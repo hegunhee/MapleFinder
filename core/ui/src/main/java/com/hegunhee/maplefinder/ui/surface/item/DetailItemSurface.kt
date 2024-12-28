@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Text
@@ -17,6 +18,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
@@ -30,6 +32,7 @@ import com.hegunhee.maplefinder.model.character.item.upgrade.CubeOption
 import com.hegunhee.maplefinder.model.character.item.upgrade.ScrollOption
 import com.hegunhee.maplefinder.model.character.item.upgrade.StarforceOption
 import com.hegunhee.maplefinder.ui.space.NormalLineSpace
+import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createItem
 import com.hegunhee.maplefinder.ui.tag.DetailItemCubeOption
 import com.hegunhee.maplefinder.ui.tag.ExceptionOption
 import com.hegunhee.maplefinder.ui.tag.StarforceHeader
@@ -39,8 +42,8 @@ import com.hegunhee.maplefinder.ui.text.ItemSoulText
 @Composable
 fun DetailItemSurface(
     scrollState: ScrollState,
-    item : Item
-){
+    item: Item
+) {
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -85,12 +88,12 @@ fun DetailItemSurface(
 
 @Composable
 private fun DetailItemHeader(
-    slot : String,
-    name : String,
-    soulName : String,
-    scrollUpgradeCount : String,
-    starforce : StarforceOption,
-    potentialOptionGrade : Grade,
+    slot: String,
+    name: String,
+    soulName: String,
+    scrollUpgradeCount: String,
+    starforce: StarforceOption,
+    potentialOptionGrade: Grade,
 ) {
     StarforceHeader(
         starCount = starforce.upgardeCount.toInt(),
@@ -98,22 +101,38 @@ private fun DetailItemHeader(
         isStarforceItem = starforce.isStarforceItem,
         isWonderfulScroll = starforce.wonderfulScrollFlag == "사용"
     )
-    if(slot == "무기" && soulName.isNotEmpty()) {
-        val weaponSoulName = soulName.split(" ")[0] + " "+soulName.split(" ")[1]
-        Text(modifier = Modifier.fillMaxWidth(),text = weaponSoulName,fontSize = 20.sp, textAlign = TextAlign.Center,color = Cyan)
+    if (slot == "무기" && soulName.isNotEmpty()) {
+        val weaponSoulName = soulName.split(" ")[0] + " " + soulName.split(" ")[1]
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = weaponSoulName,
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center,
+            color = Cyan
+        )
     }
-    val itemName = name + if(scrollUpgradeCount != "0") "(+${scrollUpgradeCount})" else ""
-    Text(modifier = Modifier.fillMaxWidth(),text = itemName,fontSize = 20.sp, textAlign = TextAlign.Center)
-    if(potentialOptionGrade !is Grade.Unknown) {
-        Text(modifier = Modifier.fillMaxWidth(),text = "${potentialOptionGrade.name} 아이템",fontSize = 20.sp,textAlign = TextAlign.Center)
+    val itemName = name + if (scrollUpgradeCount != "0") "(+${scrollUpgradeCount})" else ""
+    Text(
+        modifier = Modifier.fillMaxWidth(),
+        text = itemName,
+        fontSize = 20.sp,
+        textAlign = TextAlign.Center
+    )
+    if (potentialOptionGrade !is Grade.Unknown) {
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "${potentialOptionGrade.name} 아이템",
+            fontSize = 20.sp,
+            textAlign = TextAlign.Center
+        )
     }
 }
 
 @Composable
 private fun DetailItemIcon(
-    icon : ImageUrl,
-    grade : Grade,
-    baseLevel : Int
+    icon: ImageUrl,
+    grade: Grade,
+    baseLevel: Int
 ) {
     Row(verticalAlignment = Alignment.CenterVertically) {
         AsyncImage(
@@ -123,11 +142,14 @@ private fun DetailItemIcon(
                     width = 1.dp,
                     shape = RoundedCornerShape(0),
                     color = Color(grade.color)
-                ) ,model = icon, contentDescription = icon)
+                ), model = icon, contentDescription = icon
+        )
         Spacer(modifier = Modifier.size(5.dp))
-        Spacer(modifier = Modifier
-            .size(5.dp)
-            .background(MapleOrange))
+        Spacer(
+            modifier = Modifier
+                .size(5.dp)
+                .background(MapleOrange)
+        )
         Spacer(modifier = Modifier.size(5.dp))
         Text(text = "REQ LEV : $baseLevel", color = MapleOrange)
     }
@@ -135,14 +157,14 @@ private fun DetailItemIcon(
 
 @Composable
 private fun DetailItemOption(
-    part : String,
+    part: String,
     scrollOption: ScrollOption,
-    cuttableCount : String,
-    totalOption : List<ItemOption>,
-    baseOption : List<ItemOption>,
-    addOption : List<ItemOption>,
-    scrollUpgradeOption : List<ItemOption>,
-    starforceOption : List<ItemOption>
+    cuttableCount: String,
+    totalOption: List<ItemOption>,
+    baseOption: List<ItemOption>,
+    addOption: List<ItemOption>,
+    scrollUpgradeOption: List<ItemOption>,
+    starforceOption: List<ItemOption>
 ) {
     Text(text = "장비 분류 : $part")
     totalOption.forEach {
@@ -157,48 +179,58 @@ private fun DetailItemOption(
             starforceOptionValue = starforceOption.find { it.key == key }?.value?.toIntOrNull()
         )
     }
-    if(scrollOption.upgradeCount.toInt() + scrollOption.recoverableCount.toInt() != 0) {
+    if (scrollOption.upgradeCount.toInt() + scrollOption.recoverableCount.toInt() != 0) {
         Row {
             Text("업그레이드 가능 횟수 : ${scrollOption.upgradableCount}")
-            Text(" (복구 가능 횟수 : ${scrollOption.recoverableCount})",color = MapleOrange)
+            Text(" (복구 가능 횟수 : ${scrollOption.recoverableCount})", color = MapleOrange)
         }
-        if(scrollOption.goldenHammerFlag == "적용") {
+        if (scrollOption.goldenHammerFlag == "적용") {
             Text("황금망치 재련 적용")
         }
     }
-    if(cuttableCount != "255") {
-        Text("가위 사용 가능 횟수 : $cuttableCount",color = MapleOrange)
+    if (cuttableCount != "255") {
+        Text("가위 사용 가능 횟수 : $cuttableCount", color = MapleOrange)
     }
 }
 
 @Composable
 private fun DetailItemBottom(
-    potentialOption : CubeOption,
-    additionalOption : CubeOption,
-    exceptionalOption : List<ItemOption>,
-    hasSoulItem : Boolean,
-    soulName : String,
-    soulOption : String,
-    isWonderfulScrollUse : Boolean
+    potentialOption: CubeOption,
+    additionalOption: CubeOption,
+    exceptionalOption: List<ItemOption>,
+    hasSoulItem: Boolean,
+    soulName: String,
+    soulOption: String,
+    isWonderfulScrollUse: Boolean
 ) {
-    if(potentialOption.grade !is Grade.Unknown) {
+    if (potentialOption.grade !is Grade.Unknown) {
         NormalLineSpace()
         DetailItemCubeOption(option = potentialOption)
     }
-    if(additionalOption.grade !is Grade.Unknown) {
+    if (additionalOption.grade !is Grade.Unknown) {
         NormalLineSpace()
-        DetailItemCubeOption(cubeType = "에디셔널",option = additionalOption)
+        DetailItemCubeOption(cubeType = "에디셔널", option = additionalOption)
     }
-    if(exceptionalOption.isNotEmpty()) {
+    if (exceptionalOption.isNotEmpty()) {
         NormalLineSpace()
         ExceptionOption(exceptionalOption)
     }
-    if(isWonderfulScrollUse) {
+    if (isWonderfulScrollUse) {
         NormalLineSpace()
-        Text("놀라운 장비 강화 주문서가 사용되었습니다",color = MapleOrange)
+        Text("놀라운 장비 강화 주문서가 사용되었습니다", color = MapleOrange)
     }
-    if(hasSoulItem) {
+    if (hasSoulItem) {
         NormalLineSpace()
         ItemSoulText(soulName = soulName, soulOption = soulOption)
     }
+}
+
+@Preview
+@Composable
+private fun DetailItemSurfacePreview() {
+    val scrollState = rememberScrollState()
+    DetailItemSurface(
+        scrollState,
+        createItem()
+    )
 }
