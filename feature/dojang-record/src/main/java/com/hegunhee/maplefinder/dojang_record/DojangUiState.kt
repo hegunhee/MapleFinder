@@ -7,10 +7,10 @@ sealed interface DojangUiState {
     object Loading : DojangUiState
 
     data class Search(
-        val characterDojang : CharacterDojang
+        val characterDojang: CharacterDojang
     ) : DojangUiState
 
     data class Error(
-        val throwable : Throwable
+        val throwable: Throwable
     ) : DojangUiState
 }
