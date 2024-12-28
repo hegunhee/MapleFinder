@@ -7,7 +7,7 @@ sealed interface ItemListUiState {
     object Loading : ItemListUiState
 
     data class Success(
-        val itemList : List<Item>
+        val itemList: List<Item>,
     ) : ItemListUiState
 
     object Error : ItemListUiState
