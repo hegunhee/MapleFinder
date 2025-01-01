@@ -14,14 +14,11 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.hegunhee.maplefinder.ui.CharacterSearchBar
+import com.hegunhee.maplefinder.ui.CharacterNameSearchBar
 import com.hegunhee.maplefinder.ui.MapleTopBar
-import com.hegunhee.maplefinder.ui.dialog.MapleDatePickerDialog
 import com.hegunhee.maplefinder.ui.surface.DojangSurface
 import com.hegunhee.maplefinder.ui.surface.ErrorSurface
-import com.hegunhee.maplefinder.util.SelectedDateFormatUtil
 import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.defaultDateString
-import com.hegunhee.maplefinder.util.SelectedDateFormatUtil.toTimeMills
 
 @Composable
 fun DojangScreenRoot(
@@ -30,7 +27,7 @@ fun DojangScreenRoot(
 ) {
     val uiState = viewModel.uiState.collectAsStateWithLifecycle().value
     val (searchQuery, onQueryChanged) = rememberSaveable { mutableStateOf("") }
-    val (searchDate, onDateChanged) = rememberSaveable { mutableStateOf(defaultDateString()) }
+    val (searchDate) = remember { mutableStateOf(defaultDateString()) }
 
     DojangScreen(
         uiState = uiState,
@@ -39,7 +36,6 @@ fun DojangScreenRoot(
         onNavigationIconClick = onNavigationIconClick,
         onSearchCharacterDojang = viewModel::getCharacterDojang,
         onQueryChange = onQueryChanged,
-        onDateSelected = onDateChanged,
     )
 }
 
@@ -52,16 +48,7 @@ private fun DojangScreen(
     onNavigationIconClick: () -> Unit,
     onSearchCharacterDojang: (name: String, date: String) -> Unit,
     onQueryChange: (String) -> Unit,
-    onDateSelected: (String) -> Unit,
 ) {
-    val (showDateDialog, onDatePickerValueChange) = remember { mutableStateOf(false) }
-    if (showDateDialog) {
-        MapleDatePickerDialog(
-            initialSelectedDateMills = searchDate.toTimeMills(),
-            onDateSelected = onDateSelected,
-            isSelectableDate = SelectedDateFormatUtil::isSelectableDate,
-            onDismiss = { onDatePickerValueChange(false) })
-    }
     val keyboardController = LocalSoftwareKeyboardController.current
     Scaffold(
         topBar = {
@@ -76,12 +63,11 @@ private fun DojangScreen(
                 .padding(paddingValues)
                 .padding(10.dp)
         ) {
-            CharacterSearchBar(
+            CharacterNameSearchBar(
                 searchQuery = characterQuery,
-                date = searchDate,
+                searchDate = searchDate,
                 onSearchCharacterClick = onSearchCharacterDojang,
                 onQueryChange = onQueryChange,
-                onDatePickerShowClick = { onDatePickerValueChange(true) },
                 keyboardController = keyboardController
             )
             Spacer(modifier = Modifier.padding(vertical = 10.dp))
