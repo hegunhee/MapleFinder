@@ -18,7 +18,7 @@ suspend fun <T, R> T.createResult(call : suspend T.() -> R) : Result<R> {
             else -> { httpE }
         })
     } catch (missingFieldE: MissingFieldException) {
-        Result.failure(RuntimeException("존재는 하지만 조회할 수 없는 캐릭터입니다."))
+        Result.failure(NexonApiException.UnretrivableException)
     }catch (e: RuntimeException) {
         Result.failure(e)
     } catch (e: Throwable) {
