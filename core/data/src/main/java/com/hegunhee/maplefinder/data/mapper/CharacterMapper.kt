@@ -106,7 +106,7 @@ fun CharacterHyperStatResponse.toModel(): CharacterHyperStat {
         currentPreset = hyperStatList[currentPresetNum.toInt() - 1],
         hyperStatPresetList = hyperStatList,
         remainHyperStat = remainHyperStat,
-        currentPresetNum = currentPresetNum
+        currentPresetNum = (currentPresetNum.toInt() -1).toString()
     )
 }
 
@@ -119,7 +119,7 @@ fun CharacterAbilityResponse.toModel(): CharacterAbility {
             abilityPreset2,
             abilityPreset3
         ).map { it?.toModel() },
-        presetNo = presetNo ?: 1,
+        presetNo = presetNo?.minus(1) ?: 0,
         remainFame = remainFame
     )
 }
