@@ -9,7 +9,10 @@ import com.hegunhee.maplefinder.data.di.ApiModule.provideJson
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleApi
 import com.hegunhee.maplefinder.data.di.ApiModule.provideMapleOcidApi
 import kotlinx.coroutines.runBlocking
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.MissingFieldException
 import org.junit.Assert.assertEquals
+import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
 
@@ -38,6 +41,21 @@ class GetCharacterStatUnitTest {
 
             // Then
             assertEquals(stat.jobName, "엔젤릭버스터")
+        }
+    }
+
+    @OptIn(ExperimentalSerializationApi::class)
+    @Test
+    fun givenUnretrivableCharacterName_whenGetStat_thenReturnMissingFieldException() {
+        runBlocking {
+            // Given
+            val ocid = mapleOcidApi.getOcid(characterName = "블루배달꾼").id
+
+            // When
+            val stat = runCatching{ mapleCharacterApi.getCharacterStat(ocid = ocid, date = INQUIRY_DATE) }
+
+            // Then
+            assertThrows(MissingFieldException::class.java) { stat.getOrThrow()}
         }
     }
 
