@@ -13,6 +13,7 @@ import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
 import com.hegunhee.maplefinder.model.character.item.Item
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.supervisorScope
 import javax.inject.Inject
 
 class DefaultRepository @Inject constructor(
@@ -36,13 +37,12 @@ class DefaultRepository @Inject constructor(
     }
 
     override suspend fun getCharacter(characterName: String, date: String): Result<Character> =
-        coroutineScope {
+        supervisorScope {
             createResult {
                 val ocid = remoteDataSource.getCharacterOcid(characterName).id
                 val basicInfo = async { remoteDataSource.getCharacterBasic(ocid, date).toModel() }
-                val statInfo = async { remoteDataSource.getCharacterStat(ocid, date).toModel() }
-                val hyperStatInfo =
-                    async { remoteDataSource.getCharacterHyperStat(ocid, date).toModel() }
+                val statInfo = async{ remoteDataSource.getCharacterStat(ocid, date).toModel() }
+                val hyperStatInfo = async { remoteDataSource.getCharacterHyperStat(ocid, date).toModel() }
                 val abilityInfo = remoteDataSource.getCharacterAbility(ocid, date).toModel()
                 Character(
                     ocid = ocid,
@@ -57,7 +57,7 @@ class DefaultRepository @Inject constructor(
     override suspend fun getCharacterItem(
         ocid: String,
         date: String
-    ): Result<CharacterEquipmentItem> = coroutineScope {
+    ): Result<CharacterEquipmentItem> = supervisorScope {
         createResult {
             val basicInfo = async { remoteDataSource.getCharacterBasic(ocid, date).toModel() }
             val itemInfo = async { remoteDataSource.getCharacterItem(ocid, date) }
