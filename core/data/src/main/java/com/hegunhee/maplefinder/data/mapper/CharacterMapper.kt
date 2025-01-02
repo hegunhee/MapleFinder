@@ -136,8 +136,8 @@ internal val mapleWorldList = listOf<World>(
     World("스카니아", R.drawable.scania),
     World("유니온", R.drawable.union),
     World("제니스", R.drawable.zenith),
-    World("리부트", R.drawable.reboot),
-    World("리부트2", R.drawable.reboot),
+    World("에오스",R.drawable.eos),
+    World("핼리오스",R.drawable.helios),
 )
 
 private val mapleMWorldNameMap = mapleWorldList.associateBy { it.name }
