@@ -1,7 +1,5 @@
 package com.hegunhee.maplefinder.model.exception
 
-import java.io.IOException
-
 sealed class NexonApiException(val code : Int, override val message : String) : Exception() {
 
     object ServerException : NexonApiException(code = 500, message = "서버 내부 오류가 발생했습니다.")
