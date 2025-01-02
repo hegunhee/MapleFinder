@@ -1,8 +1,11 @@
 package com.hegunhee.maplefinder.data.api
 
 import com.hegunhee.maplefinder.model.exception.NexonApiException
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.MissingFieldException
 import retrofit2.HttpException
 
+@OptIn(ExperimentalSerializationApi::class)
 suspend fun <T, R> T.createResult(call : suspend T.() -> R) : Result<R> {
     return try {
         Result.success(call())
@@ -14,6 +17,10 @@ suspend fun <T, R> T.createResult(call : suspend T.() -> R) : Result<R> {
             400 -> { NexonApiException.InvailedParameterException }
             else -> { httpE }
         })
+    } catch (missingFieldE: MissingFieldException) {
+        Result.failure(RuntimeException("존재는 하지만 조회할 수 없는 캐릭터입니다."))
+    }catch (e: RuntimeException) {
+        Result.failure(e)
     } catch (e: Throwable) {
         Result.failure(e)
     }
