@@ -3,8 +3,8 @@ package com.hegunhee.maplefinder.domain.repository
 import com.hegunhee.maplefinder.model.character.Character
 import com.hegunhee.maplefinder.model.character.CharacterDojang
 import com.hegunhee.maplefinder.model.character.Ocid
-import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
-import com.hegunhee.maplefinder.model.character.item.Item
+import com.hegunhee.maplefinder.model.character.item.normal.CharacterEquipmentItem
+import com.hegunhee.maplefinder.model.character.item.normal.Item
 
 interface Repository {
 

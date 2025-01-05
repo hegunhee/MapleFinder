@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.hegunhee.maplefinder.model.Grade
-import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
-import com.hegunhee.maplefinder.model.character.item.Item
+import com.hegunhee.maplefinder.model.character.item.normal.CharacterEquipmentItem
+import com.hegunhee.maplefinder.model.character.item.normal.Item
 import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createEquipmentItem
 import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createItem
 import com.hegunhee.maplefinder.ui.tag.CubeOptionTag

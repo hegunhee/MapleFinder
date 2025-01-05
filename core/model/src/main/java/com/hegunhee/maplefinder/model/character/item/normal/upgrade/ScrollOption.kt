@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.model.character.item.upgrade
+package com.hegunhee.maplefinder.model.character.item.normal.upgrade
 
 data class ScrollOption(
     val upgradeCount : String,
