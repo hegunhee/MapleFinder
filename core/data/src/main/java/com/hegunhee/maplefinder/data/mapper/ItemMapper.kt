@@ -1,9 +1,9 @@
 package com.hegunhee.maplefinder.data.mapper
 
-import com.hegunhee.maplefinder.data.api.model.character.item.ItemEquipmentResponse
-import com.hegunhee.maplefinder.data.api.model.character.item.ItemResponse
-import com.hegunhee.maplefinder.data.api.model.character.item.TitleResponse
-import com.hegunhee.maplefinder.data.api.model.character.item.option.ItemOptionResponse
+import com.hegunhee.maplefinder.data.api.model.character.item.normal.ItemEquipmentResponse
+import com.hegunhee.maplefinder.data.api.model.character.item.normal.ItemResponse
+import com.hegunhee.maplefinder.data.api.model.character.item.normal.TitleResponse
+import com.hegunhee.maplefinder.data.api.model.character.item.normal.option.ItemOptionResponse
 import com.hegunhee.maplefinder.model.character.item.EquipmentItem
 import com.hegunhee.maplefinder.model.character.item.Item
 import com.hegunhee.maplefinder.model.character.item.ItemOption
