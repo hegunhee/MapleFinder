@@ -51,7 +51,7 @@ interface MapleCharacterApi {
     @GET("cashitem-equipment")
     suspend fun getCharacterCashItem(
         @Query("ocid") ocid : String,
-        @Query("date") date : String,
+        @Query("date") date : String?,
     ) : CashItemResponse
 
 }
