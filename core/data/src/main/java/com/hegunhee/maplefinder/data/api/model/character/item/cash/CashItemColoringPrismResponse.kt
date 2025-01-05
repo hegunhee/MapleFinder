@@ -4,7 +4,7 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class CashItemColoringPrism(
+data class CashItemColoringPrismResponse(
     @SerialName("color_range") val colorRange: String,
     @SerialName("hue") val hue: Int,
     @SerialName("saturation") val saturation: Int,
