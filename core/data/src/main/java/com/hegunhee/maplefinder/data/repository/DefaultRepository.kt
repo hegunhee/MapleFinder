@@ -9,6 +9,7 @@ import com.hegunhee.maplefinder.domain.repository.Repository
 import com.hegunhee.maplefinder.model.character.Character
 import com.hegunhee.maplefinder.model.character.CharacterDojang
 import com.hegunhee.maplefinder.model.character.Ocid
+import com.hegunhee.maplefinder.model.character.item.cash.CashItemCharacter
 import com.hegunhee.maplefinder.model.character.item.normal.CharacterEquipmentItem
 import com.hegunhee.maplefinder.model.character.item.normal.Item
 import kotlinx.coroutines.async
@@ -79,4 +80,17 @@ class DefaultRepository @Inject constructor(
         }
     }
 
+    override suspend fun getCharacterCashItem(
+        characterName: String,
+        date: String
+    ): Result<CashItemCharacter> {
+        return supervisorScope {
+            createResult {
+                val ocid = remoteDataSource.getCharacterOcid(characterName).id
+
+                val characterBasic = remoteDataSource.getCharacterBasic(ocid, date).toModel()
+                remoteDataSource.getCharacterCashItem(ocid, date).toModel(characterBasic)
+            }
+        }
+    }
 }
