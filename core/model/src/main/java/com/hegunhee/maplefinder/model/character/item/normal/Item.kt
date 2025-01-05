@@ -1,10 +1,10 @@
-package com.hegunhee.maplefinder.model.character.item
+package com.hegunhee.maplefinder.model.character.item.normal
 
 import com.hegunhee.maplefinder.model.ImageUrl
-import com.hegunhee.maplefinder.model.character.item.upgrade.BaseOption
-import com.hegunhee.maplefinder.model.character.item.upgrade.CubeOption
-import com.hegunhee.maplefinder.model.character.item.upgrade.ScrollOption
-import com.hegunhee.maplefinder.model.character.item.upgrade.StarforceOption
+import com.hegunhee.maplefinder.model.character.item.normal.upgrade.BaseOption
+import com.hegunhee.maplefinder.model.character.item.normal.upgrade.CubeOption
+import com.hegunhee.maplefinder.model.character.item.normal.upgrade.ScrollOption
+import com.hegunhee.maplefinder.model.character.item.normal.upgrade.StarforceOption
 
 data class Item(
     val part : String,

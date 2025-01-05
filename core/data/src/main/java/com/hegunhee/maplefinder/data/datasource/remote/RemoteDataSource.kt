@@ -4,6 +4,7 @@ import com.hegunhee.maplefinder.data.api.model.character.CharacterDojangResponse
 import com.hegunhee.maplefinder.data.api.model.OcidResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterAbilityResponse
 import com.hegunhee.maplefinder.data.api.model.character.CharacterBasicResponse
+import com.hegunhee.maplefinder.data.api.model.character.item.cash.CashItemResponse
 import com.hegunhee.maplefinder.data.api.model.character.item.normal.ItemResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterHyperStatResponse
 import com.hegunhee.maplefinder.data.api.model.character.stat.CharacterStatResponse
@@ -43,5 +44,10 @@ interface RemoteDataSource {
         ocid: String,
         date: String
     ): ItemResponse
+
+    suspend fun getCharacterCashItem(
+        ocid: String,
+        date: String?,
+    ): CashItemResponse
 
 }

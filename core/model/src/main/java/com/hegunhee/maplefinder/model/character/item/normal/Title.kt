@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.model.character.item
+package com.hegunhee.maplefinder.model.character.item.normal
 
 import com.hegunhee.maplefinder.model.ImageUrl
 

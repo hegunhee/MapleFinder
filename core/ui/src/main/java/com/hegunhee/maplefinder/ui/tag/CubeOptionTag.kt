@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.hegunhee.maplefinder.maplefinder.ui.theme.Gray
 import com.hegunhee.maplefinder.model.Grade
-import com.hegunhee.maplefinder.model.character.item.upgrade.CubeOption
+import com.hegunhee.maplefinder.model.character.item.normal.upgrade.CubeOption
 
 @Composable
 internal fun CubeOptionTag(

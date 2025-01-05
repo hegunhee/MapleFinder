@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.model.character.item
+package com.hegunhee.maplefinder.model.character.item.normal
 
 data class ItemOption(
     val key : String,

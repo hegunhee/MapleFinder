@@ -1,7 +1,7 @@
 package com.hegunhee.maplefinder.domain.usecase
 
 import com.hegunhee.maplefinder.domain.repository.Repository
-import com.hegunhee.maplefinder.model.character.item.CharacterEquipmentItem
+import com.hegunhee.maplefinder.model.character.item.normal.CharacterEquipmentItem
 import javax.inject.Inject
 
 class GetCharacterEquipmentItemUseCase @Inject constructor(

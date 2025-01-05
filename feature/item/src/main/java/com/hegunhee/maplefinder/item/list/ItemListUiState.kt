@@ -1,6 +1,6 @@
 package com.hegunhee.maplefinder.item.list
 
-import com.hegunhee.maplefinder.model.character.item.Item
+import com.hegunhee.maplefinder.model.character.item.normal.Item
 
 sealed interface ItemListUiState {
 

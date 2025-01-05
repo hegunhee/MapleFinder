@@ -24,7 +24,7 @@ import com.hegunhee.maplefinder.maplefinder.ui.theme.CloudyOrange
 import com.hegunhee.maplefinder.maplefinder.ui.theme.Gray
 import com.hegunhee.maplefinder.maplefinder.ui.theme.MapleOrange
 import com.hegunhee.maplefinder.maplefinder.ui.theme.Sky
-import com.hegunhee.maplefinder.model.character.item.upgrade.StarforceOption
+import com.hegunhee.maplefinder.model.character.item.normal.upgrade.StarforceOption
 
 @Composable
 fun StarforceTag(
