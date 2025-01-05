@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.data.api.model.character.item
+package com.hegunhee.maplefinder.data.api.model.character.item.normal
 
 import com.hegunhee.maplefinder.model.ImageUrl
 import kotlinx.serialization.SerialName

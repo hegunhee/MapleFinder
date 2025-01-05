@@ -1,6 +1,6 @@
-package com.hegunhee.maplefinder.data.api.model.character.item
+package com.hegunhee.maplefinder.data.api.model.character.item.normal
 
-import com.hegunhee.maplefinder.data.api.model.character.item.option.ItemOptionResponse
+import com.hegunhee.maplefinder.data.api.model.character.item.normal.option.ItemOptionResponse
 import com.hegunhee.maplefinder.model.ImageUrl
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
