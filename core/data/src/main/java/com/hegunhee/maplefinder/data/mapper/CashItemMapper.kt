@@ -19,17 +19,17 @@ fun CashItemResponse.toModel(characterInfo: CharacterBasic): CashItemCharacter {
         characterLookMode = this.characterLookMode.toCharacterLookupMode(),
         characterIcon = characterInfo.image,
         presetNo = presetNo?.minus(1),
-        equipmentBase = this.equipmentBase.toModel(),
+        equipmentBase = this.equipmentBase.toCashEquipmentItems(),
         equipmentPreset = listOf(
-            this.preset1.toModel(),
-            this.preset2.toModel(),
-            this.preset3.toModel()
+            this.preset1.toCashEquipmentItems(),
+            this.preset2.toCashEquipmentItems(),
+            this.preset3.toCashEquipmentItems()
         ),
-        additionalBase = this.additionalBase.toModel(),
+        additionalBase = this.additionalBase.toCashEquipmentItems(),
         additionalPreset = listOf(
-            this.additionalPreset1.toModel(),
-            this.additionalPreset2.toModel(),
-            this.additionalPreset3.toModel()
+            this.additionalPreset1.toCashEquipmentItems(),
+            this.additionalPreset2.toCashEquipmentItems(),
+            this.additionalPreset3.toCashEquipmentItems()
         ),
         date = date
     )
@@ -43,7 +43,7 @@ private fun String?.toCharacterLookupMode(): LookupMode {
     }
 }
 
-private fun List<CashEquipmentItemResponse>.toModel(): List<CashEquipmentItem> {
+private fun List<CashEquipmentItemResponse>.toCashEquipmentItems(): List<CashEquipmentItem> {
     return this.map { it.toModel() }
 }
 
@@ -54,7 +54,7 @@ private fun CashEquipmentItemResponse.toModel(): CashEquipmentItem {
         slot = slot,
         icon = icon,
         label = label,
-        option = option.toModel(),
+        option = option.toCashItemOptions(),
         coloringPrism = coloringPrism.toModel(),
         dateExpire = dateExpire,
         dateOptionExpire = dateOptionExpire,
@@ -62,7 +62,7 @@ private fun CashEquipmentItemResponse.toModel(): CashEquipmentItem {
     )
 }
 
-private fun List<CashItemOptionResponse>.toModel(): List<CashItemOption> {
+private fun List<CashItemOptionResponse>.toCashItemOptions(): List<CashItemOption> {
     return this.map { it.toModel() }
 }
 
