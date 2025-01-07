@@ -55,7 +55,7 @@ fun CharacterEquipmentItemSurface(
         Column {
             CharacterHeader(characterBasic = characterEquipmentItem.basic)
             Button(
-                onClick = {onCashItemClick(characterEquipmentItem.ocid,date)}
+                onClick = {onCashItemClick(characterEquipmentItem.name,date)}
             ) {
                 Text(CashButtonText)
             }
