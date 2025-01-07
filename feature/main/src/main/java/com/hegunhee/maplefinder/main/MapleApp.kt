@@ -39,6 +39,7 @@ import com.hegunhee.maplefinder.dojang_record.navigation.DOJANG_ROUTE
 import com.hegunhee.maplefinder.dojang_record.navigation.dojangNavGraph
 import com.hegunhee.maplefinder.item.navigation.SEARCH_ROUTE
 import com.hegunhee.maplefinder.item.navigation.itemNavGraph
+import com.hegunhee.maplefinder.item.navigation.navigateCashItem
 import com.hegunhee.maplefinder.item.navigation.navigateItemDetail
 import com.hegunhee.maplefinder.item.navigation.navigateItemList
 
@@ -70,7 +71,8 @@ fun MapleApp(
                 onNavigationIconClick = mapleAppScaffoldState::openDrawer,
                 onItemListButtonClick = mapleAppScaffoldState::navigateItemList,
                 onItemDetailButtonClick = mapleAppScaffoldState::navigateItemDetail,
-                onPopBackStack = mapleAppScaffoldState::popBackStack
+                onPopBackStack = mapleAppScaffoldState::popBackStack,
+                onCashItemButtonClick = mapleAppScaffoldState::navigateCashItem
             )
         }
     }
@@ -109,6 +111,10 @@ class MapleAppScaffoldState(
 
     fun navigateItemList(ocid: String, slotName: String,date: String) {
         navController.navigateItemList(ocid, slotName,date)
+    }
+
+    fun navigateCashItem(ocid: String, date: String) {
+        navController.navigateCashItem(ocid, date)
     }
 
     fun popBackStack() {

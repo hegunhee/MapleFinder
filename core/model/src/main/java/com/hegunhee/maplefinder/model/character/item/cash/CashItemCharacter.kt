@@ -14,4 +14,15 @@ data class CashItemCharacter(
     val additionalBase: List<CashEquipmentItem>,
     val additionalPreset: List<List<CashEquipmentItem>>,
     val date: String?,
-)
+) {
+    fun getEquipmentItems() : List<CashEquipmentItem> {
+        if(equipmentBase.isNotEmpty()) {
+            return equipmentBase
+        }
+
+        if(presetNo != null) {
+            return equipmentPreset[presetNo]
+        }
+        return emptyList()
+    }
+}
