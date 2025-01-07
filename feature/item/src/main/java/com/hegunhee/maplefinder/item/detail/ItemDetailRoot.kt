@@ -19,7 +19,8 @@ fun ItemDetailScreenRoot(
     ocid: String,
     date: String,
     onNavigationIconClick: () -> Unit,
-    onItemListButtonClick: (ocid: String,slot: String,date: String) -> Unit
+    onItemListButtonClick: (ocid: String,slot: String,date: String) -> Unit,
+    onCashItemButtonClick: (ocid: String,date: String) -> Unit,
 ) {
     LaunchedEffect(key1 = viewModel.uiState) {
         viewModel.fetchItemData(ocid, date)
@@ -29,7 +30,8 @@ fun ItemDetailScreenRoot(
         uiState = uiState,
         date = date,
         onNavigationIconClick = onNavigationIconClick,
-        onItemListButtonClick = onItemListButtonClick
+        onItemListButtonClick = onItemListButtonClick,
+        onCashItemButtonClick = onCashItemButtonClick,
     )
 }
 
@@ -38,7 +40,8 @@ private fun ItemDetailScreen(
     uiState: ItemDetailUiState,
     date: String,
     onNavigationIconClick: () -> Unit,
-    onItemListButtonClick: (ocid: String,slot: String,date: String) -> Unit
+    onItemListButtonClick: (ocid: String,slot: String,date: String) -> Unit,
+    onCashItemButtonClick: (ocid: String, date: String) -> Unit,
 ) {
     Scaffold(
         topBar = {
@@ -56,7 +59,11 @@ private fun ItemDetailScreen(
             when (uiState) {
                 ItemDetailUiState.Loading -> {}
                 is ItemDetailUiState.Success -> {
-                    CharacterEquipmentItemSurface(uiState.equipmentItem,date,onItemListButtonClick)
+                    CharacterEquipmentItemSurface(
+                        uiState.equipmentItem,
+                        date,
+                        onItemListButtonClick,
+                        onCashItemButtonClick)
                 }
 
                 is ItemDetailUiState.Error -> {

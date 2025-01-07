@@ -45,7 +45,8 @@ import com.hegunhee.maplefinder.ui.tag.StatGradeTag
 fun CharacterEquipmentItemSurface(
     characterEquipmentItem: CharacterEquipmentItem,
     date: String,
-    onDetailItemClick: (ocid: String,slot: String,date: String) -> Unit
+    onDetailItemClick: (ocid: String,slot: String,date: String) -> Unit,
+    onCashItemClick: (ocid: String,date: String) -> Unit,
 ) {
     Surface(
         modifier = Modifier
@@ -54,7 +55,7 @@ fun CharacterEquipmentItemSurface(
         Column {
             CharacterHeader(characterBasic = characterEquipmentItem.basic)
             Button(
-                onClick = {}
+                onClick = {onCashItemClick(characterEquipmentItem.ocid,date)}
             ) {
                 Text(CashButtonText)
             }
@@ -157,7 +158,8 @@ private fun CharacterEquipmentItemSurfacePreview() {
     CharacterEquipmentItemSurface(
         createEquipmentItem(),
         "",
-        onDetailItemClick = { a, b, c -> }
+        onDetailItemClick = { a, b, c -> },
+        onCashItemClick = {a,b -> }
     )
 }
 
