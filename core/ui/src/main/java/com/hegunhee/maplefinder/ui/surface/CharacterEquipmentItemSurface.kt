@@ -18,6 +18,7 @@ import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
+import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -30,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.hegunhee.maplefinder.designsystem.theme.CashButtonText
 import com.hegunhee.maplefinder.model.Grade
 import com.hegunhee.maplefinder.model.character.item.normal.CharacterEquipmentItem
 import com.hegunhee.maplefinder.model.character.item.normal.Item
@@ -51,6 +53,11 @@ fun CharacterEquipmentItemSurface(
     ) {
         Column {
             CharacterHeader(characterBasic = characterEquipmentItem.basic)
+            Button(
+                onClick = {}
+            ) {
+                Text(CashButtonText)
+            }
             LazyVerticalGrid(
                 columns = GridCells.Fixed(2),
                 verticalArrangement = Arrangement.spacedBy(5.dp),
