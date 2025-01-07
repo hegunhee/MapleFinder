@@ -4,12 +4,14 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -42,7 +44,7 @@ fun CashItemSurface(
         )
         val items = cashItemCharacter.getEquipmentItems()
 
-        if(items.isEmpty()) {
+        if (items.isEmpty()) {
             Text("캐시 아이템이 존재하지 않습니다.")
         }
 
@@ -83,10 +85,27 @@ private fun CashItem(
     Card(
         modifier = Modifier
             .size(width = 200.dp, height = 100.dp)
-            .padding(5.dp)
-            .border(2.dp, Color.Black),
+            .border(2.dp, Color.Black)
+            .padding(5.dp),
         shape = RectangleShape
     ) {
-        Text(item.name)
+        Row {
+            AsyncImage(
+                modifier = Modifier
+                    .size(60.dp)
+                    .border(
+                        width = 1.dp,
+                        shape = RoundedCornerShape(0),
+                        color = Color.Black
+                    ),
+                model = item.icon,
+                contentDescription = item.name
+            )
+            Column {
+                Text(item.slot)
+                Text(item.name)
+            }
+
+        }
     }
 }
