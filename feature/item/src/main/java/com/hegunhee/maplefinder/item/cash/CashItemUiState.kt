@@ -10,6 +10,8 @@ sealed interface CashItemUiState {
         val cashItemCharacter: CashItemCharacter,
     ) : CashItemUiState
 
-    object Error : CashItemUiState
+    data class Error(
+        val exception: Throwable
+    ) : CashItemUiState
 
 }
