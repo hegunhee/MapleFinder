@@ -19,7 +19,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.hegunhee.maplefinder.item.cash.CashItemUiState.Error
 import com.hegunhee.maplefinder.item.cash.CashItemUiState.Loading
 import com.hegunhee.maplefinder.item.cash.CashItemUiState.Success
+import com.hegunhee.maplefinder.item.navigation.cashItemRoute
 import com.hegunhee.maplefinder.ui.surface.ErrorSurface
+import com.hegunhee.maplefinder.ui.surface.item.CashItemSurface
 
 @Composable
 fun CashItemRoot(
@@ -33,6 +35,7 @@ fun CashItemRoot(
     }
     CashItemScreen(
         uiState = viewModel.uiState.collectAsStateWithLifecycle().value,
+        date = date,
         popBackStack = popBackStack
     )
 }
@@ -41,6 +44,7 @@ fun CashItemRoot(
 @Composable
 private fun CashItemScreen(
     uiState: CashItemUiState,
+    date: String,
     popBackStack: () -> Unit,
 ) {
     Scaffold(
@@ -63,11 +67,15 @@ private fun CashItemScreen(
                 .padding(paddingValues)
                 .padding(10.dp)
         ) {
-            when(uiState) {
+            when (uiState) {
                 Loading -> {}
                 is Success -> {
-
+                    CashItemSurface(
+                        cashItemCharacter = uiState.cashItemCharacter,
+                        date = date,
+                    )
                 }
+
                 is Error -> {
                     ErrorSurface(uiState.exception)
                 }
