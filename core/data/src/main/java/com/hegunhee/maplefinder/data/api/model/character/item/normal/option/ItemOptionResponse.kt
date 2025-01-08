@@ -1,4 +1,4 @@
-package com.hegunhee.maplefinder.data.api.model.character.item.option
+package com.hegunhee.maplefinder.data.api.model.character.item.normal.option
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable

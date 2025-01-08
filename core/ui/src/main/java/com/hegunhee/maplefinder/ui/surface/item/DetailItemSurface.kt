@@ -26,11 +26,11 @@ import com.hegunhee.maplefinder.maplefinder.ui.theme.Cyan
 import com.hegunhee.maplefinder.maplefinder.ui.theme.MapleOrange
 import com.hegunhee.maplefinder.model.Grade
 import com.hegunhee.maplefinder.model.ImageUrl
-import com.hegunhee.maplefinder.model.character.item.Item
-import com.hegunhee.maplefinder.model.character.item.ItemOption
-import com.hegunhee.maplefinder.model.character.item.upgrade.CubeOption
-import com.hegunhee.maplefinder.model.character.item.upgrade.ScrollOption
-import com.hegunhee.maplefinder.model.character.item.upgrade.StarforceOption
+import com.hegunhee.maplefinder.model.character.item.normal.Item
+import com.hegunhee.maplefinder.model.character.item.normal.ItemOption
+import com.hegunhee.maplefinder.model.character.item.normal.upgrade.CubeOption
+import com.hegunhee.maplefinder.model.character.item.normal.upgrade.ScrollOption
+import com.hegunhee.maplefinder.model.character.item.normal.upgrade.StarforceOption
 import com.hegunhee.maplefinder.ui.space.NormalLineSpace
 import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createItem
 import com.hegunhee.maplefinder.ui.tag.DetailItemCubeOption

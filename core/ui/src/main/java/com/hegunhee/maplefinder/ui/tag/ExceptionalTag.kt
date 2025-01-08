@@ -4,7 +4,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 import com.hegunhee.maplefinder.maplefinder.ui.theme.ExceptionRed
-import com.hegunhee.maplefinder.model.character.item.ItemOption
+import com.hegunhee.maplefinder.model.character.item.normal.ItemOption
 
 @Composable
 internal fun ExceptionOption (
