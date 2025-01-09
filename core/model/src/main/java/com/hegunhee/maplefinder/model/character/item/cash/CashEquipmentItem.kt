@@ -15,8 +15,8 @@ data class CashEquipmentItem(
     val itemGender: String,
 ) {
 
-    fun isOptionEmpty() : Boolean {
-        return option.isEmpty()
+    fun isOptionNotEmpty() : Boolean {
+        return option.isNotEmpty()
     }
 
 }

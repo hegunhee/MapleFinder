@@ -1,6 +1,7 @@
 package com.hegunhee.maplefinder.ui.surface.item
 
 import android.annotation.SuppressLint
+import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -18,16 +19,17 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowDown
-import androidx.compose.material.icons.filled.KeyboardArrowUp
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.Card
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontStyle
@@ -102,7 +104,7 @@ private fun CashItem(
     val (isExtend, onExtendChanged) = remember { mutableStateOf(false) }
 
     Card(
-        modifier.cashItemModifier(!item.isOptionEmpty(),isExtend,onExtendChanged),
+        modifier.cashItemModifier(item.isOptionNotEmpty(), isExtend, onExtendChanged),
         shape = RectangleShape
     ) {
         Column {
@@ -122,18 +124,16 @@ private fun CashItem(
                     Row {
                         Text(item.slot)
                         Spacer(modifier = Modifier.weight(1f))
-                        if (!item.isOptionEmpty()) {
-                            if (isExtend) {
-                                Icon(
-                                    imageVector = Icons.Default.KeyboardArrowUp,
-                                    contentDescription = "isExtend"
-                                )
-                            } else {
-                                Icon(
-                                    imageVector = Icons.Default.KeyboardArrowDown,
-                                    contentDescription = "isNotExtend"
-                                )
-                            }
+                        if (item.isOptionNotEmpty()) {
+                            val rotationAngle by animateFloatAsState(
+                                targetValue = if (isExtend) 180f else 0f,
+                                label = ""
+                            )
+                            Icon(
+                                imageVector = Icons.Default.ArrowDropDown,
+                                contentDescription = "extendIcon",
+                                modifier = Modifier.rotate(rotationAngle)
+                            )
                         }
                     }
                     Text(item.name, fontSize = 13.sp)
@@ -143,7 +143,7 @@ private fun CashItem(
                 item.option.forEach { option ->
                     Text(
                         modifier = Modifier.padding(start = 5.dp),
-                        text = "${option.optionType} : ${option.optionValue}",fontSize = 10.sp
+                        text = "${option.optionType} : ${option.optionValue}", fontSize = 10.sp
                     )
                 }
             }
@@ -151,12 +151,11 @@ private fun CashItem(
     }
 }
 
-
 @SuppressLint("ModifierFactoryUnreferencedReceiver")
 private fun Modifier.cashItemModifier(
     hasOption: Boolean,
-    isExpend: Boolean,
-    onExpendedChanged: (Boolean) -> Unit,
+    isExtend: Boolean,
+    onExtendedChanged: (Boolean) -> Unit,
 ): Modifier {
     val defaultModifier = this
         .width(200.dp)
@@ -166,7 +165,7 @@ private fun Modifier.cashItemModifier(
 
     return if (hasOption) {
         defaultModifier
-            .clickable { onExpendedChanged(!isExpend) }
+            .clickable { onExtendedChanged(!isExtend) }
     } else {
         defaultModifier
     }
