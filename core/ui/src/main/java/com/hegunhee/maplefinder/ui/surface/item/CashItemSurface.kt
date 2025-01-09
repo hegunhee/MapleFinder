@@ -1,22 +1,27 @@
 package com.hegunhee.maplefinder.ui.surface.item
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Card
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
@@ -35,6 +40,7 @@ import com.hegunhee.maplefinder.model.character.item.cash.CashItemCharacter
 
 @Composable
 fun CashItemSurface(
+    modifier: Modifier = Modifier,
     cashItemCharacter: CashItemCharacter,
     date: String
 ) {
@@ -52,6 +58,7 @@ fun CashItemSurface(
 
         if (items.isEmpty()) {
             Text("캐시 아이템이 존재하지 않습니다.")
+            return
         }
 
         LazyVerticalGrid(
@@ -62,7 +69,10 @@ fun CashItemSurface(
                 items = items,
                 key = { it.slot }
             ) { item ->
-                CashItem(item)
+                CashItem(
+                    modifier,
+                    item
+                )
             }
         }
     }
@@ -86,31 +96,75 @@ private fun CashItemHeader(
 
 @Composable
 private fun CashItem(
+    modifier: Modifier = Modifier,
     item: CashEquipmentItem,
 ) {
+    val (isExtend, onExtendChanged) = remember { mutableStateOf(false) }
+
     Card(
-        modifier = Modifier
-            .width(200.dp)
-            .border(2.dp, Color.Black)
-            .padding(5.dp),
+        modifier.cashItemModifier(!item.isOptionEmpty(),isExtend,onExtendChanged),
         shape = RectangleShape
     ) {
-        Row {
-            AsyncImage(
-                modifier = Modifier
-                    .size(60.dp)
-                    .border(
-                        width = 1.dp,
-                        shape = RoundedCornerShape(0),
-                        color = Color.Black
-                    ),
-                model = item.icon,
-                contentDescription = item.name
-            )
-            Column {
-                Text(item.slot)
-                Text(item.name, fontSize = 13.sp)
+        Column {
+            Row {
+                AsyncImage(
+                    modifier = Modifier
+                        .size(60.dp)
+                        .border(
+                            width = 1.dp,
+                            shape = RoundedCornerShape(0),
+                            color = Color.Black
+                        ),
+                    model = item.icon,
+                    contentDescription = item.name
+                )
+                Column {
+                    Row {
+                        Text(item.slot)
+                        Spacer(modifier = Modifier.weight(1f))
+                        if (!item.isOptionEmpty()) {
+                            if (isExtend) {
+                                Icon(
+                                    imageVector = Icons.Default.KeyboardArrowUp,
+                                    contentDescription = "isExtend"
+                                )
+                            } else {
+                                Icon(
+                                    imageVector = Icons.Default.KeyboardArrowDown,
+                                    contentDescription = "isNotExtend"
+                                )
+                            }
+                        }
+                    }
+                    Text(item.name, fontSize = 13.sp)
+                }
+            }
+            if (isExtend) {
+                item.option.forEach { option ->
+                    Text("${option.optionType} : ${option.optionValue}")
+                }
             }
         }
+    }
+}
+
+
+@SuppressLint("ModifierFactoryUnreferencedReceiver")
+private fun Modifier.cashItemModifier(
+    hasOption: Boolean,
+    isExpend: Boolean,
+    onExpendedChanged: (Boolean) -> Unit,
+): Modifier {
+    val defaultModifier = this
+        .width(200.dp)
+        .wrapContentHeight()
+        .border(2.dp, Color.Black)
+        .padding(5.dp)
+
+    return if (hasOption) {
+        defaultModifier
+            .clickable { onExpendedChanged(!isExpend) }
+    } else {
+        defaultModifier
     }
 }
