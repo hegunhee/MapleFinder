@@ -40,7 +40,6 @@ import coil.compose.AsyncImage
 import com.hegunhee.maplefinder.model.ImageUrl
 import com.hegunhee.maplefinder.model.character.item.cash.CashEquipmentItem
 import com.hegunhee.maplefinder.model.character.item.cash.CashItemCharacter
-import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter
 import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createCashEquipmentItems
 import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createCashItemCharacter
 import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createCashItemOptions
