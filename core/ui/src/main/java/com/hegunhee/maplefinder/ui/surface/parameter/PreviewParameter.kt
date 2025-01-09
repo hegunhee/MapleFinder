@@ -6,6 +6,10 @@ import com.hegunhee.maplefinder.model.World
 import com.hegunhee.maplefinder.model.character.Character
 import com.hegunhee.maplefinder.model.character.CharacterBasic
 import com.hegunhee.maplefinder.model.character.CharacterDojang
+import com.hegunhee.maplefinder.model.character.item.cash.CashEquipmentItem
+import com.hegunhee.maplefinder.model.character.item.cash.CashItemCharacter
+import com.hegunhee.maplefinder.model.character.item.cash.CashItemOption
+import com.hegunhee.maplefinder.model.character.item.cash.LookupMode
 import com.hegunhee.maplefinder.model.character.item.normal.CharacterEquipmentItem
 import com.hegunhee.maplefinder.model.character.item.normal.EquipmentItem
 import com.hegunhee.maplefinder.model.character.item.normal.Item
@@ -272,7 +276,7 @@ internal object PreviewParameter {
         )
     }
 
-    fun createCharacterDojang() : CharacterDojang {
+    fun createCharacterDojang(): CharacterDojang {
         return CharacterDojang(
             characterName = "엔버는함초롱",
             characterClass = "엔젤릭버스터",
@@ -281,6 +285,48 @@ internal object PreviewParameter {
             bestFloor = 46,
             bestTimeStamp = "12분 21초",
             bestTime = 1200,
+        )
+    }
+
+    fun createCashItemCharacter(equipmentBase: List<CashEquipmentItem>): CashItemCharacter {
+        return CashItemCharacter(
+            name = "엔버는함초롱",
+            characterClass = "엔젤릭버스터",
+            characterGender = "여",
+            characterLookMode = LookupMode.NORMAL,
+            characterIcon = "https://open.api.nexon.com/static/maplestory/character/look/MBLCCFMMKOONIBECPFDAIEEJJCJCHBGBENCBIAJNDLOJAOEBMFJDGLHPFNFHACBIPOCHJLPLMCPDMHAKGLANDHDOBFKJICNNEKDALCFCAMNKOLGPEGDLDNLKDHFBFLCMINOGCICALNPHHIHFAJABPKFNJMNKODGDANDECHEGGLCFGGCGDJHKOMCIPFPFOKKGNCIINEEBBENPHIOCLGGEKMAGKPCAOAOBLFJCPABBJFBDEFPHOMNBBCFKGPJALKMK",
+            presetNo = null,
+            equipmentBase = equipmentBase,
+            equipmentPreset = listOf(),
+            additionalBase = listOf(),
+            additionalPreset = listOf(),
+            date = "2025-01-08"
+        )
+    }
+
+    fun createCashEquipmentItems(options: List<CashItemOption>): List<CashEquipmentItem> {
+        return listOf(
+            CashEquipmentItem(
+                "츄릅 매듭팔찌",
+                "모자",
+                slot = "모자",
+                icon = "https://open.api.nexon.com/static/maplestory/item/icon/KEICIHGF",
+                label = "",
+                option = options,
+                coloringPrism = null,
+                dateExpire = null,
+                dateOptionExpire = null,
+                itemGender = "여"
+            )
+        )
+    }
+
+    fun createCashItemOptions(): List<CashItemOption> {
+        return listOf(
+            CashItemOption(
+                "공격력",
+                "30",
+            )
         )
     }
 }
