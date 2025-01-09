@@ -141,7 +141,10 @@ private fun CashItem(
             }
             if (isExtend) {
                 item.option.forEach { option ->
-                    Text("${option.optionType} : ${option.optionValue}")
+                    Text(
+                        modifier = Modifier.padding(start = 5.dp),
+                        text = "${option.optionType} : ${option.optionValue}",fontSize = 10.sp
+                    )
                 }
             }
         }
