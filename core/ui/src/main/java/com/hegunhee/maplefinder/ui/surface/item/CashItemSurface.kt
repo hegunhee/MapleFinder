@@ -33,12 +33,17 @@ import androidx.compose.ui.draw.rotate
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import com.hegunhee.maplefinder.model.ImageUrl
 import com.hegunhee.maplefinder.model.character.item.cash.CashEquipmentItem
 import com.hegunhee.maplefinder.model.character.item.cash.CashItemCharacter
+import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter
+import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createCashEquipmentItems
+import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createCashItemCharacter
+import com.hegunhee.maplefinder.ui.surface.parameter.PreviewParameter.createCashItemOptions
 
 @Composable
 fun CashItemSurface(
@@ -169,4 +174,38 @@ private fun Modifier.cashItemModifier(
     } else {
         defaultModifier
     }
+}
+
+@Preview
+@Composable
+private fun CashItemSurfacePreview() {
+    CashItemSurface(
+        cashItemCharacter = createCashItemCharacter(createCashEquipmentItems(createCashItemOptions())),
+        date = "2025-01-08"
+    )
+}
+
+@Preview
+@Composable
+private fun CashItemSurfaceItemEmptyPreview() {
+    CashItemSurface(
+        cashItemCharacter = createCashItemCharacter(listOf()),
+        date = "2025-01-08"
+    )
+}
+
+@Preview
+@Composable
+private fun CashItemPreview() {
+    CashItem(
+        item = createCashEquipmentItems(createCashItemOptions())[0],
+    )
+}
+
+@Preview
+@Composable
+private fun CastItemEmptyOptionsPreview() {
+    CashItem(
+        item = createCashEquipmentItems(listOf())[0],
+    )
 }
