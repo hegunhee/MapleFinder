@@ -94,11 +94,11 @@ private fun ItemOptionResponse.toModel(): List<ItemOption> {
     val jsonOptionList = Json.encodeToString(this)
     val jsonObject = (Json.parseToJsonElement(jsonOptionList) as JsonObject)
     val itemOptionList = jsonObject.map {
-        it.value.toString().toIntOrNull() ?: it.value.toString()
-            .substring(1, it.value.toString().length - 1)
+        val rawValue = it.value.toString().trim('"')
+        val value = rawValue.toIntOrNull()?.toString() ?: rawValue
         ItemOption(
             key = optionKeyToKorean(it.key),
-            value = it.value.toString().substring(1, it.value.toString().length - 1)
+            value = value
         )
     }.toList()
     return itemOptionList
