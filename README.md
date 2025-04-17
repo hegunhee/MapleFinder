@@ -2,20 +2,20 @@
 메이플 캐릭터의 정보 검색을 할 수 있는 앱입니다.
 
 ## 개발환경
-Kotlin : Kotlin 1.8.10
-Java : Java 17
-gradle : 8.4.0
-AGP : 8.3.2
+Kotlin : Kotlin 1.8.10  
+Java : Java 17  
+gradle : 8.4.0  
+AGP : 8.3.2  
 IDE = Android Studio Ladybug (2024.2.1 Patch 2)  
 
 ## Module  
 본 프로젝트는 multi-module 구조이며 각 feature마다 모듈의 형태로 구성되어있습니다.  
-uncle bob의 클린아키텍쳐를 차용하였습니다.
+uncle bob의 클린아키텍쳐를 차용하였습니다.  
 ![image](https://github.com/hegunhee/MapleFinder/assets/57277631/c04d6a51-89b3-4b3d-bb87-28ab0ec58903)
 
 ## 주의사항
-현재 해당 프로젝트에는 API KEY가 담겨있지않습니다.
-만약 테스트를 해보고 싶으시다면 secrets.defaults.properties 값을 변경하시면 됩니다.
+현재 해당 프로젝트에는 API KEY가 담겨있지않습니다.  
+만약 테스트를 해보고 싶으시다면 secrets.defaults.properties 값을 변경하시면 됩니다.  
 
 ## 기술스택
 - network
@@ -29,7 +29,8 @@ uncle bob의 클린아키텍쳐를 차용하였습니다.
 
 ## 기술정보
 - **compose 도입**  
-  앱의 시작부터 compose를 사용하여 제작했습니다. xml -> compose로 전환한 앱이 궁금하시다면 NowInJururu나 NewSimpleMemoApp을 참고해주시면 감사하겠습니다.
+  앱의 시작부터 compose를 사용하여 제작했습니다.  
+  xml -> compose로 전환한 앱이 궁금하시다면 NowInJururu나 NewSimpleMemoApp을 참고해주시면 감사하겠습니다.
 
 - **kotlinx.serialization 도입**  
   json의 특정 파라미터를 무시하고 kotlin과의 호환성을 높이기 위해서 moshi -> serialization으로 변경하였습니다.
@@ -44,7 +45,7 @@ uncle bob의 클린아키텍쳐를 차용하였습니다.
   data module에서 httpException을 분리해 custom exception을 만들어 UI에서 오류를 표시할 수 있게 하였습니다.  
   
 ## 프로젝트 칸반  
-지속적으로 기능을 추가하고 오류를 수정하고있습니다.
+지속적으로 기능을 추가하고 오류를 수정하고있습니다.  
 https://github.com/users/hegunhee/projects/6  
 
 ## issue(트러블 슈팅)  
