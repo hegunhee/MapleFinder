@@ -81,6 +81,8 @@ https://hegunhee.tistory.com/34
 ## 앱 화면  
 | 캐릭터 정보 검색창 (빈칸) | 캐릭터 정보검색창 (에러) | 캐릭터 정보 |
 | ------------------- | ------------------ | -------- |
-| ![캐릭터 정보검색창 (빈칸)](https://github.com/hegunhee/MapleFinder/assets/57277631/70344b6d-c3ea-4852-a8cd-42c2c26b8265) | ![캐릭터 정보검색창 (에러)](https://github.com/hegunhee/MapleFinder/assets/57277631/cf5cdd4b-0cc9-4861-ae74-c7ecd84b51ec) | ![캐릭터 정보](https://github.com/hegunhee/MapleFinder/assets/57277631/7cdebe17-3c5f-450c-b99e-714ee120569b) |  
+| ![캐릭터 정보검색창 (빈칸)](https://github.com/user-attachments/assets/e0a9a9c0-6ebf-4a4b-a9bd-0c949dd3afad) | ![캐릭터 정보검색창 (에러)](https://github.com/user-attachments/assets/10d7482e-9015-4be2-b2a1-ae2058e326c2) | ![캐릭터 정보](https://github.com/user-attachments/assets/7b605d62-fb93-4103-a5f6-6a1a86961135) |  
 | 캐릭터 장비 정보 | 캐릭터 장비 상세 정보 | drawerLayout |
-| ![캐릭터 장비 정보](https://github.com/hegunhee/MapleFinder/assets/57277631/88b822c0-8599-4bce-a0db-55d8ab7cf187) | ![캐릭터 장비 상세 정보](https://github.com/hegunhee/MapleFinder/assets/57277631/9772d803-13ff-4ffc-8b97-3f0bf01d110b) | ![drawerLayout](https://github.com/hegunhee/MapleFinder/assets/57277631/9fa95370-74a9-4022-af0f-ac272b0b08ed) | 
+| ![캐릭터 장비 정보](https://github.com/user-attachments/assets/95d4ec32-2ad7-4382-a07f-12dd1b5f3d66) | ![캐릭터 장비 상세 정보](https://github.com/user-attachments/assets/e83737be-70a6-442e-8970-9168cf1a54b2) | ![drawerLayout](https://github.com/user-attachments/assets/afcec261-f6d5-4635-99c6-78cdb5e0a1b2) | 
+| 캐릭터 캐시 장비 정보 |
+| ![캐릭터 캐시 장비 정보](https://github.com/user-attachments/assets/75e3f7db-31ae-4b0b-8a13-d8bfa962ff24) |
