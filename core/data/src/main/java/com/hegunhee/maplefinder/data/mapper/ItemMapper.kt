@@ -120,7 +120,7 @@ private fun cubeOptionToModel(
 
 internal fun starMaxCount(itemLevel: Int): Int {
     return when (itemLevel) {
-        in 138..300 -> 25
+        in 138..300 -> 300
         in 128..137 -> 20
         in 118..127 -> 15
         in 108..117 -> 10
