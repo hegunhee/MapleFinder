@@ -93,7 +93,7 @@ internal fun StarforceHeader(
         }
         if (maxStarCount > 15) {
             Row(modifier = Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.Center){
-                for (i in 16 .. 25) {
+                for (i in 16 .. 30) {
                     if (i <= maxStarCount) {
                         StarIcon(
                             modifier = starModifier,
