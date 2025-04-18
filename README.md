@@ -2,16 +2,16 @@
 메이플 캐릭터의 정보 검색을 할 수 있는 앱입니다.
 
 ## 개발환경
-Kotlin : Kotlin 1.8.10  
-Java : Java 17  
+Kotlin : 1.8.10  
+Java : 17  
 gradle : 8.4.0  
 AGP : 8.3.2  
-IDE = Android Studio Ladybug (2024.2.1 Patch 2)  
+IDE : Android Studio Ladybug (2024.2.1 Patch 2)  
 
 ## Module  
 본 프로젝트는 multi-module 구조이며 각 feature마다 모듈의 형태로 구성되어있습니다.  
 uncle bob의 클린아키텍쳐를 차용하였습니다.  
-## 패키지 구조
+## 모듈구조
 📦build-logic  
 📦app  
 📦feature  
