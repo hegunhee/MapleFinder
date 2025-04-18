@@ -35,7 +35,6 @@ fun AbilityPreset(
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = "어빌리티",
-            color = Color.Black,
             textAlign = TextAlign.Center,
             fontSize = 20.sp
         )

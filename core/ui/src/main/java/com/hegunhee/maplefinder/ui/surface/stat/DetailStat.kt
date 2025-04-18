@@ -23,7 +23,6 @@ fun DetailStat(
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = "전투력 : ${stat.powerLevel}",
-            color = Color.Black,
             textAlign = TextAlign.Center,
             fontSize = 20.sp
         )
