@@ -75,7 +75,7 @@ fun CharacterHeader(
         Column {
             Spacer(modifier = Modifier.size(10.dp))
             Row {
-                Text(characterBasic.name, fontSize = 20.sp, fontStyle = FontStyle.Normal,color = Color.Black)
+                Text(characterBasic.name, fontSize = 20.sp, fontStyle = FontStyle.Normal)
                 Spacer(modifier = Modifier.size(5.dp))
                 WorldTag(world = characterBasic.world)
             }

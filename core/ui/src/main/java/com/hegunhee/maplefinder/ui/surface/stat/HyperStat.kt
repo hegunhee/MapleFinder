@@ -25,7 +25,6 @@ fun HyperStat(
         Text(
             modifier = Modifier.fillMaxWidth(),
             text = "하이퍼 스텟",
-            color = Color.Black,
             textAlign = TextAlign.Center,
             fontSize = 20.sp
         )
